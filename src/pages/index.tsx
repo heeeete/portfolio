@@ -3,7 +3,7 @@ import Layout from "../../components/Layout";
 import NavVar from "../../components/NavVar";
 import Seo from "../../components/Seo";
 import back from "../../public/back.jpg";
-import Image from "next/image";
+import Image from "next/legacy/image";
 export default function Home() {
 	return (
 		<>
