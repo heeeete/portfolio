@@ -1,12 +1,24 @@
 import { Nova_Square } from "next/font/google";
+import { useState, useEffect, useCallback } from "react";
 
 const Nova_square = Nova_Square({ subsets: ["latin"], weight: "400" });
-export default function NavVar() {
+export default function NavVar({
+	aboutRef,
+}: {
+	aboutRef: React.RefObject<HTMLDivElement>;
+}) {
+	const scrollToTarget = () => {
+		if (aboutRef.current)
+			aboutRef.current.scrollIntoView({ behavior: "smooth" });
+	};
+
 	return (
 		<nav className={"nav"}>
 			<h1>Huipark</h1>
 			<div>
-				<button className={Nova_square.className}>ABOUT</button>
+				<button className={Nova_square.className} onClick={scrollToTarget}>
+					ABOUT
+				</button>
 				<button className={Nova_square.className}>SKILL</button>
 				<button className={Nova_square.className}>PROJECT</button>
 				<button className={Nova_square.className}>CONTACT</button>
@@ -23,6 +35,7 @@ export default function NavVar() {
 					align-items: center;
 					padding-inline: 20px;
 					backdrop-filter: blur(10px);
+					background-color: rgba(0, 0, 0, 0.294);
 					box-shadow: 0px 0px 20px 10px black;
 					z-index: 100;
 				}

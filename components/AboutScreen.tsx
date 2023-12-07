@@ -1,7 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, forwardRef } from "react";
 import Image from "next/legacy/image";
 import starBack from "../public/starBack.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
+import { Orbit } from "next/font/google";
 
+const orbit = Orbit({ subsets: ["latin"], weight: "400" });
 function Item({
 	children,
 	visible,
@@ -9,23 +16,24 @@ function Item({
 	children: React.ReactNode;
 	visible: boolean;
 }) {
-	return (
-		<div>
-			<div
-				style={{
-					opacity: visible ? 1 : 0,
-					transform: visible ? "translateY(0)" : "translateY(30px)",
-					transition: "opacity 0.5s ease, transform 1s ease",
-				}}
-			>
-				{children}
-			</div>
-		</div>
-	);
+	const observerStyle = {
+		opacity: visible ? 1 : 0,
+		transform: visible ? "translateY(0)" : "translateY(30px)",
+		transition: "opacity 0.5s ease, transform 1s ease",
+	};
+
+	return <div style={observerStyle}>{children}</div>;
 }
 
-export default function AboutScreen() {
+const AboutScreen = forwardRef<HTMLDivElement>((_, ref) => {
 	const [visibleItems, setVisibleItems] = useState(new Set());
+
+	useEffect(() => {
+		const firstFront = document.querySelector(".flip .front");
+		if (firstFront) {
+			firstFront.classList.add("no-style");
+		}
+	}, []);
 
 	useEffect(() => {
 		// IntersectionObserver 인스턴스 생성
@@ -41,7 +49,7 @@ export default function AboutScreen() {
 						// visibleItems 상태를 업데이트하여 요소의 id 추가
 						setVisibleItems((prevItems) => new Set(prevItems).add(id));
 					} else {
-						// 8. visibleItems 상태를 업데이트하여 요소의 id 제거
+						// visibleItems 상태를 업데이트하여 요소의 id 제거
 						setVisibleItems((prevItems) => {
 							const newItems = new Set(prevItems);
 							newItems.delete(id);
@@ -56,7 +64,7 @@ export default function AboutScreen() {
 		);
 
 		// 모든 .item 요소를 관찰 대상으로 추가
-		document.querySelectorAll(".item").forEach((item) => {
+		document.querySelectorAll(".item, .header").forEach((item) => {
 			observer.observe(item);
 		});
 
@@ -65,47 +73,147 @@ export default function AboutScreen() {
 	}, []);
 
 	return (
-		<div className="container">
-			<div className="image-container">
-				<Image
-					src={starBack}
-					alt="starBackground"
-					quality={100}
-					layout="fill"
-				/>
+		<div className="container" ref={ref}>
+			<div className="background-stars">
+				<Image src={starBack} layout="fill" />
 			</div>
-			{Array.from({ length: 4 }, (_, index) => index).map((index) => (
-				<Item key={index} visible={visibleItems.has(`item-${index}`)}>
-					<div
-						className="item"
-						data-id={`item-${index}`}
-						style={{
-							width: 200,
-							height: 200,
-							background: index % 2 === 0 ? "red" : "blue",
-						}}
-					></div>
-				</Item>
-			))}
+			<Item key={0} visible={visibleItems.has(`ID-0`)}>
+				<h1 className="header" data-id="ID-0">
+					ABOUT
+				</h1>
+			</Item>
+			<Item key={1} visible={visibleItems.has(`ID-1`)}>
+				<div className="item" data-id={`ID-1`}>
+					<div className="flip">
+						<div className="front">
+							<FontAwesomeIcon
+								icon={faAddressCard}
+								color="grey"
+								style={{ width: "100%", height: "auto" }}
+							/>
+						</div>
+						<div className="back">
+							<p>asd</p>
+							<p>qwe</p>
+						</div>
+					</div>
+				</div>
+			</Item>
+			<Item key={2} visible={visibleItems.has(`ID-2`)}>
+				<div className="item" data-id={`ID-2`}>
+					<div className="flip">
+						<div className="front">
+							<FontAwesomeIcon
+								icon={faGithub}
+								style={{ width: "70%", height: "auto" }}
+							/>
+						</div>
+						<div className="back">
+							<FontAwesomeIcon icon={faGithub} style={{}} />
+							<Link href={"https://github.com/heeeete"}>asd</Link>
+						</div>
+					</div>
+				</div>
+			</Item>
+			<Item key={3} visible={visibleItems.has(`ID-3`)}>
+				<div className="item" data-id={`ID-3`}>
+					<div className="flip">
+						<div className="front">
+							<p className="tistory">BLOG</p>
+						</div>
+						<div className="back">상세정보</div>
+					</div>
+				</div>
+			</Item>
 
 			<style jsx>
 				{`
 					.container {
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						align-items: center;
 						width: 100vw;
 						height: 100vh;
 						padding-top: 80px;
 						position: relative;
 						overflow: hidden;
+						background-color: rgba(0, 0, 0);
 					}
-					.image-container {
+					.background-stars {
 						top: 50%;
 						left: 50%;
 						transform: translate(-50%, -50%);
-						width: 230vw;
-						height: 230vh;
+						width: 230%;
+						height: 230%;
 						position: absolute;
 						animation: space-rotate 500s linear infinite;
-						z-index: -100;
+					}
+					.card {
+						background-color: blue;
+					}
+					.item {
+						padding: 10px;
+						width: 17rem;
+						aspect-ratio: 10/6;
+						margin-bottom: 3vh;
+						perspective: 1000px;
+						transition: 0.5s;
+					}
+					.flip {
+						position: relative;
+						transition: 0.5s;
+						width: 100%;
+						height: 100%;
+						transform-style: preserve-3d;
+					}
+					.front,
+					.back {
+						position: absolute;
+						width: 100%;
+						height: 100%;
+						backface-visibility: hidden;
+						border-radius: 10px;
+					}
+					.front.no-style {
+						background-color: transparent;
+					}
+					.front {
+						background-color: rgba(255, 255, 255, 0.486);
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						overflow: hidden;
+					}
+					.back {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						background-color: rgba(255, 255, 255, 0.486);
+						transform: rotateY(180deg);
+					}
+					.item:hover .flip,
+					.flip:hover {
+						transform: rotateY(180deg);
+					}
+
+					.tistory-box {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						width: 70%;
+						height: 123%;
+						border-radius: 50%;
+						background-color: black;
+					}
+
+					.tistory {
+						font-size: 100px;
+						font-weight: 900;
+					}
+					h1 {
+						color: white;
+						margin-bottom: 5vh;
 					}
 					@keyframes space-rotate {
 						from {
@@ -119,4 +227,6 @@ export default function AboutScreen() {
 			</style>
 		</div>
 	);
-}
+});
+
+export default AboutScreen;

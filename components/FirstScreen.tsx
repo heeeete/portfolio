@@ -1,10 +1,50 @@
 import back from "../public/back.jpg";
 import Image from "next/legacy/image";
 import DownArrow from "./DownArrow";
+import { useEffect } from "react";
 
-export default function FirstScreen() {
+export default function FirstScreen({
+	aboutRef,
+}: {
+	aboutRef: React.RefObject<HTMLDivElement>;
+}) {
+	useEffect(() => {
+		const makeStars = () => {
+			const starContainer = document.querySelector(".stars-container");
+			if (starContainer) {
+				starContainer.innerHTML = "";
+				for (let i = 0; i < 100; i++) {
+					let x: any = Math.random() * window.innerWidth;
+					let y: any = Math.random() * window.innerHeight;
+					let size: any = Math.random() * 6;
+					let time: any = Math.random() * 10;
+					const star = document.createElement("div");
+					star.className = "star";
+					star.style.display = "flex";
+					star.style.position = "absolute";
+					star.style.left = `${x}px`;
+					star.style.top = `${y}px`;
+					star.style.width = `${size}px`;
+					star.style.height = `${size}px`;
+					star.style.backgroundColor = "white";
+					star.style.borderRadius = "50%";
+					star.style.filter = "blur(1.5px)";
+					star.style.animation = `blink ${time}s  ease infinite`;
+					starContainer.appendChild(star);
+				}
+			}
+		};
+		makeStars();
+
+		window.addEventListener("resize", makeStars);
+		return () => {
+			removeEventListener("resize", makeStars);
+		};
+	}, []);
+
 	return (
 		<div className="container">
+			<div className="stars-container" />
 			<div className="image-container">
 				<div className="full-image-container">
 					<Image src={back} alt="background" layout="fill" quality={100} />
@@ -30,7 +70,7 @@ export default function FirstScreen() {
 				<p>PORTFOLIO</p>
 			</div>
 			<div className="arrow-div">
-				<DownArrow ArrowColor="white" />
+				<DownArrow ArrowColor="white" targetRef={aboutRef} />
 			</div>
 
 			<style jsx>{`
@@ -43,8 +83,10 @@ export default function FirstScreen() {
 					position: relative;
 					overflow: hidden;
 					padding-top: 70px;
+
 				}
 				.image-container {
+					display: flex;
 					position: absolute;
 					top: 50%;
 					left: 50%;
@@ -52,7 +94,7 @@ export default function FirstScreen() {
 					width: 230vw;
 					height: 230vh;
 					overflow: hidden;
-					z-index: -100;
+					z-index: -1;
 				}
 				.full-image-container,
 				.circle-image-container,
@@ -75,8 +117,34 @@ export default function FirstScreen() {
 					animation: rotateReverse 3s 1 cubic-bezier(0.56, 0.005, 0.38, 1);
 				}
 				.text {
-					opacity: 0;
-					animation: fadeIn 2s ease-out 3s forwards;
+					animation: blink 2s  infinite;
+					animation-delay: 5s;
+				}
+				@keyframes blink {
+					0% {
+						opacity: 1;
+					}
+					10% {
+						opacity: 0.7;
+					}
+					20%{
+						opacity: 0.3;
+					}
+					30% {
+						opacity: 0.6;
+					}
+					50% {
+						opacity: 0.8;
+					}
+					60% {
+						opacity: 0.6;
+					}
+					90% {
+						opacity: 0.4;
+					}
+					100% {
+						opacity: 0.5;
+					}
 				}
 				@keyframes fadeIn {
 					from {
@@ -116,12 +184,23 @@ export default function FirstScreen() {
 				p {
 					font-size: 5vw;
 					font-weight: bold;
+					text-align: center;
 				}
 				.arrow-div {
 					position: absolute;
 					bottom: 5vh;
 					opacity: 0;
 					animation: fadeInArrow 3s ease-out 3s forwards;
+					transition: 0.5s;
+				}
+				button:hover::before {
+					transform: scale(1.1);
+					box-shadow: 0 0 15px #ffee10;
+				}
+				button:hover {
+					color #ffee10;
+					box-shadow: 0px 0px 5px #ffee10;
+					text-shadow: box-shadow: 0px 0px 5px #ffee10;
 				}
 			`}</style>
 		</div>
