@@ -5,10 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
 import { Orbit } from "next/font/google";
+import DownArrow from "./DownArrow";
+import MaskButton from "./MaskButton";
 
 const orbit = Orbit({ subsets: ["latin"], weight: "400" });
+
 function Item({
 	children,
 	visible,
@@ -19,7 +21,7 @@ function Item({
 	const observerStyle = {
 		opacity: visible ? 1 : 0,
 		transform: visible ? "translateY(0)" : "translateY(30px)",
-		transition: "opacity 0.5s ease, transform 1s ease",
+		transition: "opacity 1s ease, transform 1s ease",
 	};
 
 	return <div style={observerStyle}>{children}</div>;
@@ -34,6 +36,26 @@ const AboutScreen = forwardRef<HTMLDivElement>((_, ref) => {
 			firstFront.classList.add("no-style");
 		}
 	}, []);
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach(({ target, isIntersecting }) => {
+					if (isIntersecting) {
+						target.classList.add("typing-ani");
+						element2?.classList.add("typing-ani");
+						observer.unobserve(target);
+					}
+				});
+			},
+			{ threshold: 0.9 }
+		);
+
+		const element = document.querySelector(".text-1");
+		const element2 = document.querySelector(".text-2");
+		if (element) observer.observe(element);
+		return () => observer.disconnect();
+	});
 
 	useEffect(() => {
 		// IntersectionObserver 인스턴스 생성
@@ -71,60 +93,93 @@ const AboutScreen = forwardRef<HTMLDivElement>((_, ref) => {
 		// 컴포넌트가 언마운트 될 때 관찰을 중단
 		return () => observer.disconnect();
 	}, []);
+	const asd = () => {
+		window.open("https://www.naver.com/");
+	};
 
 	return (
 		<div className="container" ref={ref}>
 			<div className="background-stars">
 				<Image src={starBack} layout="fill" />
 			</div>
-			<Item key={0} visible={visibleItems.has(`ID-0`)}>
-				<h1 className="header" data-id="ID-0">
-					ABOUT
-				</h1>
-			</Item>
-			<Item key={1} visible={visibleItems.has(`ID-1`)}>
-				<div className="item" data-id={`ID-1`}>
-					<div className="flip">
-						<div className="front">
-							<FontAwesomeIcon
-								icon={faAddressCard}
-								color="grey"
-								style={{ width: "100%", height: "auto" }}
-							/>
-						</div>
-						<div className="back">
-							<p>asd</p>
-							<p>qwe</p>
-						</div>
+			<header className="about-title">
+				<Item key={0} visible={visibleItems.has(`ID-0`)}>
+					<h1 className="header" data-id="ID-0">
+						ABOUT
+					</h1>
+				</Item>
+			</header>
+			<article className="about-content">
+				<article className="about-text">
+					<div className="typing-ani">
+						<p className={`${orbit.className} text-1`}>안녕하세요.</p>
 					</div>
-				</div>
-			</Item>
-			<Item key={2} visible={visibleItems.has(`ID-2`)}>
-				<div className="item" data-id={`ID-2`}>
-					<div className="flip">
-						<div className="front">
-							<FontAwesomeIcon
-								icon={faGithub}
-								style={{ width: "70%", height: "auto" }}
-							/>
-						</div>
-						<div className="back">
-							<FontAwesomeIcon icon={faGithub} style={{}} />
-							<Link href={"https://github.com/heeeete"}>asd</Link>
-						</div>
+					<div className="typing-ani">
+						<p className={`${orbit.className} text-2`}>
+							신입 프론트엔드 개발자 <b className="name-text">박희태</b>
+							입니다.
+						</p>
 					</div>
-				</div>
-			</Item>
-			<Item key={3} visible={visibleItems.has(`ID-3`)}>
-				<div className="item" data-id={`ID-3`}>
-					<div className="flip">
-						<div className="front">
-							<p className="tistory">BLOG</p>
+				</article>
+				<section className="about-card">
+					<Item key={1} visible={visibleItems.has(`ID-1`)}>
+						<div className="item" data-id={`ID-1`}>
+							<div className="flip">
+								<div className="front">
+									<FontAwesomeIcon
+										icon={faAddressCard}
+										color="rgba(255, 255, 255, 0.776)"
+										style={{
+											height: "auto",
+										}}
+									/>
+								</div>
+								<div className="back">
+									<p>name: 박희태</p>
+									<p>phone: 010-2994-9783</p>
+									<p>email: mkoiui98@gmail.com</p>
+								</div>
+							</div>
 						</div>
-						<div className="back">상세정보</div>
-					</div>
-				</div>
-			</Item>
+					</Item>
+					<Item key={2} visible={visibleItems.has(`ID-2`)}>
+						<div className="item" data-id={`ID-2`}>
+							<div className="flip">
+								<div className="front">
+									<FontAwesomeIcon
+										icon={faGithub}
+										style={{ width: "70%", height: "auto" }}
+									/>
+								</div>
+								<div className={`back back2`}>
+									<MaskButton
+										value="Github"
+										link="https://github.com/heeeete"
+									/>
+								</div>
+							</div>
+						</div>
+					</Item>
+					<Item key={3} visible={visibleItems.has(`ID-3`)}>
+						<div className="item" data-id={`ID-3`}>
+							<div className="flip">
+								<div className="front">
+									<p className="tistory">BLOG</p>
+								</div>
+								<div className="back">
+									<Link
+										href={"https://gaebarsaebal.tistory.com/"}
+										target="_blank"
+										style={{ textDecorationLine: "none", color: "black" }}
+									>
+										Tistory
+									</Link>
+								</div>
+							</div>
+						</div>
+					</Item>
+				</section>
+			</article>
 
 			<style jsx>
 				{`
@@ -149,14 +204,64 @@ const AboutScreen = forwardRef<HTMLDivElement>((_, ref) => {
 						position: absolute;
 						animation: space-rotate 500s linear infinite;
 					}
-					.card {
-						background-color: blue;
+
+					.about-title {
+						position: relative;
+						width: 100vw;
+						display: flex;
+						justify-content: center;
+					}
+
+					.about-content {
+						position: relative;
+						display: flex;
+						align-items: center;
+						width: 100vw;
+					}
+
+					.typing-ani {
+						white-space: nowrap;
+					}
+					.text-1,
+					.text-2 {
+						border-right: 3px solid white;
+						width: 0;
+						overflow: hidden;
+					}
+					.name-text {
+						font-size: 3.4vw;
+					}
+					.text-1.typing-ani {
+						animation: typing 1.5s steps(22) forwards,
+							blink-cursos 1s step-end infinite;
+					}
+					.text-2.typing-ani {
+						animation: typing 1.5s steps(22) forwards,
+							blink-cursos 1s step-end infinite;
+						animation-delay: 2s;
+					}
+					.about-text {
+						color: white;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+						font-size: 3vw;
+						width: 70%;
+					}
+
+					.about-card {
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						align-items: center;
+						width: 17rem;
 					}
 					.item {
 						padding: 10px;
 						width: 17rem;
 						aspect-ratio: 10/6;
-						margin-bottom: 3vh;
+						margin: 1.5vh 0;
 						perspective: 1000px;
 						transition: 0.5s;
 					}
@@ -174,12 +279,13 @@ const AboutScreen = forwardRef<HTMLDivElement>((_, ref) => {
 						height: 100%;
 						backface-visibility: hidden;
 						border-radius: 10px;
+						box-shadow: 0px 0px 15px 5px rgb(255, 255, 255);
+						background-color: rgba(255, 255, 255, 0.776);
 					}
 					.front.no-style {
 						background-color: transparent;
 					}
 					.front {
-						background-color: rgba(255, 255, 255, 0.486);
 						display: flex;
 						justify-content: center;
 						align-items: center;
@@ -187,10 +293,17 @@ const AboutScreen = forwardRef<HTMLDivElement>((_, ref) => {
 					}
 					.back {
 						display: flex;
-						justify-content: center;
-						align-items: center;
-						background-color: rgba(255, 255, 255, 0.486);
+						padding: 5px 10px;
+						flex-direction: column;
 						transform: rotateY(180deg);
+					}
+					.back2 {
+						align-items: center;
+						justify-content: center;
+						font-size: 1.3em;
+					}
+					.back > * {
+						margin: 3px 0;
 					}
 					.item:hover .flip,
 					.flip:hover {
@@ -206,11 +319,14 @@ const AboutScreen = forwardRef<HTMLDivElement>((_, ref) => {
 						border-radius: 50%;
 						background-color: black;
 					}
-
+					.back:nth-of-type(1) {
+						background-color: red;
+					}
 					.tistory {
 						font-size: 100px;
-						font-weight: 900;
+						font-weight: bolder;
 					}
+
 					h1 {
 						color: white;
 						margin-bottom: 5vh;
@@ -221,6 +337,51 @@ const AboutScreen = forwardRef<HTMLDivElement>((_, ref) => {
 						}
 						to {
 							transform: translate(-50%, -50%) rotate(360deg);
+						}
+					}
+
+					@keyframes typing {
+						from {
+							width: 0;
+						}
+						to {
+							width: 100%;
+						}
+					}
+
+					@keyframes blink-cursos {
+						50% {
+							border-color: transparent;
+						}
+					}
+
+					@media all and (max-width: 768px) {
+						.about-content {
+							flex-direction: column;
+						}
+						.about-text {
+							font-size: 5vw;
+						}
+						.name-text {
+							font-size: 6vw;
+						}
+						.item {
+							width: 15rem;
+						}
+						.tistory {
+							font-size: 5.7rem;
+						}
+					}
+
+					@keyframes ani {
+						from {
+							-webkit-mask-position: 0 0;
+							mask-position: 0 0;
+						}
+
+						to {
+							-webkit-mask-position: 100% 0;
+							mask-position: 100% 0;
 						}
 					}
 				`}

@@ -1,13 +1,15 @@
 import back from "../public/back.jpg";
 import Image from "next/legacy/image";
 import DownArrow from "./DownArrow";
-import { useEffect } from "react";
+import { useEffect, forwardRef, RefObject } from "react";
+import exp from "constants";
 
-export default function FirstScreen({
-	aboutRef,
-}: {
-	aboutRef: React.RefObject<HTMLDivElement>;
-}) {
+const FirstScreen = forwardRef<
+	HTMLDivElement,
+	{ aboutRef: RefObject<HTMLDivElement> }
+>((props, ref) => {
+	const { aboutRef } = props;
+
 	useEffect(() => {
 		const makeStars = () => {
 			const starContainer = document.querySelector(".stars-container");
@@ -43,7 +45,7 @@ export default function FirstScreen({
 	}, []);
 
 	return (
-		<div className="container">
+		<div className="container" ref={ref}>
 			<div className="stars-container" />
 			<div className="image-container">
 				<div className="full-image-container">
@@ -116,9 +118,11 @@ export default function FirstScreen({
 					clip-path: circle(9% at center);
 					animation: rotateReverse 3s 1 cubic-bezier(0.56, 0.005, 0.38, 1);
 				}
+
 				.text {
-					animation: blink 2s  infinite;
-					animation-delay: 5s;
+					opacity: 0.7;
+					animation: blink 2s ease infinite;
+					animation-delay: 4s;
 				}
 				@keyframes blink {
 					0% {
@@ -205,4 +209,6 @@ export default function FirstScreen({
 			`}</style>
 		</div>
 	);
-}
+});
+
+export default FirstScreen;
