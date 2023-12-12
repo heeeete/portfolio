@@ -45,7 +45,7 @@ const FirstScreen = forwardRef<
 	}, []);
 
 	return (
-		<div className="container" ref={ref}>
+		<section className="container" ref={ref}>
 			<div className="stars-container" />
 			<div className="image-container">
 				<div className="full-image-container">
@@ -96,7 +96,7 @@ const FirstScreen = forwardRef<
 					width: 230vw;
 					height: 230vh;
 					overflow: hidden;
-					z-index: -1;
+					z-index: 0;
 				}
 				.full-image-container,
 				.circle-image-container,
@@ -207,7 +207,7 @@ const FirstScreen = forwardRef<
 					text-shadow: box-shadow: 0px 0px 5px #ffee10;
 				}
 			`}</style>
-		</div>
+		</section>
 	);
 });
 
