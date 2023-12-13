@@ -9,6 +9,7 @@ export default function Home() {
 	const [visibleItems, setVisibleItems] = useState(new Set<string>());
 	const firstRef = useRef<HTMLDivElement | null>(null);
 	const aboutRef = useRef<HTMLDivElement | null>(null);
+	const skillRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
 		// IntersectionObserver 인스턴스 생성
@@ -50,12 +51,14 @@ export default function Home() {
 	return (
 		<>
 			<Seo titleName="희태의 포트폴리오" />
-			<NavVar aboutRef={aboutRef} firstRef={firstRef} />
-			<main>
-				<FirstScreen aboutRef={aboutRef} ref={firstRef} />
-				<AboutScreen visibleItems={visibleItems} ref={aboutRef} />
-				<SkillScreen visibleItems={visibleItems} />
-			</main>
+			<NavVar aboutRef={aboutRef} firstRef={firstRef} skillRef={skillRef} />
+			<FirstScreen aboutRef={aboutRef} ref={firstRef} />
+			<AboutScreen
+				visibleItems={visibleItems}
+				skillRef={skillRef}
+				ref={aboutRef}
+			/>
+			<SkillScreen visibleItems={visibleItems} ref={skillRef} />
 		</>
 	);
 }

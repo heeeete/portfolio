@@ -31,6 +31,7 @@ const FirstScreen = forwardRef<
 					star.style.backgroundColor = "white";
 					star.style.borderRadius = "50%";
 					star.style.filter = "blur(1.5px)";
+					star.style.zIndex = "1";
 					star.style.animation = `blink ${time}s  ease infinite`;
 					starContainer.appendChild(star);
 				}
@@ -97,6 +98,7 @@ const FirstScreen = forwardRef<
 					height: 230vh;
 					overflow: hidden;
 					z-index: 0;
+					filter: brightness(40%);
 				}
 				.full-image-container,
 				.circle-image-container,

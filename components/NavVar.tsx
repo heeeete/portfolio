@@ -5,9 +5,11 @@ const Nova_square = Nova_Square({ subsets: ["latin"], weight: "400" });
 export default function NavVar({
 	aboutRef,
 	firstRef,
+	skillRef,
 }: {
 	aboutRef: React.RefObject<HTMLDivElement>;
 	firstRef: React.RefObject<HTMLDivElement>;
+	skillRef: React.RefObject<HTMLDivElement>;
 }) {
 	const scrollToFirst = () => {
 		if (firstRef.current) {
@@ -18,6 +20,13 @@ export default function NavVar({
 	const scrollToAbout = () => {
 		if (aboutRef.current) {
 			aboutRef.current.scrollIntoView({ behavior: "smooth" });
+			toggleMenu();
+		}
+	};
+
+	const scrollToSkill = () => {
+		if (skillRef.current) {
+			skillRef.current.scrollIntoView({ behavior: "smooth" });
 			toggleMenu();
 		}
 	};
@@ -43,7 +52,9 @@ export default function NavVar({
 					<button className={Nova_square.className} onClick={scrollToAbout}>
 						ABOUT
 					</button>
-					<button className={Nova_square.className}>SKILL</button>
+					<button className={Nova_square.className} onClick={scrollToSkill}>
+						SKILL
+					</button>
 					<button className={Nova_square.className}>PROJECT</button>
 					<button className={Nova_square.className}>CONTACT</button>
 				</div>

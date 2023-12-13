@@ -8,9 +8,7 @@ type Arrow = {
 
 export default function DownArrow({ ArrowColor, targetRef }: Arrow) {
 	const scrollToTarget = () => {
-		console.log("debug");
 		if (targetRef.current) {
-			console.log("debug2");
 			targetRef.current.scrollIntoView({ behavior: "smooth" });
 		}
 	};
@@ -23,6 +21,12 @@ export default function DownArrow({ ArrowColor, targetRef }: Arrow) {
 				</button>
 			</div>
 			<style jsx>{`
+				div {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+				}
 				button {
 					background-color: transparent;
 					border: 2px solid ${ArrowColor};
