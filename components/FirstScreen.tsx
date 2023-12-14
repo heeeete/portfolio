@@ -11,43 +11,34 @@ const FirstScreen = forwardRef<
 	const { aboutRef } = props;
 
 	useEffect(() => {
-		const makeStars = () => {
-			const starContainer = document.querySelector(".stars-container");
-			if (starContainer) {
-				starContainer.innerHTML = "";
-				for (let i = 0; i < 100; i++) {
-					let x: any = Math.random() * window.innerWidth;
-					let y: any = Math.random() * window.innerHeight;
-					let size: any = Math.random() * 6;
-					let time: any = Math.random() * 10;
-					const star = document.createElement("div");
-					star.className = "star";
-					star.style.display = "flex";
-					star.style.position = "absolute";
-					star.style.left = `${x}px`;
-					star.style.top = `${y}px`;
-					star.style.width = `${size}px`;
-					star.style.height = `${size}px`;
-					star.style.backgroundColor = "white";
-					star.style.borderRadius = "50%";
-					star.style.filter = "blur(1.5px)";
-					star.style.zIndex = "1";
-					star.style.animation = `blink ${time}s  ease infinite`;
-					starContainer.appendChild(star);
-				}
-			}
-		};
-		makeStars();
+		const halfScreenWidth = screen.width / 1.92;
+		const imageContainer = document.querySelectorAll(".image-container");
+		const mediaQurey = window.matchMedia(
+			`screen and (max-width: ${halfScreenWidth}px)`
+		);
 
-		window.addEventListener("resize", makeStars);
+		const handleImageContainer = () => {
+			if (mediaQurey.matches)
+				imageContainer.forEach((e) => {
+					const htmlE = e as HTMLElement;
+					htmlE.style.width = `${screen.width * 1.2}px`;
+				});
+			else
+				imageContainer.forEach((e) => {
+					const htmlE = e as HTMLElement;
+					htmlE.style.width = "230vw";
+				});
+		};
+		mediaQurey.addEventListener("change", handleImageContainer);
+		handleImageContainer();
+
 		return () => {
-			removeEventListener("resize", makeStars);
+			mediaQurey.removeEventListener("change", handleImageContainer);
 		};
 	}, []);
 
 	return (
 		<section className="container" ref={ref}>
-			<div className="stars-container" />
 			<div className="image-container">
 				<div className="full-image-container">
 					<Image src={back} alt="background" layout="fill" quality={100} />
@@ -69,8 +60,8 @@ const FirstScreen = forwardRef<
 				</div>
 			</div>
 			<div className="text">
-				<p>FRONTEND</p>
-				<p>PORTFOLIO</p>
+				<p>FRONT-END</p>
+				<p>PORT-FOLIO</p>
 			</div>
 			<div className="arrow-div">
 				<DownArrow ArrowColor="white" targetRef={aboutRef} />
@@ -100,6 +91,11 @@ const FirstScreen = forwardRef<
 					z-index: 0;
 					filter: brightness(40%);
 				}
+
+				.image-container.half-size {
+					width: 2200px;
+				}
+
 				.full-image-container,
 				.circle-image-container,
 				.secoend-image-container {
