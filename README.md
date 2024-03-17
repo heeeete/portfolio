@@ -4,5 +4,4 @@
 
 
 [포트폴리오][]
-# link define
 [포트폴리오]: https://heeeete.github.io/portfoilo/
