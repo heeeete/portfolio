@@ -82,8 +82,8 @@ const FirstScreen = forwardRef<
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					width: 100vw;
-					height: 100vh;
+					width: 100dvw;
+					height: 100dvh;
 					position: relative;
 					overflow: hidden;
 					padding-top: 70px;
@@ -95,7 +95,7 @@ const FirstScreen = forwardRef<
 					top: 50%;
 					left: 50%;
 					transform: translate(-50%, -50%);
-					width: 230vw;
+					width: 230dvw;
 					height: 230vh;
 					overflow: hidden;
 					z-index: 0;
@@ -194,7 +194,7 @@ const FirstScreen = forwardRef<
 					color: white;
 				}
 				p {
-					font-size: 5vw;
+					font-size: 5dvw;
 					font-weight: bold;
 					text-align: center;
 				}

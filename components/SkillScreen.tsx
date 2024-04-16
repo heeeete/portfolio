@@ -57,9 +57,8 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
                         visible={visibleItems.has(`ID-skillHeader`)}
                     >
                         <h1
-                            className="observer"
+                            className="observer headerText"
                             data-id="ID-skillHeader"
-                            style={{ fontSize: "4em" }}
                         >
                             My Skill
                         </h1>
@@ -222,7 +221,7 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
                                 className="version-img-container"
                                 style={{
                                     background: "white",
-                                    width: "20vw",
+                                    width: "20dvw",
                                     display: "flex",
                                     padding: 10,
                                     borderRadius: 10,
@@ -287,12 +286,16 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
                             position: relative;
                             background-color: black;
                             color: white;
+                            width: 100dvw;
                         }
                         .header {
                             display: flex;
                             justify-content: center;
                             padding-top: 80px;
                             padding-bottom: 10vh;
+                        }
+                        .headerText {
+                            font-size: 4em;
                         }
                         .line {
                             display: flex;
@@ -315,7 +318,8 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
                         .version-control-skill,
                         .backend-skill,
                         .mobile-skill,
-                        .other-skill {
+                        .other-skill {'
+                            width: 10dvw;
                             display: grid;
                             box-sizing: border-box;
                             justify-items: center;
@@ -361,17 +365,17 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
                         }
 
                         .img-container {
-                            width: 8vw;
+                            width: 8dvw;
                             height: 100%;
-                            min-width: 100px;
+                            min-width: 50px;
                             transition: 0.5s;
                             filter: drop-shadow(5px 5px 5px black);
                         }
 
                         .mobile-img-container,
                         .version-img-container {
-                            width: 12vw;
-                            min-width: 150px;
+                            width: 12dvw;
+                            min-width: 70px;
                             transition: 0.5s;
                             filter: drop-shadow(5px 5px 5px black);
                         }
@@ -389,6 +393,9 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
                             .forntend-skill {
                                 grid-template-columns: repeat(3, 3fr);
                                 row-gap: 50px;
+                            }
+                            .headerText {
+                                font-size: 2em;
                             }
                         }
                     `}

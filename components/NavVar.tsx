@@ -69,11 +69,11 @@ export default function NavVar({
                 .nav {
                     display: flex;
                     position: fixed;
-                    min-height: 40px;
+                    min-height: 70px;
                     left: 0;
                     right: 0;
                     color: white;
-                    padding: 10px;
+                    padding: 17px;
                     backdrop-filter: blur(10px);
                     background-color: rgba(0, 0, 0, 0.294);
                     box-shadow: 0px 0px 20px 10px black;

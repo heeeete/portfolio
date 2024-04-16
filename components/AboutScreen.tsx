@@ -45,15 +45,11 @@ const AboutScreen = forwardRef<
     return (
         <section className="container" ref={ref}>
             <div className="background-stars">
-                <Image src={starBack} layout="fill" />
+                <Image src={starBack} layout="fill" alt="background-img" />
             </div>
             <header className="about-title">
                 <ObserverItem key={0} visible={visibleItems.has(`ID-0`)}>
-                    <h1
-                        className="header"
-                        data-id="ID-0"
-                        style={{ fontSize: "2rem" }}
-                    >
+                    <h1 className="header" data-id="ID-0">
                         ABOUT
                     </h1>
                 </ObserverItem>
@@ -81,6 +77,7 @@ const AboutScreen = forwardRef<
                                         color="rgba(255, 255, 255, 0.776)"
                                         style={{
                                             height: "auto",
+                                            width: "100%",
                                         }}
                                     />
                                 </div>
@@ -165,8 +162,8 @@ const AboutScreen = forwardRef<
                         flex-direction: column;
                         justify-content: center;
                         align-items: center;
-                        width: 100vw;
-                        height: 100vh;
+                        width: 100dvw;
+                        height: 100dvh;
                         padding-top: 80px;
                         position: relative;
                         overflow: hidden;
@@ -184,16 +181,20 @@ const AboutScreen = forwardRef<
 
                     .about-title {
                         position: relative;
-                        width: 100vw;
+                        width: 100dvw;
                         display: flex;
                         justify-content: center;
+                    }
+
+                    .header {
+                        font-size: 4em;
                     }
 
                     .about-content {
                         position: relative;
                         display: flex;
                         align-items: center;
-                        width: 100vw;
+                        width: 100dvw;
                     }
 
                     .about-text {
@@ -203,7 +204,7 @@ const AboutScreen = forwardRef<
                         flex-direction: column;
                         align-items: center;
                         justify-content: center;
-                        font-size: 1.5rem;
+                        font-size: 1.5dvw;
                         width: 70%;
                         white-space: nowrap;
                     }
@@ -240,7 +241,7 @@ const AboutScreen = forwardRef<
 
                     .name-text {
                         font-family: Koreail-Bold;
-                        font-size: 2rem;
+                        font-size: 2dvw;
                     }
 
                     .about-card {
@@ -252,7 +253,7 @@ const AboutScreen = forwardRef<
                     }
                     .item {
                         padding: 10px;
-                        width: 180px;
+                        width: 17rem;
                         aspect-ratio: 10/6;
                         margin: 1.5vh 0;
                         perspective: 1000px;
@@ -274,7 +275,6 @@ const AboutScreen = forwardRef<
                         border-radius: 10px;
                         box-shadow: 0px 0px 15px 5px rgb(255, 255, 255);
                         background-color: rgba(255, 255, 255, 0.776);
-                        font-size: 0.7rem;
                     }
                     .front.no-style {
                         background-color: transparent;
@@ -297,12 +297,10 @@ const AboutScreen = forwardRef<
                     .back2 {
                         align-items: center;
                         justify-content: center;
-                        font-size: 1rem;
+                        font-size: 1.3em;
                     }
                     .back > * {
-                         {
-                            /* margin: 3px 0; */
-                        }
+                        margin: 3px 0;
                     }
                     .item:hover .flip,
                     .flip:hover {
@@ -320,7 +318,7 @@ const AboutScreen = forwardRef<
                     }
 
                     .tistory {
-                        font-size: 50px;
+                        font-size: 100px;
                         font-weight: bolder;
                     }
 
@@ -358,23 +356,32 @@ const AboutScreen = forwardRef<
                         bottom: 5vh;
                     }
                     @media all and (max-width: 768px) {
+                        .header {
+                            font-size: 2em;
+                        }
                         .Arrow {
-                            right: 5vw;
+                            right: 5dvw;
                         }
                         .about-content {
                             flex-direction: column;
                         }
                         .about-text {
-                            font-size: 5vw;
+                            font-size: 5dvw;
                         }
                         .name-text {
-                            font-size: 6vw;
+                            font-size: 6dvw;
                         }
                         .item {
-                            width: 15rem;
+                            width: 10rem;
                         }
                         .tistory {
-                            font-size: 5.7rem;
+                            font-size: 2rem;
+                        }
+                        .back2 {
+                            font-size: 1rem;
+                        }
+                        .back1 {
+                            font-size: 10px;
                         }
                     }
                 `}

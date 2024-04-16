@@ -33,7 +33,7 @@ button {
 
 html,
 body {
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     background-color: black;
     -ms-overflow-style: none; /* 인터넷 익스플로러 */
     scrollbar-width: none; /* 파이어폭스 */
@@ -41,8 +41,8 @@ body {
 
 html,
 body {
-    height: 100%;
-    overflow: hidden;
+    height: 100dvh;
+    width: 100dvw;
 }
 
 body {
