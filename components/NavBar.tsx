@@ -2,7 +2,7 @@ import { Nova_Square } from "next/font/google";
 import { useState, useEffect, useCallback } from "react";
 
 const Nova_square = Nova_Square({ subsets: ["latin"], weight: "400" });
-export default function NavVar({
+export default function NavBar({
 	aboutRef,
 	firstRef,
 	skillRef,
