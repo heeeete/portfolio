@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, forwardRef } from "react";
+import { useEffect, useRef, useState, forwardRef, ElementType } from "react";
 import Image from "next/legacy/image";
 import starBack from "../public/starBack.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,384 +10,430 @@ import MaskButton from "./MaskButton";
 import ObserverItem from "./ObserverItem";
 
 const AboutScreen = forwardRef<
-    HTMLDivElement,
-    { visibleItems: Set<string>; skillRef: React.RefObject<HTMLDivElement> }
+	HTMLDivElement,
+	{ visibleItems: Set<string>; skillRef: React.RefObject<HTMLDivElement> }
 >((props, ref) => {
-    const { visibleItems, skillRef } = props;
+	const { visibleItems, skillRef } = props;
+	const starRef = useRef<HTMLDivElement | null>(null);
 
-    useEffect(() => {
-        const firstFront = document.querySelector(".flip .front");
-        if (firstFront) {
-            firstFront.classList.add("no-style");
-        }
-    }, []);
+	useEffect(() => {
+		const firstFront = document.querySelector(".flip .front");
+		if (firstFront) {
+			firstFront.classList.add("no-style");
+		}
+	}, []);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach(({ target, isIntersecting }) => {
-                    if (isIntersecting) {
-                        target.classList.add("typing-ani");
-                        element2?.classList.add("typing-ani");
-                        observer.unobserve(target);
-                    }
-                });
-            },
-            { threshold: 0.9 }
-        );
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach(({ target, isIntersecting }) => {
+					if (isIntersecting) {
+						const element2 = document.querySelector(".text-2") as HTMLElement;
+						const element3 = document.querySelector(".text-3") as HTMLElement;
+						const element4 = document.querySelector(".text-4") as HTMLElement;
+						const element5 = document.querySelector(".text-5") as HTMLElement;
+						const element6 = document.querySelector(".text-6") as HTMLElement;
 
-        const element = document.querySelector(".text-1");
-        const element2 = document.querySelector(".text-2");
-        if (element) observer.observe(element);
-        return () => observer.disconnect();
-    });
+						target.classList.add("typing-ani");
+						element2?.classList.add("typing-ani");
+						element3?.classList.add("typing-ani");
+						element4?.classList.add("typing-ani");
+						element5?.classList.add("typing-ani");
+						element6?.classList.add("typing-ani");
 
-    return (
-        <section className="container" ref={ref}>
-            <div className="background-stars">
-                <Image src={starBack} layout="fill" alt="background-img" />
-            </div>
-            <header className="about-title">
-                <ObserverItem key={0} visible={visibleItems.has(`ID-0`)}>
-                    <h1 className="header" data-id="ID-0">
-                        ABOUT
-                    </h1>
-                </ObserverItem>
-            </header>
-            <article className="about-content">
-                <article className="about-text">
-                    <div className="typing-ani">
-                        <p className={`text-1`}>안녕하세요.</p>
-                    </div>
-                    <div className="typing-ani">
-                        <p className={`text-2`}>
-                            신입 프론트엔드 개발자{" "}
-                            <b className="name-text">박희태</b>
-                            입니다.
-                        </p>
-                    </div>
-                </article>
-                <section className="about-card">
-                    <ObserverItem key={1} visible={visibleItems.has(`ID-1`)}>
-                        <div className="item" data-id={`ID-1`}>
-                            <div className="flip">
-                                <div className="front">
-                                    <FontAwesomeIcon
-                                        icon={faAddressCard}
-                                        color="rgba(255, 255, 255, 0.776)"
-                                        style={{
-                                            height: "auto",
-                                            width: "100%",
-                                        }}
-                                    />
-                                </div>
-                                <div className="back back1">
-                                    <FontAwesomeIcon icon={faUser} />
-                                    <p>
-                                        name:{" "}
-                                        <span
-                                            style={{
-                                                fontFamily: "Koreail-Light",
-                                            }}
-                                        >
-                                            박희태
-                                        </span>
-                                    </p>
-                                    <p>
-                                        phone:{" "}
-                                        <a
-                                            className="tel"
-                                            href="tel:010-2994-9783"
-                                        >
-                                            010-2994-9783
-                                        </a>
-                                    </p>
-                                    <p>
-                                        email:{" "}
-                                        <a
-                                            className="mail"
-                                            href="mailto:mkoiui98@gmail.com"
-                                        >
-                                            mkoiui98@gmail.com
-                                        </a>
-                                    </p>
-                                    <p>birth date: 98.11.26</p>
-                                </div>
-                            </div>
-                        </div>
-                    </ObserverItem>
-                    <ObserverItem key={2} visible={visibleItems.has(`ID-2`)}>
-                        <div className="item" data-id={`ID-2`}>
-                            <div className="flip">
-                                <div className="front">
-                                    <FontAwesomeIcon
-                                        icon={faGithub}
-                                        style={{ width: "70%", height: "auto" }}
-                                    />
-                                </div>
-                                <div className={`back back2`}>
-                                    <MaskButton
-                                        value="Github"
-                                        link="https://github.com/heeeete"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </ObserverItem>
-                    <ObserverItem key={3} visible={visibleItems.has(`ID-3`)}>
-                        <div className="item" data-id={`ID-3`}>
-                            <div className="flip">
-                                <div className="front">
-                                    <p className="tistory">BLOG</p>
-                                </div>
-                                <div className="back back2">
-                                    <MaskButton
-                                        value="Tistory"
-                                        link="https://gaebarsaebal.tistory.com/"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </ObserverItem>
-                </section>
-            </article>
-            <div className="Arrow">
-                <DownArrow ArrowColor="white" targetRef={skillRef} />
-            </div>
+						setTimeout(() => {
+							if (element6) {
+								element6.style.borderRight = "3px solid white";
+							}
+						}, 5000);
+						observer.unobserve(target);
+					}
+				});
+			},
+			{ threshold: 0.9 }
+		);
 
-            <style jsx>
-                {`
-                    .container {
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        width: 100dvw;
-                        height: 100dvh;
-                        padding-top: 80px;
-                        position: relative;
-                        overflow: hidden;
-                        background-color: rgba(0, 0, 0);
-                    }
-                    .background-stars {
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        width: 230%;
-                        height: 230%;
-                        position: absolute;
-                        animation: space-rotate 500s linear infinite;
-                    }
+		const element = document.querySelector(".text-1") as HTMLElement;
+		if (element) observer.observe(element);
+		return () => observer.disconnect();
+	}, []);
 
-                    .about-title {
-                        position: relative;
-                        width: 100dvw;
-                        display: flex;
-                        justify-content: center;
-                    }
+	return (
+		<section className="container" ref={ref}>
+			<header className="about-title">
+				<ObserverItem key={0} visible={visibleItems.has(`ID-0`)}>
+					<h1 className="header" data-id="ID-0">
+						ABOUT
+					</h1>
+				</ObserverItem>
+			</header>
+			<article className="about-content">
+				<article className="about-text">
+					<div className="typing-ani">
+						<p className={`text-1`}>
+							웹 개발을 사랑하는 신입 프론트엔드 개발자{" "}
+							<b className="name-text">박희태</b>입니다.
+						</p>
+					</div>
+					<div className="typing-ani">
+						<p className={`text-2`}>저는</p>
+					</div>
 
-                    .header {
-                        font-size: 4em;
-                    }
+					<div className="typing-ani">
+						<p className={`text-3`}>사용자 경험 을 최우선으로 합니다.</p>
+					</div>
+					<div className="typing-ani">
+						<p className={`text-4`}>
+							공부한 것을 정리 하고 공유하는 것을 좋아해 블로그를 운영하고
+							있습니다.
+						</p>
+					</div>
+					<div className="typing-ani">
+						<p className={`text-5`}>
+							다양한 애니메이션 을 활용하는 것을 좋아합니다.
+						</p>
+					</div>
+					<div className="typing-ani">
+						<p className={`text-6`}>
+							WebSocket 을 활용해 실시간 서비스를 만든 경험이 있습니다.
+						</p>
+					</div>
+				</article>
+				<section className="about-card">
+					<ObserverItem key={1} visible={visibleItems.has(`ID-1`)}>
+						<div className="item" data-id={`ID-1`}>
+							<div className="flip">
+								<div className="front">
+									<FontAwesomeIcon
+										icon={faAddressCard}
+										color="rgba(255, 255, 255, 0.776)"
+										style={{
+											height: "auto",
+											width: "100%",
+										}}
+									/>
+								</div>
+								<div className="back back1">
+									<FontAwesomeIcon icon={faUser} />
+									<p>
+										name:{" "}
+										<span
+											style={{
+												fontFamily: "Koreail-Light",
+											}}
+										>
+											박희태
+										</span>
+									</p>
+									<p>
+										phone:{" "}
+										<a className="tel" href="tel:010-2994-9783">
+											010-2994-9783
+										</a>
+									</p>
+									<p>
+										email:{" "}
+										<a className="mail" href="mailto:mkoiui98@gmail.com">
+											mkoiui98@gmail.com
+										</a>
+									</p>
+									<p>birth date: 98.11.26</p>
+								</div>
+							</div>
+						</div>
+					</ObserverItem>
+					<ObserverItem key={2} visible={visibleItems.has(`ID-2`)}>
+						<div className="item" data-id={`ID-2`}>
+							<div className="flip">
+								<div className="front">
+									<FontAwesomeIcon
+										icon={faGithub}
+										style={{ width: "70%", height: "auto" }}
+									/>
+								</div>
+								<div className={`back back2`}>
+									<MaskButton
+										value="Github"
+										link="https://github.com/heeeete"
+									/>
+								</div>
+							</div>
+						</div>
+					</ObserverItem>
+					<ObserverItem key={3} visible={visibleItems.has(`ID-3`)}>
+						<div className="item" data-id={`ID-3`}>
+							<div className="flip">
+								<div className="front">
+									<p className="tistory">BLOG</p>
+								</div>
+								<div className="back back2">
+									<MaskButton
+										value="Tistory"
+										link="https://gaebarsaebal.tistory.com/"
+									/>
+								</div>
+							</div>
+						</div>
+					</ObserverItem>
+				</section>
+			</article>
+			<div className="Arrow">
+				<DownArrow ArrowColor="white" targetRef={skillRef} />
+			</div>
 
-                    .about-content {
-                        position: relative;
-                        display: flex;
-                        align-items: center;
-                        width: 100dvw;
-                    }
+			<style jsx>
+				{`
+					.container {
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						align-items: center;
+						width: 100dvw;
+						height: 100dvh;
+						padding-top: 80px;
+						position: relative;
+						overflow: hidden;
+						background-color: rgba(0, 0, 0);
+					}
+					.background-stars {
+						position: absolute;
 
-                    .about-text {
-                        font-family: Koreail-Light;
-                        color: white;
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        justify-content: center;
-                        font-size: 1.5dvw;
-                        width: 70%;
-                        white-space: nowrap;
-                    }
+						width: 100%;
+						height: 100%;
+					}
 
-                    .text-1,
-                    .text-2 {
-                        border-right: 3px solid white;
-                        width: 0;
-                        overflow: hidden;
-                    }
-                    .text-1 {
-                        padding: 5px 0;
-                    }
+					.about-title {
+						position: relative;
+						width: 100dvw;
+						display: flex;
+						justify-content: center;
+					}
 
-                    .text-1.typing-ani {
-                        animation: typing 1.5s steps(22) forwards,
-                            blink-cursos 1s step-end infinite;
-                    }
+					.header {
+						font-size: 4em;
+					}
 
-                    .text-2.typing-ani {
-                        animation: typing 1.5s steps(22) forwards,
-                            blink-cursos 1s step-end infinite;
-                        animation-delay: 2s;
-                    }
+					.about-content {
+						position: relative;
+						display: flex;
+						align-items: center;
+						width: 100dvw;
+						z-index: 2;
+					}
 
-                    @keyframes typing {
-                        from {
-                            width: 0;
-                        }
-                        to {
-                            width: 100%;
-                        }
-                    }
+					.about-text {
+						font-family: Koreail-Light;
+						color: white;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+						font-size: 1.5dvw;
+						width: 70%;
+						white-space: nowrap;
+						z-index: 2;
+					}
 
-                    .name-text {
-                        font-family: Koreail-Bold;
-                        font-size: 2dvw;
-                    }
+					.text-1,
+					.text-2,
+					.text-3,
+					.text-4,
+					.text-5,
+					.text-6 {
+						width: 0;
+						overflow: hidden;
+						padding: 5px 0;
+					}
 
-                    .about-card {
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        width: 17rem;
-                    }
-                    .item {
-                        padding: 10px;
-                        width: 17rem;
-                        aspect-ratio: 10/6;
-                        margin: 1.5vh 0;
-                        perspective: 1000px;
-                        transition: 0.5s;
-                    }
-                    .flip {
-                        position: relative;
-                        transition: 0.5s;
-                        width: 100%;
-                        height: 100%;
-                        transform-style: preserve-3d;
-                    }
-                    .front,
-                    .back {
-                        position: absolute;
-                        width: 100%;
-                        height: 100%;
-                        backface-visibility: hidden;
-                        border-radius: 10px;
-                        box-shadow: 0px 0px 15px 5px rgb(255, 255, 255);
-                        background-color: rgba(255, 255, 255, 0.776);
-                    }
-                    .front.no-style {
-                        background-color: transparent;
-                    }
-                    .front {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        overflow: hidden;
-                    }
-                    .back {
-                        display: flex;
-                        padding: 5px 10px;
-                        flex-direction: column;
-                        transform: rotateY(180deg);
-                    }
-                    .back1 {
-                        justify-content: center;
-                    }
-                    .back2 {
-                        align-items: center;
-                        justify-content: center;
-                        font-size: 1.3em;
-                    }
-                    .back > * {
-                        margin: 3px 0;
-                    }
-                    .item:hover .flip,
-                    .flip:hover {
-                        transform: rotateY(180deg);
-                    }
+					.text-1.typing-ani {
+						animation: typing 1.5s steps(22) forwards,
+							blink-cursos 1s step-end infinite;
+					}
 
-                    .tistory-box {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        width: 70%;
-                        height: 123%;
-                        border-radius: 50%;
-                        background-color: black;
-                    }
+					.text-2.typing-ani {
+						animation: typing 0.2s steps(2) forwards,
+							blink-cursos 1s step-end infinite;
+						animation-delay: 2s;
+					}
+					.text-3.typing-ani {
+						animation: typing 1.5s steps(22) forwards,
+							blink-cursos 1s step-end infinite;
+						animation-delay: 2.3s;
+					}
+					.text-4.typing-ani {
+						animation: typing 1.5s steps(22) forwards,
+							blink-cursos 1s step-end infinite;
+						animation-delay: 2.6s;
+					}
+					.text-5.typing-ani {
+						animation: typing 1.5s steps(22) forwards,
+							blink-cursos 1s step-end infinite;
+						animation-delay: 2.9s;
+					}
+					.text-6.typing-ani {
+						animation: typing 1.5s steps(22) forwards,
+							blink-cursos 1s step-end infinite;
+						animation-delay: 3.2s;
+					}
 
-                    .tistory {
-                        font-size: 100px;
-                        font-weight: bolder;
-                    }
+					@keyframes typing {
+						from {
+							width: 0;
+						}
+						to {
+							width: 100%;
+						}
+					}
 
-                    .tel,
-                    .mail {
-                        text-decoration-line: none;
-                        color: black;
+					.name-text {
+						font-family: Koreail-Bold;
+						font-size: 2dvw;
+					}
 
-                        &:hover {
-                            color: rgb(223, 154, 25);
-                        }
-                    }
+					.about-card {
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						align-items: center;
+						width: 17rem;
+					}
+					.item {
+						padding: 10px;
+						width: 17rem;
+						aspect-ratio: 10/6;
+						margin: 1.5vh 0;
+						perspective: 1000px;
+						transition: 0.5s;
+					}
+					.flip {
+						position: relative;
+						transition: 0.5s;
+						width: 100%;
+						height: 100%;
+						transform-style: preserve-3d;
+					}
+					.front,
+					.back {
+						position: absolute;
+						width: 100%;
+						height: 100%;
+						backface-visibility: hidden;
+						border-radius: 10px;
+						box-shadow: 0px 0px 15px 5px rgb(255, 255, 255);
+						background-color: rgba(255, 255, 255, 0.776);
+					}
+					.front.no-style {
+						background-color: transparent;
+					}
+					.front {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						overflow: hidden;
+					}
+					.back {
+						display: flex;
+						padding: 5px 10px;
+						flex-direction: column;
+						transform: rotateY(180deg);
+					}
+					.back1 {
+						justify-content: center;
+					}
+					.back2 {
+						align-items: center;
+						justify-content: center;
+						font-size: 1.3em;
+					}
+					.back > * {
+						margin: 3px 0;
+					}
+					.item:hover .flip,
+					.flip:hover {
+						transform: rotateY(180deg);
+					}
 
-                    h1 {
-                        color: white;
-                        margin-bottom: 5vh;
-                    }
-                    @keyframes space-rotate {
-                        from {
-                            transform: translate(-50%, -50%) rotate(0deg);
-                        }
-                        to {
-                            transform: translate(-50%, -50%) rotate(360deg);
-                        }
-                    }
+					.tistory-box {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						width: 70%;
+						height: 123%;
+						border-radius: 50%;
+						background-color: black;
+					}
 
-                    @keyframes blink-cursos {
-                        50% {
-                            border-color: transparent;
-                        }
-                    }
+					.tistory {
+						font-size: 100px;
+						font-weight: bolder;
+					}
 
-                    .Arrow {
-                        position: absolute;
-                        bottom: 5vh;
-                    }
-                    @media all and (max-width: 768px) {
-                        .header {
-                            font-size: 2em;
-                        }
-                        .Arrow {
-                            right: 5dvw;
-                        }
-                        .about-content {
-                            flex-direction: column;
-                        }
-                        .about-text {
-                            font-size: 5dvw;
-                        }
-                        .name-text {
-                            font-size: 6dvw;
-                        }
-                        .item {
-                            width: 10rem;
-                        }
-                        .tistory {
-                            font-size: 2rem;
-                        }
-                        .back2 {
-                            font-size: 1rem;
-                        }
-                        .back1 {
-                            font-size: 10px;
-                        }
-                    }
-                `}
-            </style>
-        </section>
-    );
+					.tel,
+					.mail {
+						text-decoration-line: none;
+						color: black;
+
+						&:hover {
+							color: rgb(223, 154, 25);
+						}
+					}
+
+					h1 {
+						color: white;
+						margin-bottom: 5vh;
+					}
+					@keyframes space-rotate {
+						from {
+							transform: translate(-50%, -50%) rotate(0deg);
+						}
+						to {
+							transform: translate(-50%, -50%) rotate(360deg);
+						}
+					}
+
+					@keyframes blink-cursos {
+						50% {
+							border-color: transparent;
+						}
+					}
+
+					.Arrow {
+						position: absolute;
+						bottom: 5vh;
+					}
+					@media all and (max-width: 768px) {
+						.header {
+							font-size: 2em;
+						}
+						.Arrow {
+							right: 5dvw;
+						}
+						.about-content {
+							flex-direction: column;
+						}
+						.about-text {
+							font-size: 5dvw;
+						}
+						.name-text {
+							font-size: 6dvw;
+						}
+						.item {
+							width: 10rem;
+						}
+						.tistory {
+							font-size: 2rem;
+						}
+						.back2 {
+							font-size: 1rem;
+						}
+						.back1 {
+							font-size: 10px;
+						}
+					}
+				`}
+			</style>
+		</section>
+	);
 });
 
 export default AboutScreen;

@@ -5,79 +5,69 @@ import { useEffect, forwardRef, RefObject } from "react";
 import exp from "constants";
 
 const FirstScreen = forwardRef<
-    HTMLDivElement,
-    { aboutRef: RefObject<HTMLDivElement> }
+	HTMLDivElement,
+	{ aboutRef: RefObject<HTMLDivElement> }
 >((props, ref) => {
-    const { aboutRef } = props;
+	const { aboutRef } = props;
 
-    useEffect(() => {
-        const halfScreenWidth = screen.width / 1.92;
-        const imageContainer = document.querySelectorAll(".image-container");
-        const mediaQurey = window.matchMedia(
-            `screen and (max-width: ${halfScreenWidth}px)`
-        );
+	useEffect(() => {
+		const halfScreenWidth = screen.width / 1.92;
+		const imageContainer = document.querySelectorAll(".image-container");
+		const mediaQurey = window.matchMedia(
+			`screen and (max-width: ${halfScreenWidth}px)`
+		);
 
-        const handleImageContainer = () => {
-            if (mediaQurey.matches)
-                imageContainer.forEach((e) => {
-                    const htmlE = e as HTMLElement;
-                    htmlE.style.width = `${screen.width * 1.2}px`;
-                });
-            else
-                imageContainer.forEach((e) => {
-                    const htmlE = e as HTMLElement;
-                    htmlE.style.width = "230vw";
-                });
-        };
-        mediaQurey.addEventListener("change", handleImageContainer);
-        handleImageContainer();
+		const handleImageContainer = () => {
+			if (mediaQurey.matches)
+				imageContainer.forEach((e) => {
+					const htmlE = e as HTMLElement;
+					htmlE.style.width = `${screen.width * 1.2}px`;
+				});
+			else
+				imageContainer.forEach((e) => {
+					const htmlE = e as HTMLElement;
+					htmlE.style.width = "230vw";
+				});
+		};
+		mediaQurey.addEventListener("change", handleImageContainer);
+		handleImageContainer();
 
-        return () => {
-            mediaQurey.removeEventListener("change", handleImageContainer);
-        };
-    }, []);
+		return () => {
+			mediaQurey.removeEventListener("change", handleImageContainer);
+		};
+	}, []);
 
-    return (
-        <section className="container" ref={ref}>
-            <div className="image-container">
-                <div className="full-image-container">
-                    <Image
-                        src={back}
-                        alt="background"
-                        layout="fill"
-                        quality={100}
-                    />
-                </div>
-            </div>
-            <div className="image-container">
-                <div className="secoend-image-container">
-                    <Image
-                        src={back}
-                        alt="background"
-                        layout="fill"
-                        quality={100}
-                    ></Image>
-                </div>
-            </div>
-            <div className="image-container">
-                <div className="circle-image-container">
-                    <Image
-                        src={back}
-                        alt="circular part"
-                        layout="fill"
-                        quality={100}
-                    />
-                </div>
-            </div>
-            <div className="text">
-                <p>FRONT-END</p>
-                <p>PORT-FOLIO</p>
-            </div>
-            <div className="arrow-div">
-                <DownArrow ArrowColor="white" targetRef={aboutRef} />
-            </div>
+	return (
+		<section className="container" ref={ref}>
+			<div className="image-container">
+				<div className="full-image-container">
+					<Image src={back} alt="background" layout="fill" quality={100} />
+				</div>
+			</div>
+			<div className="image-container">
+				<div className="secoend-image-container">
+					<Image
+						src={back}
+						alt="background"
+						layout="fill"
+						quality={100}
+					></Image>
+				</div>
+			</div>
+			<div className="image-container">
+				<div className="circle-image-container">
+					<Image src={back} alt="circular part" layout="fill" quality={100} />
+				</div>
+			</div>
+			<div className="text">
+				<p>FRONT-END</p>
+				<p>PORT-FOLIO</p>
+			</div>
+			<div className="arrow-div">
+				<DownArrow ArrowColor="white" targetRef={aboutRef} />
+			</div>
 
-            <style jsx>{`
+			<style jsx>{`
 				.container {
 					display: flex;
 					justify-content: center;
@@ -87,6 +77,7 @@ const FirstScreen = forwardRef<
 					position: relative;
 					overflow: hidden;
 					padding-top: 70px;
+					z-index: 2;
 
 				}
 				.image-container {
@@ -215,8 +206,8 @@ const FirstScreen = forwardRef<
 					text-shadow: box-shadow: 0px 0px 5px #ffee10;
 				}
 			`}</style>
-        </section>
-    );
+		</section>
+	);
 });
 
 export default FirstScreen;
