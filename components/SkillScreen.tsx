@@ -17,7 +17,7 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
 						</h1>
 					</ObserverItem>
 				</header>
-				<article>
+				<article className="skillContainer">
 					<div className="line">Frontend</div>
 					<ObserverItem
 						key={"frontSkill"}
@@ -161,17 +161,7 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
 									}}
 								/>
 							</div>
-							<div
-								className="version-img-container"
-								style={{
-									background: "white",
-									width: "20dvw",
-									display: "flex",
-									padding: 10,
-									borderRadius: 10,
-									objectFit: "contain",
-								}}
-							>
+							<div className="version-img-container github">
 								<Image
 									className="image"
 									src={require("../public/github.png")}
@@ -226,6 +216,11 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
                             color: white;
                             width: 100dvw;
                         }
+						.skillContainer {
+							display: flex;
+							flex-direction: column;
+							align-items: center;
+						}
                         .header {
                             display: flex;
                             justify-content: center;
@@ -249,7 +244,7 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
                             height: 1px;
                             font-size: 0px;
                             line-height: 0px;
-                            margin: 0px 16px;
+                            margin: 0px 100px;
                         }
 
                         .forntend-skill,
@@ -257,7 +252,7 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
                         .backend-skill,
                         .mobile-skill,
                         .other-skill {'
-                            width: 10dvw;
+                            width: 10sdvw;
                             display: grid;
                             box-sizing: border-box;
                             justify-items: center;
@@ -266,32 +261,10 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
                             margin: 1em;
                             padding: 1em;
                             border-radius: 10px;
-                            animation: box-anime 20s ease infinite;
-                        }
-
-                        @keyframes box-anime {
-                            0%,
-                            100% {
-                                box-shadow: 0px 0px 50px 3px
-                                    rgba(255, 255, 255, 0.337);
-                            }
-
-                            25% {
-                                box-shadow: 0px 0px 50px 3px
-                                    rgba(97, 255, 97, 0.139);
-                            }
-                            50% {
-                                box-shadow: 0px 0px 50px 3px
-                                    rgba(255, 0, 0, 0.21);
-                            }
-                            70% {
-                                box-shadow: 0px 0px 50px 3px
-                                    rgba(63, 223, 255, 0.26);
-                            }
                         }
 
                         .forntend-skill {
-                            grid-template-columns: repeat(6, 6fr);
+                            grid-template-columns: repeat(3, 6fr);
                         }
 
                         .version-control-skill {
@@ -303,20 +276,28 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
                         }
 
                         .img-container {
-                            width: 8dvw;
+							padding: 20px;
+							width: 110px;
                             height: 100%;
-                            min-width: 50px;
                             transition: 0.5s;
                             filter: drop-shadow(5px 5px 5px black);
                         }
 
                         .mobile-img-container,
                         .version-img-container {
-                            width: 12dvw;
-                            min-width: 70px;
+                            width: 150px;
+
                             transition: 0.5s;
                             filter: drop-shadow(5px 5px 5px black);
                         }
+						.version-img-container.github {
+							background: white;
+									width: 200px;
+									display: flex;
+									padding: 10px;
+									border-radius: 10px;
+									object-fit: contain;
+						}
 
                         .img-container:hover,
                         .mobile-img-container:hover,
@@ -328,14 +309,13 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
                         }
 
                         @media all and (max-width: 768px) {
-                            .forntend-skill {
-                                grid-template-columns: repeat(3, 3fr);
-                                row-gap: 50px;
-                            }
                             .headerText {
-                                font-size: 2em;
+                                font-size: 2rem;
                             }
                         }
+						@media all and (width < 369px) {
+
+						}
                     `}
 				</style>
 			</section>

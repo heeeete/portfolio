@@ -60,10 +60,24 @@ export default function Home() {
 			if (starContainer) {
 				starContainer.innerHTML = "";
 				for (let i = 0; i < 50; i++) {
-					let x: any = Math.random() * starContainer.clientWidth;
-					let y: any = Math.random() * starContainer.clientHeight;
-					let size: any = Math.random() * 13;
-					let time: any = Math.random() * 10;
+					// let x: any = Math.random() * starContainer.clientWidth;
+					// let y: any = Math.random() * starContainer.clientHeight;
+					const x: any = Math.random() * window.innerWidth;
+					const y: any = Math.random() * window.innerHeight;
+					const size: any = Math.random() * 13;
+					const time: any = Math.random() * 7 + 3;
+					const moveX = Math.random() * 200 - 100;
+					const moveY = Math.random() * 200 - 100;
+					const keyframes = `
+					@keyframes star-move${i} {
+					  0%, 100% { transform: translate(0px, 0px); }
+					  50% { transform: translate(${moveX}px, ${moveY}px); }
+					}
+				  `;
+
+					const styleSheet = document.styleSheets[0];
+					styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
+
 					const star = document.createElement("div");
 					star.className = "star";
 					star.style.display = "flex";
@@ -75,7 +89,7 @@ export default function Home() {
 					star.style.backgroundColor = randomColor();
 					star.style.borderRadius = "50%";
 					star.style.filter = "blur(1px)";
-					star.style.animation = `blink ${time}s  ease infinite`;
+					star.style.animation = `star-move${i} ${time}s ease infinite`;
 					star.style.zIndex = "1";
 					starContainer.appendChild(star);
 				}
@@ -109,7 +123,6 @@ export default function Home() {
 					}
 					.background-stars {
 						position: absolute;
-
 						width: 100%;
 						height: 100%;
 					}

@@ -47,13 +47,3 @@ body {
 	-webkit-overflow-scrolling: touch;
 	overflow-y: scroll; /* 스크롤 가능하게 유지 */
 }
-
-@keyframes blink {
-	0%,
-	100% {
-		opacity: 1;
-	}
-	50% {
-		opacity: 0;
-	}
-}
