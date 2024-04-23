@@ -412,10 +412,10 @@ const AboutScreen = forwardRef<
 							flex-direction: column;
 						}
 						.about-text {
-							font-size: 5dvw;
+							font-size: 3dvw;
 						}
 						.name-text {
-							font-size: 6dvw;
+							font-size: 4dvw;
 						}
 						.item {
 							width: 10rem;
