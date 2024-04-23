@@ -19,13 +19,7 @@ export default function MaskButton({
 				.link-btn {
 					position: relative;
 				}
-				.mas {
-					color: black;
-				}
 				.mas2 {
-					background-color: black;
-
-					color: white;
 					-webkit-animation: mask-ani 0.7s steps(22) forwards;
 					animation: mask-ani 0.7s steps(22) forwards;
 
@@ -45,10 +39,8 @@ export default function MaskButton({
 					transform: translate(-50%, -50%);
 					padding: 0.5em 2em;
 					border-radius: 5px;
-					box-shadow: 0 2px 25px rgb(0, 0, 0);
 					transition: 0.5s;
 					cursor: pointer;
-					border: 1px solid black;
 				}
 
 				@keyframes mask-ani {

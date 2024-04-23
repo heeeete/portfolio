@@ -59,10 +59,7 @@ const FirstScreen = forwardRef<
 					<Image src={back} alt="circular part" layout="fill" quality={100} />
 				</div>
 			</div>
-			<div className="text">
-				<p>FRONT-END</p>
-				<p>PORT-FOLIO</p>
-			</div>
+			<div className="text">FRONT-END-PORTFOLIO</div>
 			<div className="arrow-div">
 				<DownArrow ArrowColor="white" targetRef={aboutRef} />
 			</div>
@@ -90,7 +87,7 @@ const FirstScreen = forwardRef<
 					height: 230vh;
 					overflow: hidden;
 					z-index: 0;
-					filter: brightness(40%);
+					transition: 1s;
 				}
 
 				.image-container.half-size {
@@ -122,6 +119,7 @@ const FirstScreen = forwardRef<
 					opacity: 0.7;
 					animation: blink 2s ease infinite;
 					animation-delay: 4s;
+					font-size: 40px;
 				}
 				@keyframes blink {
 					0% {

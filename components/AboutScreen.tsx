@@ -59,10 +59,10 @@ const AboutScreen = forwardRef<
 	}, []);
 
 	return (
-		<section className="container" ref={ref}>
+		<section className="about-container" ref={ref}>
 			<header className="about-title">
 				<ObserverItem key={0} visible={visibleItems.has(`ID-0`)}>
-					<h1 className="header" data-id="ID-0">
+					<h1 className="header responsive-text" data-id="ID-0">
 						ABOUT
 					</h1>
 				</ObserverItem>
@@ -70,32 +70,34 @@ const AboutScreen = forwardRef<
 			<article className="about-content">
 				<article className="about-text">
 					<div className="typing-ani">
-						<p className={`text-1`}>
+						<p className="text-1 responsive-text">
 							웹 개발을 사랑하는 신입 프론트엔드 개발자{" "}
 							<b className="name-text">박희태</b>입니다.
 						</p>
 					</div>
 					<div className="typing-ani">
-						<p className={`text-2`}>저는</p>
+						<p className={`text-2 responsive-text`}>저는</p>
 					</div>
 
 					<div className="typing-ani">
-						<p className={`text-3`}>사용자 경험 을 최우선으로 합니다.</p>
+						<p className={`text-3 responsive-text`}>
+							사용자 경험을 최우선으로 합니다.
+						</p>
 					</div>
 					<div className="typing-ani">
-						<p className={`text-4`}>
-							공부한 것을 정리 하고 공유하는 것을 좋아해 블로그를 운영하고
+						<p className={`text-4 responsive-text`}>
+							공부한 것을 정리하고 공유하는 것을 좋아해 블로그를 운영하고
 							있습니다.
 						</p>
 					</div>
 					<div className="typing-ani">
-						<p className={`text-5`}>
-							다양한 애니메이션 을 활용하는 것을 좋아합니다.
+						<p className={`text-5 responsive-text`}>
+							다양한 애니메이션을 활용하는 것을 좋아합니다.
 						</p>
 					</div>
 					<div className="typing-ani">
-						<p className={`text-6`}>
-							WebSocket 을 활용해 실시간 서비스를 만든 경험이 있습니다.
+						<p className={`text-6 responsive-text`}>
+							WebSocket을 활용해 실시간 서비스를 만든 경험이 있습니다.
 						</p>
 					</div>
 				</article>
@@ -103,21 +105,15 @@ const AboutScreen = forwardRef<
 					<ObserverItem key={1} visible={visibleItems.has(`ID-1`)}>
 						<div className="item" data-id={`ID-1`}>
 							<div className="flip">
-								<div className="front">
-									<FontAwesomeIcon
-										icon={faAddressCard}
-										color="rgba(255, 255, 255, 0.776)"
-										style={{
-											height: "auto",
-											width: "100%",
-										}}
-									/>
+								<div className="front first">
+									<p className="info">INFO</p>
 								</div>
 								<div className="back back1">
-									<FontAwesomeIcon icon={faUser} />
-									<p>
+									<FontAwesomeIcon icon={faUser} color="#a6a6a6" />
+									<p className="responsive-text">
 										name:{" "}
 										<span
+											className="responsive-text"
 											style={{
 												fontFamily: "Koreail-Light",
 											}}
@@ -125,19 +121,22 @@ const AboutScreen = forwardRef<
 											박희태
 										</span>
 									</p>
-									<p>
+									<p className="responsive-text">
 										phone:{" "}
-										<a className="tel" href="tel:010-2994-9783">
+										<a className="tel responsive-text" href="tel:010-2994-9783">
 											010-2994-9783
 										</a>
 									</p>
-									<p>
+									<p className="responsive-text">
 										email:{" "}
-										<a className="mail" href="mailto:mkoiui98@gmail.com">
+										<a
+											className="mail responsive-text"
+											href="mailto:mkoiui98@gmail.com"
+										>
 											mkoiui98@gmail.com
 										</a>
 									</p>
-									<p>birth date: 98.11.26</p>
+									<p className="responsive-text">birth date: 98.11.26</p>
 								</div>
 							</div>
 						</div>
@@ -145,10 +144,10 @@ const AboutScreen = forwardRef<
 					<ObserverItem key={2} visible={visibleItems.has(`ID-2`)}>
 						<div className="item" data-id={`ID-2`}>
 							<div className="flip">
-								<div className="front">
+								<div className="front second">
 									<FontAwesomeIcon
 										icon={faGithub}
-										style={{ width: "70%", height: "auto" }}
+										style={{ width: "55%", height: "auto", color: "#004f00" }}
 									/>
 								</div>
 								<div className={`back back2`}>
@@ -164,7 +163,7 @@ const AboutScreen = forwardRef<
 						<div className="item" data-id={`ID-3`}>
 							<div className="flip">
 								<div className="front">
-									<p className="tistory">BLOG</p>
+									<p className="tistory responsive-text">BLOG</p>
 								</div>
 								<div className="back back2">
 									<MaskButton
@@ -183,7 +182,7 @@ const AboutScreen = forwardRef<
 
 			<style jsx>
 				{`
-					.container {
+					.about-container {
 						display: flex;
 						flex-direction: column;
 						justify-content: center;
@@ -193,13 +192,6 @@ const AboutScreen = forwardRef<
 						padding-top: 80px;
 						position: relative;
 						overflow: hidden;
-						background-color: rgba(0, 0, 0);
-					}
-					.background-stars {
-						position: absolute;
-
-						width: 100%;
-						height: 100%;
 					}
 
 					.about-title {
@@ -223,7 +215,6 @@ const AboutScreen = forwardRef<
 
 					.about-text {
 						font-family: Koreail-Light;
-						color: white;
 						display: flex;
 						flex-direction: column;
 						align-items: center;
@@ -311,6 +302,7 @@ const AboutScreen = forwardRef<
 						width: 100%;
 						height: 100%;
 						transform-style: preserve-3d;
+						border-radius: 10px;
 					}
 					.front,
 					.back {
@@ -319,12 +311,8 @@ const AboutScreen = forwardRef<
 						height: 100%;
 						backface-visibility: hidden;
 						border-radius: 10px;
-						box-shadow: 0px 0px 15px 5px rgb(255, 255, 255);
-						background-color: rgba(255, 255, 255, 0.776);
 					}
-					.front.no-style {
-						background-color: transparent;
-					}
+
 					.front {
 						display: flex;
 						justify-content: center;
@@ -363,32 +351,23 @@ const AboutScreen = forwardRef<
 						background-color: black;
 					}
 
-					.tistory {
+					.tistory,
+					.info {
 						font-size: 100px;
 						font-weight: bolder;
+						color: #004f00;
 					}
 
 					.tel,
 					.mail {
 						text-decoration-line: none;
-						color: black;
-
 						&:hover {
 							color: rgb(223, 154, 25);
 						}
 					}
 
 					h1 {
-						color: white;
 						margin-bottom: 5vh;
-					}
-					@keyframes space-rotate {
-						from {
-							transform: translate(-50%, -50%) rotate(0deg);
-						}
-						to {
-							transform: translate(-50%, -50%) rotate(360deg);
-						}
 					}
 
 					@keyframes blink-cursos {
@@ -401,6 +380,7 @@ const AboutScreen = forwardRef<
 						position: absolute;
 						bottom: 5vh;
 					}
+
 					@media all and (max-width: 768px) {
 						.header {
 							font-size: 2em;

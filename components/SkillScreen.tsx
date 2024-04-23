@@ -12,13 +12,16 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
 						key={"skillHeader"}
 						visible={visibleItems.has(`ID-skillHeader`)}
 					>
-						<h1 className="observer headerText" data-id="ID-skillHeader">
+						<h1
+							className="observer headerText responsive-text"
+							data-id="ID-skillHeader"
+						>
 							My Skill
 						</h1>
 					</ObserverItem>
 				</header>
 				<article className="skillContainer">
-					<div className="line">Frontend</div>
+					<div className="line responsive-text">Frontend</div>
 					<ObserverItem
 						key={"frontSkill"}
 						visible={visibleItems.has("ID-frontSkill")}
@@ -99,7 +102,7 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
 							</div>
 						</div>
 					</ObserverItem>
-					<div className="line">Backend</div>
+					<div className="line responsive-text">Backend</div>
 					<ObserverItem
 						key={"backend"}
 						visible={visibleItems.has("ID-backend")}
@@ -119,7 +122,7 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
 							</div>
 						</div>
 					</ObserverItem>
-					<div className="line">Mobile App</div>
+					<div className="line responsive-text">Mobile App</div>
 					<ObserverItem
 						key={"mobileApp"}
 						visible={visibleItems.has("ID-mobileApp")}
@@ -140,7 +143,7 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
 							</div>
 						</div>
 					</ObserverItem>
-					<div className="line">Version Control</div>
+					<div className="line responsive-text">Version Control</div>
 					<ObserverItem
 						key={"versionCon"}
 						visible={visibleItems.has("ID-versionCon")}
@@ -176,7 +179,7 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
 							</div>
 						</div>
 					</ObserverItem>
-					<div className="line">Other Language</div>
+					<div className="line responsive-text">Other Language</div>
 					<ObserverItem key={"ohter"} visible={visibleItems.has("ID-ohter")}>
 						<div className="observer other-skill" data-id="ID-ohter">
 							<div className="img-container">
@@ -212,7 +215,7 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
 					{`
                         .container {
                             position: relative;
-                            background-color: black;
+
                             color: white;
                             width: 100dvw;
                         }
@@ -235,6 +238,8 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
                             justify-content: center;
                             align-items: center;
                             font-size: 1.5em;
+							width: 20%;
+
                         }
                         .line::before,
                         .line::after {
@@ -244,7 +249,7 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
                             height: 1px;
                             font-size: 0px;
                             line-height: 0px;
-                            margin: 0px 100px;
+                            margin: 0px 10px;
                         }
 
                         .forntend-skill,
@@ -305,17 +310,20 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
                             transform: translateY(-20px);
                         }
 
-                        .image {
-                        }
-
                         @media all and (max-width: 768px) {
                             .headerText {
                                 font-size: 2rem;
                             }
+							.img-container{
+								width: 70px;
+								margin: 0;
+								padding: 5px;
+							}
+							.mobile-img-container,.version-img-container,.version-img-container.github{
+								width: 100px;
+								margin: 10px;
+							}
                         }
-						@media all and (width < 369px) {
-
-						}
                     `}
 				</style>
 			</section>
