@@ -33,6 +33,8 @@ const AboutScreen = forwardRef<
 						const element4 = document.querySelector(".text-4") as HTMLElement;
 						const element5 = document.querySelector(".text-5") as HTMLElement;
 						const element6 = document.querySelector(".text-6") as HTMLElement;
+						const element7 = document.querySelector(".text-7") as HTMLElement;
+						const element8 = document.querySelector(".text-8") as HTMLElement;
 
 						target.classList.add("typing-ani");
 						element2?.classList.add("typing-ani");
@@ -40,10 +42,12 @@ const AboutScreen = forwardRef<
 						element4?.classList.add("typing-ani");
 						element5?.classList.add("typing-ani");
 						element6?.classList.add("typing-ani");
+						element7?.classList.add("typing-ani");
+						element8?.classList.add("typing-ani");
 
 						setTimeout(() => {
 							if (element6) {
-								element6.style.borderRight = "3px solid white";
+								element8.style.borderRight = "3px solid white";
 							}
 						}, 5000);
 						observer.unobserve(target);
@@ -71,33 +75,42 @@ const AboutScreen = forwardRef<
 				<article className="about-text">
 					<div className="typing-ani">
 						<p className="text-1 responsive-text">
-							웹 개발을 사랑하는 신입 프론트엔드 개발자{" "}
+							더 나은 사용자 경험을 위해 끊임없이 도전하는 프론트엔드 개발자{" "}
 							<b className="name-text">박희태</b>입니다.
 						</p>
 					</div>
 					<div className="typing-ani">
 						<p className={`text-2 responsive-text`}>저는</p>
 					</div>
-
 					<div className="typing-ani">
 						<p className={`text-3 responsive-text`}>
-							사용자 경험을 최우선으로 합니다.
+							⚪️ 사용자 경험을 최우선으로 합니다.
 						</p>
 					</div>
 					<div className="typing-ani">
 						<p className={`text-4 responsive-text`}>
-							공부한 것을 정리하고 공유하는 것을 좋아해 블로그를 운영하고
+							⚪️ 공부한 것을 정리하고 공유하는 것을 좋아해 블로그를 운영하고
 							있습니다.
 						</p>
 					</div>
 					<div className="typing-ani">
 						<p className={`text-5 responsive-text`}>
-							다양한 애니메이션을 활용하는 것을 좋아합니다.
+							⚪️ 다양한 애니메이션을 활용하는 것을 좋아합니다.
 						</p>
 					</div>
 					<div className="typing-ani">
 						<p className={`text-6 responsive-text`}>
-							WebSocket을 활용해 실시간 서비스를 만든 경험이 있습니다.
+							⚪️ WebSocket을 활용해 실시간 서비스를 만든 경험이 있습니다.
+						</p>
+					</div>
+					<div className="typing-ani">
+						<p className={`text-7 responsive-text`}>
+							⚪️ 원활한 소통을 통해 작업물의 완성도를 높입니다.
+						</p>
+					</div>
+					<div className="typing-ani">
+						<p className={`text-8 responsive-text`}>
+							⚪️ 42서울 에서 동료와의 코드 리뷰를 통해 협업 능력을 키웠습니다.
 						</p>
 					</div>
 				</article>
@@ -106,10 +119,24 @@ const AboutScreen = forwardRef<
 						<div className="item" data-id={`ID-1`}>
 							<div className="flip">
 								<div className="front first">
-									<p className="info">INFO</p>
+									<p className="info">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="1em"
+											height="1em"
+											viewBox="0 0 24 24"
+										>
+											<path
+												fill="currentColor"
+												d="M17 3h-3v3h-4V3H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m-5 5a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m4 8H8v-1c0-1.33 2.67-2 4-2s4 .67 4 2zM13 5h-2V1h2zm3 14H8v-1h8zm-4 2H8v-1h4z"
+											/>
+										</svg>
+									</p>
 								</div>
 								<div className="back back1">
-									<FontAwesomeIcon icon={faUser} color="#a6a6a6" />
+									<div className="info-back-img">
+										<FontAwesomeIcon icon={faUser} />
+									</div>
 									<p className="responsive-text">
 										name:{" "}
 										<span
@@ -144,10 +171,10 @@ const AboutScreen = forwardRef<
 					<ObserverItem key={2} visible={visibleItems.has(`ID-2`)}>
 						<div className="item" data-id={`ID-2`}>
 							<div className="flip">
-								<div className="front second">
+								<div className="front second github">
 									<FontAwesomeIcon
 										icon={faGithub}
-										style={{ width: "55%", height: "auto", color: "#004f00" }}
+										style={{ width: "55%", height: "auto" }}
 									/>
 								</div>
 								<div className={`back back2`}>
@@ -230,7 +257,9 @@ const AboutScreen = forwardRef<
 					.text-3,
 					.text-4,
 					.text-5,
-					.text-6 {
+					.text-6,
+					.text-7,
+					.text-8 {
 						width: 0;
 						overflow: hidden;
 						padding: 5px 0;
@@ -265,6 +294,16 @@ const AboutScreen = forwardRef<
 						animation: typing 1.5s steps(22) forwards,
 							blink-cursos 1s step-end infinite;
 						animation-delay: 3.2s;
+					}
+					.text-7.typing-ani {
+						animation: typing 1.5s steps(22) forwards,
+							blink-cursos 1s step-end infinite;
+						animation-delay: 3.5s;
+					}
+					.text-8.typing-ani {
+						animation: typing 1.5s steps(22) forwards,
+							blink-cursos 1s step-end infinite;
+						animation-delay: 3.8s;
 					}
 
 					@keyframes typing {
@@ -313,6 +352,11 @@ const AboutScreen = forwardRef<
 						border-radius: 10px;
 					}
 
+					.info-back-img {
+						display: flex;
+						justify-content: center;
+					}
+
 					.front {
 						display: flex;
 						justify-content: center;
@@ -345,17 +389,15 @@ const AboutScreen = forwardRef<
 						display: flex;
 						justify-content: center;
 						align-items: center;
-						width: 70%;
-						height: 123%;
-						border-radius: 50%;
-						background-color: black;
 					}
 
-					.tistory,
-					.info {
-						font-size: 100px;
+					.tistory {
+						display: flex;
+						font-size: 75px;
 						font-weight: bolder;
-						color: #004f00;
+					}
+					.info {
+						font-size: 7rem;
 					}
 
 					.tel,
@@ -392,16 +434,17 @@ const AboutScreen = forwardRef<
 							flex-direction: column;
 						}
 						.about-text {
-							font-size: 3dvw;
+							font-size: 2dvw;
 						}
 						.name-text {
-							font-size: 4dvw;
+							font-size: 3dvw;
 						}
 						.item {
 							width: 10rem;
 						}
-						.tistory {
-							font-size: 2rem;
+						.tistory,
+						.info {
+							font-size: 3rem;
 						}
 						.back2 {
 							font-size: 1rem;
