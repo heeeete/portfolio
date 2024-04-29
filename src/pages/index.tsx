@@ -105,7 +105,6 @@ export default function Home() {
 
 	return (
 		<>
-			<Seo titleName="희태의 포트폴리오" />
 			<div className="container">
 				<div className="background-stars" ref={starRef}></div>
 				<NavBar aboutRef={aboutRef} firstRef={firstRef} skillRef={skillRef} />
