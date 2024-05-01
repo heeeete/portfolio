@@ -4,6 +4,7 @@ import Seo from "../../components/Seo";
 import FirstScreen from "../../components/FirstScreen";
 import AboutScreen from "../../components/AboutScreen";
 import SkillScreen from "../../components/SkillScreen";
+import ProjectScreen from "../../components/ProjectScreen";
 
 const randomColor = () => {
 	return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(
@@ -17,6 +18,7 @@ export default function Home() {
 	const aboutRef = useRef<HTMLDivElement | null>(null);
 	const skillRef = useRef<HTMLDivElement | null>(null);
 	const starRef = useRef<HTMLDivElement | null>(null);
+	const projectRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(
@@ -39,11 +41,11 @@ export default function Home() {
 				});
 			},
 			{
-				threshold: 0.9,
+				threshold: 0.1,
 			}
 		);
 
-		document.querySelectorAll(".item, .header, .observer").forEach((item) => {
+		document.querySelectorAll(".item, .title, .observer").forEach((item) => {
 			observer.observe(item);
 		});
 
@@ -60,14 +62,13 @@ export default function Home() {
 			if (starContainer) {
 				starContainer.innerHTML = "";
 				for (let i = 0; i < 50; i++) {
-					// let x: any = Math.random() * starContainer.clientWidth;
-					// let y: any = Math.random() * starContainer.clientHeight;
-					const x: any = Math.random() * window.innerWidth;
-					const y: any = Math.random() * window.innerHeight;
-					const size: any = Math.random() * 13;
-					const time: any = Math.random() * 7 + 3;
-					const moveX = Math.random() * 200 - 100;
-					const moveY = Math.random() * 200 - 100;
+					const x: Number = Math.random() * window.innerWidth;
+					const y: Number = Math.random() * window.innerHeight;
+					const size: Number = Math.random() * 13;
+					const time: Number = Math.random() * 7 + 3;
+					const delayTime: Number = Math.random() * 3;
+					const moveX = Math.random() * 300 - 100;
+					const moveY = Math.random() * 300 - 100;
 					const keyframes = `
 					@keyframes star-move${i} {
 					  0%, 100% { transform: translate(0px, 0px); }
@@ -89,8 +90,8 @@ export default function Home() {
 					star.style.backgroundColor = randomColor();
 					star.style.borderRadius = "50%";
 					star.style.filter = "blur(1px)";
-					star.style.animation = `star-move${i} ${time}s ease infinite`;
-					star.style.zIndex = "1";
+					star.style.animation = `star-move${i} ${time}s ${delayTime}s ease infinite`;
+					star.style.zIndex = "-1";
 					starContainer.appendChild(star);
 				}
 			}
@@ -114,7 +115,12 @@ export default function Home() {
 					skillRef={skillRef}
 					ref={aboutRef}
 				/>
-				<SkillScreen visibleItems={visibleItems} ref={skillRef} />
+				<SkillScreen
+					visibleItems={visibleItems}
+					projectRef={projectRef}
+					ref={skillRef}
+				/>
+				<ProjectScreen visibleItems={visibleItems} ref={projectRef} />
 			</div>
 			<style jsx>
 				{`
