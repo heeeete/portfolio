@@ -1,10 +1,6 @@
 import { Head } from "next/document";
 
-type SeoProps = {
-	titleName: string;
-};
-
-export default function Seo({ titleName }: SeoProps) {
+export default function Seo() {
 	const schema = {
 		"@context": "http://schema.org",
 		"@type": "Person",
@@ -53,7 +49,6 @@ export default function Seo({ titleName }: SeoProps) {
 
 	return (
 		<Head>
-			<title>{titleName}</title>
 			<meta name="description" content="frontEnd portfolio" />
 			<script
 				type="application/ld+json"
