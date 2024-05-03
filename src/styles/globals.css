@@ -15,6 +15,15 @@
 	src: url("../../public/font/Korail_Round_Gothic_Bold.ttf") format("truetype");
 }
 /* 라이트모드 */
+body.light-nav-active .header,
+body.light-nav-active .btns > button,
+body.light-nav-active .theme {
+	color: black; /* 기본 상태에서의 색상 변경 */
+}
+body.light-nav-active .menu-button > * {
+	background-color: black;
+}
+
 :root {
 	--color-about-btn: #004f00d6;
 	--color-text: black;
@@ -27,25 +36,55 @@
 	.menu-button > * {
 		background-color: white;
 	}
-	body.light-nav-active .header,
-	body.light-nav-active .btns > button,
-	body.light-nav-active .theme {
-		color: black; /* 기본 상태에서의 색상 변경 */
-	}
-	body.light-nav-active .menu-button > * {
-		background-color: black;
-	}
 }
 
 /* 다크모드 */
 [data-theme="dark"] {
-	--color-about-btn: rgba(255, 0, 0, 0.5);
+	--color-about-btn: rgb(129, 129, 129);
 	--color-text: white;
 
 	.image-container {
 		filter: brightness(20%);
 	}
 	background-color: black;
+}
+
+/* button 기본 스타일 제거 */
+button,
+input {
+	border: none;
+	outline: none;
+	background-color: inherit;
+	cursor: pointer;
+}
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body::-webkit-scrollbar {
+	display: none;
+}
+
+body.full-screen {
+	overflow: hidden;
+}
+
+html,
+body {
+}
+
+.title-container {
+	padding-bottom: 20px;
+}
+.title {
+	font-size: 3rem;
+}
+
+.Arrow {
+	padding-block: 50px;
 }
 
 .responsive-text {
@@ -70,31 +109,20 @@
 .info-back-img {
 	color: var(--color-about-btn);
 }
-
-/* button 기본 스타일 제거 */
-button {
-	border: none;
-	outline: none;
-	background-color: inherit;
-	cursor: pointer;
+.project-container {
+	box-shadow: 0 0px 30px var(--color-text);
 }
 
-* {
-	box-sizing: border-box;
-	padding: 0;
-	margin: 0;
+.project-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
-
-body::-webkit-scrollbar {
-	display: none;
-}
-html,
-body {
-	height: 100dvh;
-	width: 100dvw;
-}
-
-body {
-	-webkit-overflow-scrolling: touch;
-	overflow-y: scroll; /* 스크롤 가능하게 유지 */
+.project-link > * {
+	padding: 10px;
+	border-radius: 10px;
+	transition: 0.3s;
+	&:hover {
+		background-color: #e7e7e7;
+	}
 }

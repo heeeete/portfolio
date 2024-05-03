@@ -1,222 +1,249 @@
-import { forwardRef, useEffect, useRef } from "react";
+import { forwardRef } from "react";
 import ObserverItem from "./ObserverItem";
 import Image from "next/image";
+import DownArrow from "./DownArrow";
 
-const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
-	(props, ref) => {
-		const { visibleItems } = props;
-		return (
-			<section className="container" ref={ref}>
-				<header className="header">
-					<ObserverItem
-						key={"skillHeader"}
-						visible={visibleItems.has(`ID-skillHeader`)}
+const SkillScreen = forwardRef<
+	HTMLDivElement,
+	{ visibleItems: Set<string>; projectRef: React.RefObject<HTMLDivElement> }
+>((props, ref) => {
+	const { visibleItems, projectRef } = props;
+	return (
+		<section className="container" ref={ref}>
+			<header className="title-container">
+				<ObserverItem
+					key={"skillHeader"}
+					visible={visibleItems.has(`ID-skillHeader`)}
+				>
+					<h1
+						className="observer title responsive-text"
+						data-id="ID-skillHeader"
 					>
-						<h1
-							className="observer headerText responsive-text"
-							data-id="ID-skillHeader"
-						>
-							My Skill
-						</h1>
-					</ObserverItem>
-				</header>
-				<article className="skillContainer">
-					<div className="line responsive-text">Frontend</div>
-					<ObserverItem
-						key={"frontSkill"}
-						visible={visibleItems.has("ID-frontSkill")}
+						My Skill
+					</h1>
+				</ObserverItem>
+			</header>
+			<article className="skillContainer">
+				<div className="line responsive-text">Frontend</div>
+				<ObserverItem
+					key={"frontSkill"}
+					visible={visibleItems.has("ID-frontSkill")}
+				>
+					<div className="observer forntend-skill" data-id="ID-frontSkill">
+						<div className="img-container">
+							<Image
+								className="image"
+								src={"/HTML5.svg"}
+								alt="HTML"
+								width={1}
+								height={1}
+								style={{
+									width: "100%",
+									height: "100%",
+									objectFit: "contain",
+								}}
+							/>
+						</div>
+						<div className="img-container">
+							<Image
+								className="image"
+								src={"/CSS.svg"}
+								alt="CSS"
+								width={1}
+								height={1}
+								style={{
+									width: "100%",
+									height: "100%",
+									objectFit: "contain",
+								}}
+							/>
+						</div>
+						<div className="img-container">
+							<Image
+								className="image"
+								src={"/JS.svg"}
+								alt="JS"
+								width={1}
+								height={1}
+								style={{
+									width: "100%",
+									height: "100%",
+									borderRadius: 10,
+									objectFit: "contain",
+								}}
+							/>
+						</div>
+						<div className="img-container">
+							<Image
+								className="image"
+								src={"/TS.png"}
+								alt="JS"
+								width={1}
+								height={1}
+								style={{
+									width: "100%",
+									height: "100%",
+									objectFit: "contain",
+								}}
+							/>
+						</div>
+						<div className="img-container">
+							<Image
+								className="image"
+								src={"/REACT.png"}
+								alt="JS"
+								width={1}
+								height={1}
+								style={{
+									width: "100%",
+									height: "100%",
+									objectFit: "contain",
+								}}
+							/>
+						</div>
+						<div className="img-container">
+							<Image
+								className="image"
+								src={"/nextJS.png"}
+								alt="JS"
+								width={1}
+								height={1}
+								style={{
+									width: "100%",
+									height: "100%",
+									objectFit: "contain",
+								}}
+							/>
+						</div>
+					</div>
+				</ObserverItem>
+				<div className="line responsive-text">Backend</div>
+				<ObserverItem key={"backend"} visible={visibleItems.has("ID-backend")}>
+					<div className="observer backend-skill" data-id="ID-backend">
+						<div className="img-container">
+							<Image
+								className="image"
+								src={"/nodeJS.png"}
+								alt="JS"
+								width={1}
+								height={1}
+								style={{
+									width: "100%",
+									height: "100%",
+									objectFit: "contain",
+								}}
+							/>
+						</div>
+					</div>
+				</ObserverItem>
+				<div className="line responsive-text">Mobile App</div>
+				<ObserverItem
+					key={"mobileApp"}
+					visible={visibleItems.has("ID-mobileApp")}
+				>
+					<div className="observer mobile-skill" data-id="ID-mobileApp">
+						<div className="mobile-img-container">
+							<Image
+								className="image"
+								src={"/RN.webp"}
+								alt="JS"
+								width={1}
+								height={1}
+								style={{
+									width: "100%",
+									height: "100%",
+									borderRadius: 10,
+									objectFit: "contain",
+								}}
+							/>
+						</div>
+					</div>
+				</ObserverItem>
+				<div className="line responsive-text">Version Control</div>
+				<ObserverItem
+					key={"versionCon"}
+					visible={visibleItems.has("ID-versionCon")}
+				>
+					<div
+						className="observer version-control-skill"
+						data-id="ID-versionCon"
 					>
-						<div className="observer forntend-skill" data-id="ID-frontSkill">
-							<div className="img-container">
-								<Image
-									className="image"
-									src={require("../public/HTML5.svg")}
-									alt="HTML"
-									style={{
-										width: "100%",
-										height: "100%",
-										objectFit: "contain",
-									}}
-								/>
-							</div>
-							<div className="img-container">
-								<Image
-									className="image"
-									src={require("../public/CSS.svg")}
-									alt="CSS"
-									style={{
-										width: "100%",
-										height: "100%",
-										objectFit: "contain",
-									}}
-								/>
-							</div>
-							<div className="img-container">
-								<Image
-									className="image"
-									src={require("../public/JS.svg")}
-									alt="JS"
-									style={{
-										width: "100%",
-										height: "100%",
-										borderRadius: 10,
-										objectFit: "contain",
-									}}
-								/>
-							</div>
-							<div className="img-container">
-								<Image
-									className="image"
-									src={require("../public/TS.png")}
-									alt="JS"
-									style={{
-										width: "100%",
-										height: "100%",
-										objectFit: "contain",
-									}}
-								/>
-							</div>
-							<div className="img-container">
-								<Image
-									className="image"
-									src={require("../public/REACT.png")}
-									alt="JS"
-									style={{
-										width: "100%",
-										height: "100%",
-										objectFit: "contain",
-									}}
-								/>
-							</div>
-							<div className="img-container">
-								<Image
-									className="image"
-									src={require("../public/nextJS.png")}
-									alt="JS"
-									style={{
-										width: "100%",
-										height: "100%",
-										objectFit: "contain",
-									}}
-								/>
-							</div>
+						<div className="version-img-container">
+							<Image
+								className="image"
+								src={"/GIT.svg"}
+								alt="GIT"
+								width={1}
+								height={1}
+								style={{
+									width: "100%",
+									height: "100%",
+									objectFit: "contain",
+								}}
+							/>
 						</div>
-					</ObserverItem>
-					<div className="line responsive-text">Backend</div>
-					<ObserverItem
-						key={"backend"}
-						visible={visibleItems.has("ID-backend")}
-					>
-						<div className="observer backend-skill" data-id="ID-backend">
-							<div className="img-container">
-								<Image
-									className="image"
-									src={require("../public/nodeJS.png")}
-									alt="JS"
-									style={{
-										width: "100%",
-										height: "100%",
-										objectFit: "contain",
-									}}
-								/>
-							</div>
+						<div className="version-img-container github">
+							<Image
+								className="image"
+								src={"/github.png"}
+								alt="GIT"
+								width={1}
+								height={1}
+								style={{
+									width: "100%",
+									height: "100%",
+									objectFit: "contain",
+								}}
+							/>
 						</div>
-					</ObserverItem>
-					<div className="line responsive-text">Mobile App</div>
-					<ObserverItem
-						key={"mobileApp"}
-						visible={visibleItems.has("ID-mobileApp")}
-					>
-						<div className="observer mobile-skill" data-id="ID-mobileApp">
-							<div className="mobile-img-container">
-								<Image
-									className="image"
-									src={require("../public/RN.webp")}
-									alt="JS"
-									style={{
-										width: "100%",
-										height: "100%",
-										borderRadius: 10,
-										objectFit: "contain",
-									}}
-								/>
-							</div>
+					</div>
+				</ObserverItem>
+				<div className="line responsive-text">Other Language</div>
+				<ObserverItem key={"ohter"} visible={visibleItems.has("ID-ohter")}>
+					<div className="observer other-skill" data-id="ID-ohter">
+						<div className="img-container">
+							<Image
+								className="image"
+								src={"/C.png"}
+								alt="C"
+								width={1}
+								height={1}
+								style={{
+									width: "100%",
+									height: "100%",
+									borderRadius: 10,
+									objectFit: "contain",
+								}}
+							/>
 						</div>
-					</ObserverItem>
-					<div className="line responsive-text">Version Control</div>
-					<ObserverItem
-						key={"versionCon"}
-						visible={visibleItems.has("ID-versionCon")}
-					>
-						<div
-							className="observer version-control-skill"
-							data-id="ID-versionCon"
-						>
-							<div className="version-img-container">
-								<Image
-									className="image"
-									src={require("../public/GIT.svg")}
-									alt="GIT"
-									style={{
-										width: "100%",
-										height: "100%",
-										objectFit: "contain",
-									}}
-								/>
-							</div>
-							<div className="version-img-container github">
-								<Image
-									className="image"
-									src={require("../public/github.png")}
-									alt="GIT"
-									style={{
-										width: "100%",
-										height: "100%",
-										objectFit: "contain",
-									}}
-									layout="responsive"
-								/>
-							</div>
+						<div className="img-container">
+							<Image
+								className="image"
+								src={"/cpp.svg"}
+								width={1}
+								height={1}
+								alt="C"
+								style={{
+									width: "100%",
+									height: "100%",
+									borderRadius: 10,
+									objectFit: "contain",
+								}}
+							/>
 						</div>
-					</ObserverItem>
-					<div className="line responsive-text">Other Language</div>
-					<ObserverItem key={"ohter"} visible={visibleItems.has("ID-ohter")}>
-						<div className="observer other-skill" data-id="ID-ohter">
-							<div className="img-container">
-								<Image
-									className="image"
-									src={require("../public/C.png")}
-									alt="C"
-									style={{
-										width: "100%",
-										height: "100%",
-										borderRadius: 10,
-										objectFit: "contain",
-									}}
-								/>
-							</div>
-							<div className="img-container">
-								<Image
-									className="image"
-									src={require("../public/cpp.svg")}
-									alt="C"
-									style={{
-										width: "100%",
-										height: "100%",
-										borderRadius: 10,
-										objectFit: "contain",
-									}}
-								/>
-							</div>
-						</div>
-					</ObserverItem>
-				</article>
-				<style jsx>
-					{`
+					</div>
+				</ObserverItem>
+			</article>
+			<div className="Arrow">
+				<DownArrow ArrowColor="white" targetRef={projectRef} />
+			</div>
+			<style jsx>
+				{`
                         .container {
+							display: flex;
+							flex-direction: column;
                             position: relative;
-
-                            color: white;
+							align-items: center;
                             width: 100dvw;
                         }
 						.skillContainer {
@@ -224,21 +251,19 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
 							flex-direction: column;
 							align-items: center;
 						}
-                        .header {
+                        .title-container {
                             display: flex;
                             justify-content: center;
-                            padding-top: 80px;
-                            padding-bottom: 10vh;
-                        }
-                        .headerText {
-                            font-size: 4em;
+                            padding-top: 100px;
+                            padding-bottom: 100px;
                         }
                         .line {
                             display: flex;
                             justify-content: center;
                             align-items: center;
                             font-size: 1.5em;
-							width: 20%;
+							width: 100%;
+
 
                         }
                         .line::before,
@@ -311,7 +336,7 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
                         }
 
                         @media all and (max-width: 768px) {
-                            .headerText {
+                            .title {
                                 font-size: 2rem;
                             }
 							.img-container{
@@ -325,10 +350,9 @@ const SkillScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
 							}
                         }
                     `}
-				</style>
-			</section>
-		);
-	}
-);
+			</style>
+		</section>
+	);
+});
 
 export default SkillScreen;

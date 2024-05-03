@@ -2,7 +2,6 @@ import back from "../public/back.jpg";
 import Image from "next/legacy/image";
 import DownArrow from "./DownArrow";
 import { useEffect, forwardRef, RefObject } from "react";
-import exp from "constants";
 
 const FirstScreen = forwardRef<
 	HTMLDivElement,
@@ -120,6 +119,7 @@ const FirstScreen = forwardRef<
 					animation: blink 2s ease infinite;
 					animation-delay: 4s;
 					font-size: 40px;
+					text-align: center;
 				}
 				@keyframes blink {
 					0% {
@@ -190,7 +190,6 @@ const FirstScreen = forwardRef<
 				.arrow-div {
 					position: absolute;
 					bottom: 5vh;
-					opacity: 0;
 					animation: fadeInArrow 3s ease-out 3s forwards;
 					transition: 0.5s;
 				}

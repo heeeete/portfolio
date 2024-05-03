@@ -64,9 +64,9 @@ const AboutScreen = forwardRef<
 
 	return (
 		<section className="about-container" ref={ref}>
-			<header className="about-title">
-				<ObserverItem key={0} visible={visibleItems.has(`ID-0`)}>
-					<h1 className="header responsive-text" data-id="ID-0">
+			<header className="title-container">
+				<ObserverItem key={0} visible={visibleItems.has(`about-title`)}>
+					<h1 className="title responsive-text" data-id="about-title">
 						ABOUT
 					</h1>
 				</ObserverItem>
@@ -84,33 +84,33 @@ const AboutScreen = forwardRef<
 					</div>
 					<div className="typing-ani">
 						<p className={`text-3 responsive-text`}>
-							⚪️ 사용자 경험을 최우선으로 합니다.
+							-사용자 경험을 최우선으로 합니다.
 						</p>
 					</div>
 					<div className="typing-ani">
 						<p className={`text-4 responsive-text`}>
-							⚪️ 공부한 것을 정리하고 공유하는 것을 좋아해 블로그를 운영하고
+							-공부한 것을 정리하고 공유하는 것을 좋아해 블로그를 운영하고
 							있습니다.
 						</p>
 					</div>
 					<div className="typing-ani">
 						<p className={`text-5 responsive-text`}>
-							⚪️ 다양한 애니메이션을 활용하는 것을 좋아합니다.
+							-다양한 애니메이션을 활용하는 것을 좋아합니다.
 						</p>
 					</div>
 					<div className="typing-ani">
 						<p className={`text-6 responsive-text`}>
-							⚪️ WebSocket을 활용해 실시간 서비스를 만든 경험이 있습니다.
+							-WebSocket을 활용해 실시간 서비스를 만든 경험이 있습니다.
 						</p>
 					</div>
 					<div className="typing-ani">
 						<p className={`text-7 responsive-text`}>
-							⚪️ 원활한 소통을 통해 작업물의 완성도를 높입니다.
+							-원활한 소통을 통해 작업물의 완성도를 높입니다.
 						</p>
 					</div>
 					<div className="typing-ani">
 						<p className={`text-8 responsive-text`}>
-							⚪️ 42서울 에서 동료와의 코드 리뷰를 통해 협업 능력을 키웠습니다.
+							-42서울 에서 동료와의 코드 리뷰를 통해 협업 능력을 키웠습니다.
 						</p>
 					</div>
 				</article>
@@ -218,18 +218,6 @@ const AboutScreen = forwardRef<
 						height: 100dvh;
 						padding-top: 80px;
 						position: relative;
-						overflow: hidden;
-					}
-
-					.about-title {
-						position: relative;
-						width: 100dvw;
-						display: flex;
-						justify-content: center;
-					}
-
-					.header {
-						font-size: 4em;
 					}
 
 					.about-content {
@@ -418,26 +406,20 @@ const AboutScreen = forwardRef<
 						}
 					}
 
-					.Arrow {
-						position: absolute;
-						bottom: 5vh;
-					}
-
 					@media all and (max-width: 768px) {
-						.header {
+						.title {
 							font-size: 2em;
 						}
 						.Arrow {
-							right: 5dvw;
 						}
 						.about-content {
 							flex-direction: column;
 						}
 						.about-text {
-							font-size: 2dvw;
+							font-size: 0.7rem;
 						}
 						.name-text {
-							font-size: 3dvw;
+							font-size: 0.9rem;
 						}
 						.item {
 							width: 10rem;
