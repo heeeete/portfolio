@@ -4,49 +4,182 @@ import { useRouter } from "next/router";
 import React, { memo } from "react";
 import Portfolio from "./projects/Portfolio";
 import Image from "next/image";
+import { cursorTo } from "readline";
 
 const ImgSlider = ({ children }: { children: React.ReactNode }) => {
-	const [offset, setOffset] = useState(0);
-
+	// const [offset, setOffset] = useState(0);
+	const [imgWidth, setImgWidth] = useState(0);
+	const [idx, setIdx] = useState(0);
+	const [dragValue, setDragValue] = useState(0);
+	const sliderContainerRef = useRef<HTMLDivElement>(null);
 	const totalChildren = React.Children.count(children);
-	const imageWidth = 200; // 각 이미지의 너비
+	let initDragPos = 0;
+	let diff: number;
+
+	// useEffect(() => {
+	// 	const resizeListener = () => {
+	// 		setTimeout(() => {
+	// 			const $imgContainer = document.querySelector(
+	// 				".slider-img-container"
+	// 			) as HTMLElement;
+	// 			if ($imgContainer) {
+	// 				console.log("Updated width:", $imgContainer.offsetWidth);
+	// 				setOffset(0);
+	// 				setImgWidth($imgContainer.offsetWidth);
+	// 			}
+	// 		}, 300);
+	// 	};
+
+	// 	resizeListener();
+
+	// 	window.addEventListener("resize", resizeListener);
+
+	// 	return () => {
+	// 		window.removeEventListener("resize", resizeListener);
+	// 	};
+	// }, []);
+
+	useEffect(() => {
+		const $imgInnerContainer = document.querySelector(
+			".img-inner-container"
+		) as HTMLElement;
+
+		const startMouse = (e: MouseEvent) => {
+			diff = e.clientX - initDragPos;
+			const a = diff / imgWidth;
+			setIdx((currIdx) => currIdx + a);
+			console.log(diff, imgWidth, a);
+			console.log("idx = ", idx);
+		};
+		const stopMouse = (e: MouseEvent) => {
+			document.removeEventListener("mousemove", startMouse);
+			document.removeEventListener("mouseup", stopMouse);
+		};
+
+		const downMouse = (e: MouseEvent) => {
+			e.preventDefault();
+			initDragPos = e.clientX;
+			console.log("startX = ", e.clientX);
+
+			document.addEventListener("mousemove", startMouse);
+			document.addEventListener("mouseup", stopMouse);
+		};
+
+		$imgInnerContainer?.addEventListener("mousedown", downMouse);
+
+		return () => {
+			$imgInnerContainer?.removeEventListener("mousedown", downMouse);
+			document.removeEventListener("mousemove", startMouse);
+			document.removeEventListener("mouseup", stopMouse);
+		};
+	}, [imgWidth]);
+
+	console.log(idx);
+
+	useEffect(() => {
+		const resizeObserver = new ResizeObserver((entries) => {
+			for (let e of entries) {
+				const { width } = e.contentRect;
+				setIdx(0);
+				setImgWidth(width);
+			}
+		});
+
+		if (sliderContainerRef.current)
+			resizeObserver.observe(sliderContainerRef.current);
+
+		return () => {
+			if (sliderContainerRef.current)
+				resizeObserver.unobserve(sliderContainerRef.current);
+		};
+	}, []);
 
 	const onClickLeft = () => {
-		// 왼쪽으로 이동
-		setOffset((currentOffset) => {
-			return Math.min(currentOffset + imageWidth, 0);
-		});
+		setIdx((currIdx) => Math.max(currIdx - 1, 0));
 	};
 
 	const onClickRight = () => {
-		// 오른쪽으로 이동
-		setOffset((currentOffset) => {
-			const maxOffset = -(totalChildren - 1) * imageWidth;
-			return Math.max(currentOffset - imageWidth, maxOffset);
+		setIdx((currIdx) => Math.min(currIdx + 1, totalChildren - 1));
+	};
+
+	const RenderCurrentPosition = () => {
+		return Array.from({ length: totalChildren }, (_, _idx) => {
+			return (
+				<div className="circle" key={_idx}>
+					<style jsx>{`
+						.circle {
+							width: 10px;
+							height: 10px;
+							border: 0.5px solid #ffffff;
+							background-color: ${idx === _idx ? "#ffffff" : ""};
+							border-radius: 50%;
+							margin-inline: 1.5px;
+							transition: 1s;
+						}
+					`}</style>
+				</div>
+			);
 		});
 	};
+
 	return (
-		<div className="slider-container">
-			<button onClick={onClickLeft}>{"<"}</button>
-			<div className="img-container">
-				<div className="img-inner-container">{children}</div>
+		<div className="container">
+			<div className="slider-container">
+				<button onClick={onClickLeft}>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="1em"
+						height="1em"
+						viewBox="0 0 20 20"
+					>
+						<path
+							fill="currentColor"
+							d="m4 10l9 9l1.4-1.5L7 10l7.4-7.5L13 1z"
+						/>
+					</svg>
+				</button>
+				<div className="slider-img-container" ref={sliderContainerRef}>
+					<div className="img-inner-container">{children}</div>
+				</div>
+				<button onClick={onClickRight}>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="1em"
+						height="1em"
+						viewBox="0 0 20 20"
+					>
+						<path
+							fill="currentColor"
+							d="M7 1L5.6 2.5L13 10l-7.4 7.5L7 19l9-9z"
+						/>
+					</svg>
+				</button>
 			</div>
-			<button onClick={onClickRight}>{">"}</button>
+			<div className="circle-container">
+				<RenderCurrentPosition />
+			</div>
 			<style jsx>{`
+				.container {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+				}
 				.slider-container {
 					display: flex;
+					width: 100%;
 				}
-				.img-container {
-					width: ${imageWidth}px;
+				.slider-img-container {
 					display: flex;
 					overflow: hidden;
 				}
 				.img-inner-container {
 					display: flex;
-					transform: translateX(${offset}px);
-					transition: 0.5s;
+					transform: translateX(${idx * imgWidth * -1}px);
 				}
-
+				.circle-container {
+					transform: translateY(-20px);
+					display: flex;
+				}
 				button {
 					background: none;
 					border: none;
@@ -237,7 +370,13 @@ const PongWorld = () => {
 					59fps로 유지되며, 최저 FPS가 58fps로 이전 15fps에서 크게
 					개선되었습니다.
 				</p>
-				<Image src={"/a.png"} alt="code" width={300} height={300} />
+				<Image
+					src={"/a.png"}
+					alt="code"
+					width={300}
+					height={300}
+					style={{ width: "100%", height: "100%", maxWidth: "600px" }}
+				/>
 			</div>
 			<style jsx>{`
 				h1 {
@@ -257,10 +396,14 @@ const PongWorld = () => {
 				.stack-container {
 					display: flex;
 					justify-content: space-between;
+					flex-wrap: wrap;
 				}
 				.hash2,
 				.hash1 {
 					display: flex;
+					flex-wrap: wrap;
+
+					white-space: nowrap;
 				}
 				.hash1 > *,
 				.hash2 > * {

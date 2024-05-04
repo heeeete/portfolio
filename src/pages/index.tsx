@@ -5,6 +5,7 @@ import FirstScreen from "../../components/FirstScreen";
 import AboutScreen from "../../components/AboutScreen";
 import SkillScreen from "../../components/SkillScreen";
 import ProjectScreen from "../../components/ProjectScreen";
+import debounce from "../../components/utils/debounce";
 
 const randomColor = () => {
 	return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(
@@ -27,11 +28,8 @@ export default function Home() {
 					const id: string | null = target.getAttribute("data-id");
 
 					if (isIntersecting) {
-						// 요소가 뷰포트에 들어왔는지 확인
-						// visibleItems 상태를 업데이트하여 요소의 id 추가
 						if (id) setVisibleItems((prevItems) => new Set(prevItems).add(id));
 					} else {
-						// visibleItems 상태를 업데이트하여 요소의 id 제거
 						setVisibleItems((prevItems) => {
 							const newItems = new Set(prevItems);
 							if (id) newItems.delete(id);
@@ -96,11 +94,13 @@ export default function Home() {
 				}
 			}
 		};
+
+		const debounceMakeStarts = debounce(makeStars, 500);
 		makeStars();
 
-		window.addEventListener("resize", makeStars);
+		window.addEventListener("resize", debounceMakeStarts);
 		return () => {
-			removeEventListener("resize", makeStars);
+			removeEventListener("resize", debounceMakeStarts);
 		};
 	}, []);
 
