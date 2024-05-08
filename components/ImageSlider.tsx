@@ -1,23 +1,47 @@
+import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 
-const ImageSlider = ({
-	children,
-	width = null,
-	height = null,
-}: {
-	children: React.ReactNode;
+interface Image {
+	url: string;
+}
+
+interface ImageSlider {
+	images: Image[];
 	width?: number | null;
 	height?: number | null;
-}) => {
-	const [imgWidth, setImgWidth] = useState(0);
-	const [offset, setOffset] = useState(0);
-	const [idx, setIdx] = useState(0);
+	objectFit?: "fill" | "contain" | "cover" | "none" | "scale-down";
+	dotColor?: string;
+	dotBorderColor?: string;
+	arrowColor?: string;
+	borderRadius?: number;
+}
+
+const ImageSlider = ({
+	images,
+	width = null,
+	height = null,
+	objectFit = "fill",
+	dotColor = "white",
+	dotBorderColor = "white",
+	arrowColor = "white",
+	borderRadius = 0,
+}: ImageSlider) => {
+	const imgStyle: React.CSSProperties = {
+		width: width ? `${width}px` : "100%",
+		height: height ? `${height}px` : "100%",
+		objectFit: objectFit,
+		borderRadius: borderRadius,
+	};
+
+	const [imgWidth, setImgWidth] = useState<number>(0);
+	const [offset, setOffset] = useState<number>(0);
+	const [idx, setIdx] = useState<number>(0);
 	const sliderContainerRef = useRef<HTMLDivElement>(null);
-	const totalChildren = React.Children.count(children);
-	let initDragPos = 0;
+	const totalChildren: number = images.length;
+	let initDragPos: number = 0;
 	let travelRatio: number = 0;
 	let travel: number = 0;
-	let originOffset = 0;
+	let originOffset: number = 0;
 
 	useEffect(() => {
 		const resizeObserver = new ResizeObserver((entries) => {
@@ -85,6 +109,11 @@ const ImageSlider = ({
 		};
 	}, [imgWidth, idx]);
 
+	const onClickindicator = (idx: number) => {
+		setOffset(-idx * imgWidth);
+		setIdx(idx);
+	};
+
 	const navigate = (direction: number) => {
 		const newIdx = Math.max(0, Math.min(totalChildren - 1, idx + direction));
 		setIdx(newIdx);
@@ -94,16 +123,21 @@ const ImageSlider = ({
 	const RenderCurrentPosition = () => {
 		return Array.from({ length: totalChildren }, (_, _idx) => {
 			return (
-				<div className="circle" key={_idx}>
+				<div
+					className="circle"
+					onClick={() => onClickindicator(_idx)}
+					key={_idx}
+				>
 					<style jsx>{`
 						.circle {
 							width: 10px;
 							height: 10px;
-							border: 0.5px solid #ffffff;
-							background-color: ${idx === _idx ? "#ffffff" : ""};
+							border: 0.5px solid ${dotBorderColor};
+							background-color: ${idx === _idx ? dotColor : ""};
 							border-radius: 50%;
 							margin-inline: 1.5px;
 							transition: 1s;
+							cursor: pointer;
 						}
 					`}</style>
 				</div>
@@ -128,7 +162,20 @@ const ImageSlider = ({
 					</svg>
 				</button>
 				<div className="slider-img-container" ref={sliderContainerRef}>
-					<div className="img-inner-container">{children}</div>
+					<div className="img-inner-container">
+						{images.map((e, idx) => {
+							return (
+								<Image
+									src={e.url}
+									alt="img-slider"
+									key={idx}
+									width={1}
+									height={1}
+									style={imgStyle}
+								/>
+							);
+						})}
+					</div>
 				</div>
 				<button onClick={() => navigate(1)}>
 					<svg
@@ -154,36 +201,43 @@ const ImageSlider = ({
 					align-items: center;
 					width: ${width ? width + "px" : "100%"};
 					${height && `height : ${height}px`};
-					background-color: yellow;
 				}
 				.slider-container {
 					display: flex;
-					background-color: green;
 				}
 				.slider-img-container {
 					display: flex;
 					overflow: hidden;
-					width: 300px;
-					height: 100px;
-					background-color: red;
+					width: ${width ? width + "px" : "100%"};
+					height: ${height ? height + "px" : "100%"};
+					border-radius: ${borderRadius}px;
 				}
 				.img-inner-container {
 					display: flex;
 					transform: translateX(${offset}px);
 					transition: 0.1s;
-					background-color: blue;
 				}
 				.circle-container {
 					transform: translateY(-20px);
 					display: flex;
 				}
+				.image-wapper {
+				}
 				button {
 					background: none;
 					border: none;
-					color: white;
+					color: ${arrowColor};
 					font-size: 24px;
 					cursor: pointer;
 					z-index: 1;
+					&:hover {
+						transition: 0.3s;
+						transform: scale(150%);
+					}
+					&:active {
+						transition: 0s;
+						transform: scale(100%);
+					}
 				}
 			`}</style>
 		</div>

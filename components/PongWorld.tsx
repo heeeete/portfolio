@@ -2,13 +2,21 @@ import Image from "next/image";
 import ImageSlider from "./ImageSlider";
 
 const PongWorld = () => {
+	const images: { url: string }[] = [
+		{ url: "/login.png" },
+		{ url: "/home.png" },
+		{ url: "/game.png" },
+		{ url: "/chat.png" },
+		{ url: "/mypage.png" },
+	];
+
 	return (
 		<>
 			2024.02 - 2024.04
 			<br />
 			<br />
 			<div className="project-header">
-				<h1>🏓 PongWorldaaaaaㅁㄴㅇ aaasd</h1>
+				<h1>🏓 PongWorld</h1>
 				<div className="project-link">
 					<a
 						href="https://github.com/Tscen-Rangers/ft_transcendence"
@@ -38,52 +46,7 @@ const PongWorld = () => {
 				</div>
 			</div>
 			<br />
-			<div style={{ display: "flex" }}>
-				<Image
-					src={"/login.png"}
-					alt="loginImg"
-					width={1}
-					height={1}
-					style={{ width: "300px", height: "100px", objectFit: "contain" }}
-				/>
-			</div>
-			<ImageSlider>
-				<Image
-					src={"/login.png"}
-					alt="loginImg"
-					width={1}
-					height={1}
-					style={{ width: "300px", height: "100px" }}
-				/>
-				<Image
-					src={"/home.png"}
-					alt="loginImg"
-					width={1}
-					height={1}
-					style={{ width: "300px", height: "100px" }}
-				/>
-				<Image
-					src={"/game.png"}
-					alt="loginImg"
-					width={1}
-					height={1}
-					style={{ width: "300px", height: "100px" }}
-				/>
-				<Image
-					src={"/chat.png"}
-					alt="loginImg"
-					width={1}
-					height={1}
-					style={{ width: "300px", height: "100px" }}
-				/>
-				<Image
-					src={"/mypage.png"}
-					alt="loginImg"
-					width={1}
-					height={1}
-					style={{ width: "300px", height: "100px" }}
-				/>
-			</ImageSlider>
+			<ImageSlider images={images} />
 			<br />
 			<p>
 				PongWorld 프로젝트는 외부 라이브러리 없이 VanillaJS를 이용해 SPA
@@ -92,12 +55,24 @@ const PongWorld = () => {
 			<br />
 			<div>
 				<h2>역할</h2>
-				<p>&nbsp;-SPA구현</p>
-				<p>&nbsp;-실시간 게임</p>
-				<p>&nbsp;-실시간 채팅</p>
-				<p>&nbsp;-로그인</p>
-				<p>&nbsp;-마이페이지</p>
-				<p>&nbsp;-모달구현</p>
+				<p>
+					<strong>&nbsp;-SPA구현</strong>
+				</p>
+				<p>
+					<strong>&nbsp;-실시간 게임</strong>
+				</p>
+				<p>
+					<strong>&nbsp;-실시간 채팅</strong>
+				</p>
+				<p>
+					<strong>&nbsp;-로그인</strong>
+				</p>
+				<p>
+					<strong>&nbsp;-마이페이지</strong>
+				</p>
+				<p>
+					<strong>&nbsp;-모달구현</strong>
+				</p>
 			</div>
 			<br />
 			<div>

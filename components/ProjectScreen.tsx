@@ -117,13 +117,13 @@ const TickTock = () => {
 
 const Mamory = () => {
 	const images = [
-		{ url: "/mamory1.jpg" },
-		{ url: "/mamory2.jpg" },
-		{ url: "/mamory3.jpg" },
-		{ url: "/mamory4.jpg" },
-		{ url: "/mamory5.jpg" },
-		{ url: "/mamory6.jpg" },
-		{ url: "/mamory7.jpg" },
+		{ url: "/mamory1.png" },
+		{ url: "/mamory2.png" },
+		{ url: "/mamory3.png" },
+		{ url: "/mamory4.png" },
+		{ url: "/mamory5.png" },
+		{ url: "/mamory6.png" },
+		{ url: "/mamory7.png" },
 	];
 
 	return (
@@ -154,78 +154,7 @@ const Mamory = () => {
 			</div>
 			<br />
 			<div className="slider">
-				<ImageSlider width={400}>
-					<Image
-						src={"/mamory1.png"}
-						alt="loginImg"
-						width={1}
-						height={1}
-						style={{ width: "300px", height: "100px" }}
-					/>
-					<Image
-						src={"/mamory2.png"}
-						alt="loginImg"
-						width={1}
-						height={1}
-						style={{ width: "300px", height: "100px" }}
-					/>
-					<Image
-						src={"/mamory3.png"}
-						alt="loginImg"
-						width={1}
-						height={1}
-						style={{ width: "300px", height: "100px" }}
-					/>
-					<Image
-						src={"/mamory3-1.png"}
-						alt="loginImg"
-						width={1}
-						height={1}
-						style={{ width: "300px", height: "100px" }}
-					/>
-					<Image
-						src={"/mamory4.png"}
-						alt="loginImg"
-						width={1}
-						height={1}
-						style={{ width: "300px", height: "100px" }}
-					/>
-					<Image
-						src={"/mamory5.png"}
-						alt="loginImg"
-						width={1}
-						height={1}
-						style={{ width: "300px", height: "100px" }}
-					/>
-					<Image
-						src={"/mamory6.png"}
-						alt="loginImg"
-						width={1}
-						height={1}
-						style={{ width: "300px", height: "100px" }}
-					/>
-					<Image
-						src={"/mamory7.png"}
-						alt="loginImg"
-						width={1}
-						height={1}
-						style={{ width: "300px", height: "100px" }}
-					/>
-					<Image
-						src={"/mamory8.png"}
-						alt="loginImg"
-						width={1}
-						height={1}
-						style={{ width: "300px", height: "100px" }}
-					/>
-					<Image
-						src={"/mamory9.png"}
-						alt="loginImg"
-						width={1}
-						height={1}
-						style={{ width: "300px", height: "100px" }}
-					/>
-				</ImageSlider>
+				<ImageSlider width={300} images={images} />
 			</div>
 			<br />
 			<p>
