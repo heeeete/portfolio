@@ -4,438 +4,8 @@ import { useRouter } from "next/router";
 import React, { memo } from "react";
 import Portfolio from "./projects/Portfolio";
 import Image from "next/image";
-import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
-
-const ImgSlider = ({
-	children,
-	width = null,
-	height = null,
-}: {
-	children: React.ReactNode;
-	width?: number | null;
-	height?: number | null;
-}) => {
-	const [imgWidth, setImgWidth] = useState(0);
-	const [offset, setOffset] = useState(0);
-	const [idx, setIdx] = useState(0);
-	const sliderContainerRef = useRef<HTMLDivElement>(null);
-	const totalChildren = React.Children.count(children);
-	let initDragPos = 0;
-	let travelRatio: number = 0;
-	let travel: number = 0;
-	let originOffset = 0;
-
-	useEffect(() => {
-		const resizeObserver = new ResizeObserver((entries) => {
-			for (let e of entries) {
-				const { width } = e.contentRect;
-				setImgWidth(width);
-				setOffset(-idx * width);
-				setIdx(0);
-			}
-		});
-
-		if (sliderContainerRef.current)
-			resizeObserver.observe(sliderContainerRef.current);
-
-		return () => {
-			if (sliderContainerRef.current)
-				resizeObserver.unobserve(sliderContainerRef.current);
-		};
-	}, []);
-
-	useEffect(() => {
-		const $imgInnerContainer = document.querySelector(
-			".img-inner-container"
-		) as HTMLElement;
-
-		const startMouse = (e: MouseEvent) => {
-			if (Math.abs(travelRatio) < 0.8) {
-				travel = e.clientX - initDragPos;
-				travelRatio = travel / imgWidth;
-				setOffset(originOffset + travel);
-			}
-		};
-
-		const stopMouse = (e: MouseEvent) => {
-			if (Math.abs(travelRatio) > 0.3) {
-				const newIdx =
-					travelRatio > 0
-						? Math.max(idx - 1, 0)
-						: Math.min(idx + 1, totalChildren - 1);
-				setIdx(newIdx);
-				setOffset(newIdx * -imgWidth);
-			} else {
-				setOffset(idx * -imgWidth);
-			}
-			document.removeEventListener("mousemove", startMouse);
-			document.removeEventListener("mouseup", stopMouse);
-		};
-
-		const downMouse = (e: MouseEvent) => {
-			e.preventDefault();
-			travelRatio = 0;
-			initDragPos = e.clientX;
-			originOffset = offset;
-
-			document.addEventListener("mousemove", startMouse);
-			document.addEventListener("mouseup", stopMouse);
-		};
-
-		$imgInnerContainer?.addEventListener("mousedown", downMouse);
-
-		return () => {
-			$imgInnerContainer?.removeEventListener("mousedown", downMouse);
-			document.removeEventListener("mousemove", startMouse);
-			document.removeEventListener("mouseup", stopMouse);
-		};
-	}, [imgWidth, idx]);
-
-	const navigate = (direction: number) => {
-		const newIdx = Math.max(0, Math.min(totalChildren - 1, idx + direction));
-		setIdx(newIdx);
-		setOffset(-newIdx * imgWidth);
-	};
-
-	const RenderCurrentPosition = () => {
-		return Array.from({ length: totalChildren }, (_, _idx) => {
-			return (
-				<div className="circle" key={_idx}>
-					<style jsx>{`
-						.circle {
-							width: 10px;
-							height: 10px;
-							border: 0.5px solid #ffffff;
-							background-color: ${idx === _idx ? "#ffffff" : ""};
-							border-radius: 50%;
-							margin-inline: 1.5px;
-							transition: 1s;
-						}
-					`}</style>
-				</div>
-			);
-		});
-	};
-
-	return (
-		<div className="container">
-			<div className="slider-container">
-				<button onClick={() => navigate(-1)}>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="1em"
-						height="1em"
-						viewBox="0 0 20 20"
-					>
-						<path
-							fill="currentColor"
-							d="m4 10l9 9l1.4-1.5L7 10l7.4-7.5L13 1z"
-						/>
-					</svg>
-				</button>
-				<div className="slider-img-container" ref={sliderContainerRef}>
-					<div className="img-inner-container">{children}</div>
-				</div>
-				<button onClick={() => navigate(1)}>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="1em"
-						height="1em"
-						viewBox="0 0 20 20"
-					>
-						<path
-							fill="currentColor"
-							d="M7 1L5.6 2.5L13 10l-7.4 7.5L7 19l9-9z"
-						/>
-					</svg>
-				</button>
-			</div>
-			<div className="circle-container">
-				<RenderCurrentPosition />
-			</div>
-			<style jsx>{`
-				.container {
-					display: flex;
-					flex-direction: column;
-					align-items: center;
-					width: ${width ? width + "px" : "100%"};
-					${height && `height : ${height}px`};
-				}
-				.slider-container {
-					display: flex;
-					width: 100%;
-				}
-				.slider-img-container {
-					display: flex;
-					overflow: hidden;
-					margin-inline: 20px;
-				}
-				.img-inner-container {
-					display: flex;
-					transform: translateX(${offset}px);
-					transition: 0.1s;
-				}
-				.circle-container {
-					transform: translateY(-20px);
-					display: flex;
-				}
-				button {
-					background: none;
-					border: none;
-					color: white;
-					font-size: 24px;
-					cursor: pointer;
-					z-index: 1;
-				}
-			`}</style>
-		</div>
-	);
-};
-
-const PongWorld = () => {
-	return (
-		<>
-			2024.02 - 2024.04
-			<br />
-			<br />
-			<div className="project-header">
-				<h1>🏓 PongWorld</h1>
-				<div className="project-link">
-					<a
-						href="https://github.com/Tscen-Rangers/ft_transcendence"
-						target="_blank"
-					>
-						Github
-					</a>
-					<a
-						href="https://www.notion.so/PongWorld-2ae22aa16e9543028f8ad0fbbb40c735"
-						target="_blank"
-					>
-						Video
-					</a>
-				</div>
-			</div>
-			<br />
-			<div className="stack-container">
-				<div className="hash1">
-					<p>#Vanilla.js</p>
-					<p>#FE - 2</p>
-					<p>#BE - 2</p>
-				</div>
-				<div className="hash2">
-					<p>#SPA</p>
-					<p>#GAME</p>
-					<p>#WebSocket</p>
-				</div>
-			</div>
-			<br />
-			<ImgSlider>
-				<Image
-					src={"/login.png"}
-					alt="loginImg"
-					width={1}
-					height={1}
-					style={{ width: "100%", height: "100%" }}
-				/>
-				<Image
-					src={"/home.png"}
-					alt="loginImg"
-					width={1}
-					height={1}
-					style={{ width: "100%", height: "100%" }}
-				/>
-				<Image
-					src={"/game.png"}
-					alt="loginImg"
-					width={1}
-					height={1}
-					style={{ width: "100%", height: "100%" }}
-				/>
-				<Image
-					src={"/chat.png"}
-					alt="loginImg"
-					width={1}
-					height={1}
-					style={{ width: "100%", height: "100%" }}
-				/>
-				<Image
-					src={"/mypage.png"}
-					alt="loginImg"
-					width={1}
-					height={1}
-					style={{ width: "100%", height: "100%" }}
-				/>
-			</ImgSlider>
-			<br />
-			<p>
-				PongWorld 프로젝트는 외부 라이브러리 없이 VanillaJS를 이용해 SPA
-				방식으로 개발한 실시간 PingPong 게임 플랫폼입니다.
-			</p>
-			<br />
-			<div>
-				<h2>역할</h2>
-				<p>&nbsp;-SPA구현</p>
-				<p>&nbsp;-실시간 게임</p>
-				<p>&nbsp;-실시간 채팅</p>
-				<p>&nbsp;-로그인</p>
-				<p>&nbsp;-마이페이지</p>
-				<p>&nbsp;-모달구현</p>
-			</div>
-			<br />
-			<div>
-				<h2>개선 / 문제해결 사례 1 - 애니메이션 최적화</h2>
-				<h3>&nbsp;문제</h3>
-				<p>&nbsp;&nbsp;-탁구채를 60FPS으로 움직이면 버벅거리는 현상 발생</p>
-				<br />
-				<h3>&nbsp;원인</h3>
-				<p>
-					&nbsp;&nbsp;-setInterval : 기존에 아래와 같이 60FPS설정을
-					setInterval()로 구현을 했다. 이 방법은 JavaScript 이벤트 루프 내에서
-					비동기적으로 실행되며 정확한 타이머주기를 보장하지 않는다. 지연이
-					누적되다 보면 프레임 드랍이 생긴다.
-				</p>
-				<Image
-					src={"/pongWorldCode1.png"}
-					alt="code1"
-					width={100}
-					height={100}
-					style={{
-						width: "100%",
-						height: "100%",
-						maxWidth: "1200px",
-					}}
-				/>
-				<br />
-				<p>
-					&nbsp;&nbsp;-리렌더링 : 탁구채의 위치를 변경할때 top, botton, left,
-					right 등 position CSS 속성를 사용한다. 해당 속성은 다른 엘리먼트에
-					영향을 끼치기 때문에 리플로우, 리페인트가 발생하게 된다. 탁구채가
-					60프레임으로 움직이는데 1초에 60번씩 새로 화면을 그리게 되면서 환경에
-					따라 버벅이는 현상이 생긴다.
-				</p>
-				<br />
-				<h3>&nbsp;해결</h3>
-				<p>
-					&nbsp;&nbsp;-<strong>setInterval()</strong>대신{" "}
-					<strong>requestAnimationFrame()</strong>을 사용 : 브라우저가 렌더링 될
-					타이밍에 맞춰서 미리 함수를 예약을 해서 렌더링 주기에 맞는 부르더운
-					애니메이션을 구현 할 수 있다.
-				</p>
-				<p>
-					&nbsp;&nbsp;-<strong>position</strong>말고 <strong>transform</strong>
-					속성을 이용 : 개발자 도구로 position과 translate를 각각 사용해서
-					성능을 확인해보면 position은 레이아웃 변경과 더불어 리페인트,
-					리플로우가 많이 일어난 것을 확인 할 수 있다. 그에 반해 translate는
-					레이아웃 변경 없이 깔끔한 상태를 볼 수 있다. <br />
-					&nbsp;그리고 translate는 GPU를 사용하는데 position은 연산이 많아져도
-					CPU로만 연산을 수행해서 과부하가 올 수 있지만 translate는 연산을 할때
-					GPU를 사용한다 GPU는 그래픽 처리에 특화된 하드웨어로, 병렬 처리 능력이
-					뛰어나 많은 양의 계산을 빠르게 처리할 수 있다.
-				</p>
-				<div className="row-img">
-					<div
-						style={{
-							display: "flex",
-							flexDirection: "column",
-							textAlign: "center",
-						}}
-					>
-						<Image
-							src={"/position-img.png"}
-							alt="code"
-							width={100}
-							height={100}
-							style={{
-								width: "100%",
-								height: "100%",
-								maxWidth: "600px",
-							}}
-						/>
-						position
-					</div>
-					<div
-						style={{
-							display: "flex",
-							flexDirection: "column",
-							marginLeft: "10px",
-							textAlign: "center",
-						}}
-					>
-						<Image
-							src={"/translate-img.png"}
-							alt="code"
-							width={100}
-							height={100}
-							style={{
-								width: "100%",
-								height: "100%",
-								maxWidth: "600px",
-							}}
-						/>
-						translate
-					</div>
-				</div>
-				<h3>&nbsp;성과</h3>
-				<p>
-					&nbsp;&nbsp;-프레임 드랍 발생 빈도가 크게 감소하여, 게임의 FPS가 평균
-					59fps로 유지되며, 최저 FPS가 58fps로 이전 15fps에서 크게
-					개선되었습니다.
-				</p>
-				<Image
-					src={"/a.png"}
-					alt="code"
-					width={300}
-					height={300}
-					style={{ width: "100%", height: "100%", maxWidth: "600px" }}
-				/>
-			</div>
-			<style jsx>{`
-				h1 {
-					font-size: 2rem;
-				}
-				h2 {
-					font-size: 1.5rem;
-					border-bottom: 1px solid black;
-				}
-				h3 {
-					font-size: 1.2rem;
-				}
-				a {
-					text-decoration: none;
-					color: #b23eff;
-				}
-				.stack-container {
-					display: flex;
-					justify-content: space-between;
-					flex-wrap: wrap;
-				}
-				.hash2,
-				.hash1 {
-					display: flex;
-					flex-wrap: wrap;
-
-					white-space: nowrap;
-				}
-				.hash1 > *,
-				.hash2 > * {
-					margin-right: 10px;
-					padding: 7px;
-					border-radius: 30px;
-					background-color: #57006d3a;
-					color: white;
-				}
-				.hash1 > * {
-					background-color: #d3000099;
-				}
-				.row-img {
-					display: flex;
-					flex-direction: row;
-					justify-content: center;
-				}
-			`}</style>
-		</>
-	);
-};
+import ImageSlider from "./ImageSlider";
+import PongWorld from "./PongWorld";
 
 const TickTock = () => {
 	return (
@@ -584,78 +154,78 @@ const Mamory = () => {
 			</div>
 			<br />
 			<div className="slider">
-				<ImgSlider width={300}>
+				<ImageSlider width={400}>
 					<Image
 						src={"/mamory1.png"}
 						alt="loginImg"
 						width={1}
 						height={1}
-						style={{ width: "100%", height: "100%" }}
+						style={{ width: "300px", height: "100px" }}
 					/>
 					<Image
 						src={"/mamory2.png"}
 						alt="loginImg"
 						width={1}
 						height={1}
-						style={{ width: "100%", height: "100%" }}
+						style={{ width: "300px", height: "100px" }}
 					/>
 					<Image
 						src={"/mamory3.png"}
 						alt="loginImg"
 						width={1}
 						height={1}
-						style={{ width: "100%", height: "100%" }}
+						style={{ width: "300px", height: "100px" }}
 					/>
 					<Image
 						src={"/mamory3-1.png"}
 						alt="loginImg"
 						width={1}
 						height={1}
-						style={{ width: "100%", height: "100%" }}
+						style={{ width: "300px", height: "100px" }}
 					/>
 					<Image
 						src={"/mamory4.png"}
 						alt="loginImg"
 						width={1}
 						height={1}
-						style={{ width: "100%", height: "100%" }}
+						style={{ width: "300px", height: "100px" }}
 					/>
 					<Image
 						src={"/mamory5.png"}
 						alt="loginImg"
 						width={1}
 						height={1}
-						style={{ width: "100%", height: "100%" }}
+						style={{ width: "300px", height: "100px" }}
 					/>
 					<Image
 						src={"/mamory6.png"}
 						alt="loginImg"
 						width={1}
 						height={1}
-						style={{ width: "100%", height: "100%" }}
+						style={{ width: "300px", height: "100px" }}
 					/>
 					<Image
 						src={"/mamory7.png"}
 						alt="loginImg"
 						width={1}
 						height={1}
-						style={{ width: "100%", height: "100%" }}
+						style={{ width: "300px", height: "100px" }}
 					/>
 					<Image
 						src={"/mamory8.png"}
 						alt="loginImg"
 						width={1}
 						height={1}
-						style={{ width: "100%", height: "100%" }}
+						style={{ width: "300px", height: "100px" }}
 					/>
 					<Image
 						src={"/mamory9.png"}
 						alt="loginImg"
 						width={1}
 						height={1}
-						style={{ width: "100%", height: "100%" }}
+						style={{ width: "300px", height: "100px" }}
 					/>
-				</ImgSlider>
+				</ImageSlider>
 			</div>
 			<br />
 			<p>

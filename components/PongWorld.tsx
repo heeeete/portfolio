@@ -1,10 +1,14 @@
 import Image from "next/image";
+import ImageSlider from "./ImageSlider";
 
-export default function PongWorld() {
+const PongWorld = () => {
 	return (
 		<>
+			2024.02 - 2024.04
+			<br />
+			<br />
 			<div className="project-header">
-				<h1>🏓 PongWorld</h1>
+				<h1>🏓 PongWorldaaaaaㅁㄴㅇ aaasd</h1>
 				<div className="project-link">
 					<a
 						href="https://github.com/Tscen-Rangers/ft_transcendence"
@@ -20,11 +24,67 @@ export default function PongWorld() {
 					</a>
 				</div>
 			</div>
-			<div className="hash">
-				<p>#SPA</p>
-				<p>#GAME</p>
-				<p>#WebSocket</p>
+			<br />
+			<div className="stack-container">
+				<div className="hash1">
+					<p>#Vanilla.js</p>
+					<p>#FE - 2</p>
+					<p>#BE - 2</p>
+				</div>
+				<div className="hash2">
+					<p>#SPA</p>
+					<p>#GAME</p>
+					<p>#WebSocket</p>
+				</div>
 			</div>
+			<br />
+			<div style={{ display: "flex" }}>
+				<Image
+					src={"/login.png"}
+					alt="loginImg"
+					width={1}
+					height={1}
+					style={{ width: "300px", height: "100px", objectFit: "contain" }}
+				/>
+			</div>
+			<ImageSlider>
+				<Image
+					src={"/login.png"}
+					alt="loginImg"
+					width={1}
+					height={1}
+					style={{ width: "300px", height: "100px" }}
+				/>
+				<Image
+					src={"/home.png"}
+					alt="loginImg"
+					width={1}
+					height={1}
+					style={{ width: "300px", height: "100px" }}
+				/>
+				<Image
+					src={"/game.png"}
+					alt="loginImg"
+					width={1}
+					height={1}
+					style={{ width: "300px", height: "100px" }}
+				/>
+				<Image
+					src={"/chat.png"}
+					alt="loginImg"
+					width={1}
+					height={1}
+					style={{ width: "300px", height: "100px" }}
+				/>
+				<Image
+					src={"/mypage.png"}
+					alt="loginImg"
+					width={1}
+					height={1}
+					style={{ width: "300px", height: "100px" }}
+				/>
+			</ImageSlider>
+			<br />
 			<p>
 				PongWorld 프로젝트는 외부 라이브러리 없이 VanillaJS를 이용해 SPA
 				방식으로 개발한 실시간 PingPong 게임 플랫폼입니다.
@@ -57,7 +117,11 @@ export default function PongWorld() {
 					alt="code1"
 					width={100}
 					height={100}
-					style={{ width: "100%", height: "100%", maxWidth: "1200px" }}
+					style={{
+						width: "100%",
+						height: "100%",
+						maxWidth: "1200px",
+					}}
 				/>
 				<br />
 				<p>
@@ -99,7 +163,11 @@ export default function PongWorld() {
 							alt="code"
 							width={100}
 							height={100}
-							style={{ width: "100%", height: "100%", maxWidth: "600px" }}
+							style={{
+								width: "100%",
+								height: "100%",
+								maxWidth: "600px",
+							}}
 						/>
 						position
 					</div>
@@ -116,17 +184,28 @@ export default function PongWorld() {
 							alt="code"
 							width={100}
 							height={100}
-							style={{ width: "100%", height: "100%", maxWidth: "600px" }}
+							style={{
+								width: "100%",
+								height: "100%",
+								maxWidth: "600px",
+							}}
 						/>
 						translate
 					</div>
 				</div>
 				<h3>&nbsp;성과</h3>
 				<p>
-					&nbsp;&nbsp;-기존에 3초에 한 번씩 심하게 프레임 드랍이 있던 게
-					리렌더링 최적화와 GPU 사용 그리고 애니메이션 최적화로 끊김 없이
-					부드러운 플레이가 가능해졌asd다.asdadsqweqwe
+					&nbsp;&nbsp;-프레임 드랍 발생 빈도가 크게 감소하여, 게임의 FPS가 평균
+					59fps로 유지되며, 최저 FPS가 58fps로 이전 15fps에서 크게
+					개선되었습니다.
 				</p>
+				<Image
+					src={"/a.png"}
+					alt="code"
+					width={300}
+					height={300}
+					style={{ width: "100%", height: "100%", maxWidth: "600px" }}
+				/>
 			</div>
 			<style jsx>{`
 				h1 {
@@ -137,21 +216,34 @@ export default function PongWorld() {
 					border-bottom: 1px solid black;
 				}
 				h3 {
-					font-size: 1.3rem;
+					font-size: 1.2rem;
 				}
 				a {
 					text-decoration: none;
 					color: #b23eff;
 				}
-				.hash {
+				.stack-container {
 					display: flex;
+					justify-content: space-between;
+					flex-wrap: wrap;
 				}
-				.hash > * {
+				.hash2,
+				.hash1 {
+					display: flex;
+					flex-wrap: wrap;
+
+					white-space: nowrap;
+				}
+				.hash1 > *,
+				.hash2 > * {
 					margin-right: 10px;
 					padding: 7px;
 					border-radius: 30px;
 					background-color: #57006d3a;
 					color: white;
+				}
+				.hash1 > * {
+					background-color: #d3000099;
 				}
 				.row-img {
 					display: flex;
@@ -161,4 +253,6 @@ export default function PongWorld() {
 			`}</style>
 		</>
 	);
-}
+};
+
+export default PongWorld;
