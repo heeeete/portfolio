@@ -1,6 +1,10 @@
 import Image from "next/image";
 import ImageSlider from "./ImageSlider";
 
+const PurpleText = (text: string) => {
+	return <span style={{ color: "purple" }}>{text}</span>;
+};
+
 const PongWorld = () => {
 	const images: { url: string }[] = [
 		{ url: "/login.png" },
@@ -22,13 +26,7 @@ const PongWorld = () => {
 						href="https://github.com/Tscen-Rangers/ft_transcendence"
 						target="_blank"
 					>
-						Github
-					</a>
-					<a
-						href="https://www.notion.so/PongWorld-2ae22aa16e9543028f8ad0fbbb40c735"
-						target="_blank"
-					>
-						Video
+						Github / Video
 					</a>
 				</div>
 			</div>
@@ -54,24 +52,49 @@ const PongWorld = () => {
 			</p>
 			<br />
 			<div>
+				<h3>✔︎&nbsp;실시간 웹페이지 구현</h3>
+				<br />
+				<h3>
+					✔︎&nbsp;{PurpleText("Websocket")}을 이용한 실시간 멀티 게임 구현
+				</h3>
+				<br />
+
+				<h3>
+					✔︎&nbsp;{PurpleText("HTML history API")}를 이용해 SPA 페이지 구현
+				</h3>
+				<br />
+				<h3>
+					✔︎&nbsp;{PurpleText("DOM을 클래스로 추상화")}하여 가독성과 유지보수
+					향상
+				</h3>
+				<br />
+				<h3>
+					✔︎&nbsp;{PurpleText("requestAnimationFrame()")}을 사용하여 부드러운
+					애니메이션 구현
+				</h3>
+				<br />
+				<h3>✔︎&nbsp;다양한 뷰포트 지원</h3>
+				<br />
+			</div>
+			<div>
 				<h2>역할</h2>
 				<p>
-					<strong>&nbsp;-SPA구현</strong>
+					<strong>✔︎&nbsp;SPA구현</strong>
 				</p>
 				<p>
-					<strong>&nbsp;-실시간 게임</strong>
+					<strong>✔︎&nbsp;실시간 게임</strong>
 				</p>
 				<p>
-					<strong>&nbsp;-실시간 채팅</strong>
+					<strong>✔︎&nbsp;실시간 채팅</strong>
 				</p>
 				<p>
-					<strong>&nbsp;-로그인</strong>
+					<strong>✔︎&nbsp;로그인</strong>
 				</p>
 				<p>
-					<strong>&nbsp;-마이페이지</strong>
+					<strong>✔︎&nbsp;마이페이지</strong>
 				</p>
 				<p>
-					<strong>&nbsp;-모달구현</strong>
+					<strong>✔︎&nbsp;모달구현</strong>
 				</p>
 			</div>
 			<br />

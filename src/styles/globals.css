@@ -121,9 +121,12 @@ body {
 }
 .project-link > * {
 	padding: 10px;
+	margin-inline: 3px;
 	border-radius: 10px;
 	transition: 0.3s;
+	background-color: white;
+	box-shadow: 2px 2px 1px black;
 	&:hover {
-		background-color: #e7e7e7;
+		background-color: #d5d5d5;
 	}
 }

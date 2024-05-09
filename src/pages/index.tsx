@@ -22,6 +22,22 @@ export default function Home() {
 	const projectRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
+		// 추가된 부분: 스크롤에 따른 레이어 이동
+		const onScroll = () => {
+			const scrolledY = window.scrollY;
+			if (scrolledY > 0) {
+				document.documentElement.style.setProperty(
+					"--scroll",
+					`${scrolledY}px`
+				);
+			}
+		};
+
+		window.addEventListener("scroll", onScroll);
+		return () => window.removeEventListener("scroll", onScroll);
+	}, []);
+
+	useEffect(() => {
 		const observer = new IntersectionObserver(
 			(entries) => {
 				entries.forEach(({ target, isIntersecting }) => {
