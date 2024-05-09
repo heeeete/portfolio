@@ -67,15 +67,22 @@ const ImageSlider = ({
 			".img-inner-container"
 		) as HTMLElement;
 
+		// 마우스를 드래그하는 동안 발생하는 이벤트
 		const startMouse = (e: MouseEvent) => {
+			// 이동거리를 비율로 했을때 0.8 이상이면 더이상 안 넘어감
 			if (Math.abs(travelRatio) < 0.8) {
+				// 이동거리
 				travel = e.clientX - initDragPos;
+				// 이동거리 비율
 				travelRatio = travel / imgWidth;
+				// 실시간으로 사용자에게 얼마나 넘겼는지 보여줌
 				setOffset(originOffset + travel);
 			}
 		};
 
-		const stopMouse = (e: MouseEvent) => {
+		// 클릭을 놓으면 발생하는 이벤트
+		const stopMouse = () => {
+			// 넘긴 비율이 0.3 이상이면 이미지를 넘김
 			if (Math.abs(travelRatio) > 0.3) {
 				const newIdx =
 					travelRatio > 0
@@ -86,14 +93,20 @@ const ImageSlider = ({
 			} else {
 				setOffset(idx * -imgWidth);
 			}
+			// 이벤트 제거
 			document.removeEventListener("mousemove", startMouse);
 			document.removeEventListener("mouseup", stopMouse);
 		};
 
+		// 마우스를 클릭한 순간 발생하는 이벤트
 		const downMouse = (e: MouseEvent) => {
+			// 기존 이벤트의 동작 방식을 막음
 			e.preventDefault();
+			// 이미지 크기를 기준으로 얼마나 이동했는지 비율로 확인하는 변수
 			travelRatio = 0;
+			// 클릭한 순간의 좌표를 저장
 			initDragPos = e.clientX;
+			// 현재 이미지 슬라이더의 offset위치를 저장
 			originOffset = offset;
 
 			document.addEventListener("mousemove", startMouse);
@@ -109,7 +122,7 @@ const ImageSlider = ({
 		};
 	}, [imgWidth, idx]);
 
-	const onClickindicator = (idx: number) => {
+	const onClickIndicator = (idx: number) => {
 		setOffset(-idx * imgWidth);
 		setIdx(idx);
 	};
@@ -125,7 +138,7 @@ const ImageSlider = ({
 			return (
 				<div
 					className="circle"
-					onClick={() => onClickindicator(_idx)}
+					onClick={() => onClickIndicator(_idx)}
 					key={_idx}
 				>
 					<style jsx>{`
