@@ -1,13 +1,8 @@
-function debounce(func: (...args: any[]) => void, wait: number) {
-	let timeout: number | undefined;
-	return function executedFunction(...args: any[]) {
-		const later = () => {
-			clearTimeout(timeout);
-			func(...args);
-		};
-		clearTimeout(timeout);
-		timeout = window.setTimeout(later, wait);
+function debounce(func: () => void, wait: number) {
+	let id: number | undefined;
+	return function () {
+		clearTimeout(id);
+		id = window.setTimeout(func, wait);
 	};
 }
-
 export default debounce;

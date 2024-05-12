@@ -109,6 +109,10 @@ body {
 .info-back-img {
 	color: var(--color-about-btn);
 }
+
+/* ---------------------------------------------------------------- */
+/* ---------------------   projectCSS   --------------------------- */
+/* ---------------------------------------------------------------- */
 .project-container {
 	box-shadow: 0 0px 30px var(--color-text);
 }
@@ -128,5 +132,60 @@ body {
 	box-shadow: 2px 2px 1px black;
 	&:hover {
 		background-color: #d5d5d5;
+	}
+}
+.stack-container {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+.hash2,
+.hash1 {
+	display: flex;
+}
+.hash1 > *,
+.hash2 > * {
+	margin-right: 10px;
+	padding: 7px;
+	border-radius: 30px;
+	background-color: #57006d3a;
+	color: white;
+}
+.hash1 > * {
+	background-color: #d3000099;
+}
+.project-summary-content {
+	display: flex;
+	text-align: center;
+
+	& > * {
+		display: flex;
+		flex-direction: column;
+		width: 50%;
+		align-items: center;
+	}
+}
+.project-minimal-content {
+	border-radius: 10px;
+	background-color: #b1b1b1;
+}
+.see-more-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 30px;
+	animation: bounce-see-more 1s infinite ease;
+}
+.see-more-btn {
+	padding: 7px;
+	border-radius: 10px;
+}
+@keyframes bounce-see-more {
+	0%,
+	100% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-20px);
 	}
 }
