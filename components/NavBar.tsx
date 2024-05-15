@@ -66,6 +66,8 @@ export default function NavBar({
 			}
 		};
 
+		changeNavColorEvent();
+
 		window.addEventListener("scroll", changeNavColorEvent);
 		return () => {
 			window.removeEventListener("scroll", changeNavColorEvent);
@@ -79,6 +81,13 @@ export default function NavBar({
 					<h1 className="header" onClick={scrollToFirst}>
 						Huipark
 					</h1>
+
+					<div className="menu-button" onClick={toggleMenu}>
+						<div className="f"></div>
+						<div className="s"></div>
+					</div>
+				</div>
+				<div className="btns">
 					<div className="theme" onClick={changeMode}>
 						{theme === "dark" ? (
 							<svg
@@ -106,12 +115,6 @@ export default function NavBar({
 							</svg>
 						)}
 					</div>
-					<div className="menu-button" onClick={toggleMenu}>
-						<div className="f"></div>
-						<div className="s"></div>
-					</div>
-				</div>
-				<div className="btns">
 					<button className={Nova_square.className} onClick={scrollToAbout}>
 						ABOUT
 					</button>
@@ -252,7 +255,7 @@ export default function NavBar({
 						transition: 1s;
 					}
 					.btns.active {
-						height: 150px;
+						height: 200px;
 					}
 					.menu-button {
 						display: flex;

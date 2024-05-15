@@ -18,7 +18,7 @@
 body.light-nav-active .header,
 body.light-nav-active .btns > button,
 body.light-nav-active .theme {
-	color: black; /* 기본 상태에서의 색상 변경 */
+	color: black;
 }
 body.light-nav-active .menu-button > * {
 	background-color: black;
@@ -27,6 +27,7 @@ body.light-nav-active .menu-button > * {
 :root {
 	--color-about-btn: #004f00d6;
 	--color-text: black;
+	--mas-text: white;
 
 	background-color: white;
 	transition: 1s;
@@ -36,17 +37,23 @@ body.light-nav-active .menu-button > * {
 	.menu-button > * {
 		background-color: white;
 	}
+	/* .btns > button {
+		color: green;
+	} */
 }
 
 /* 다크모드 */
 [data-theme="dark"] {
-	--color-about-btn: rgb(129, 129, 129);
+	--color-about-btn: rgb(255, 255, 255);
 	--color-text: white;
-
+	--mas-text: black;
 	.image-container {
 		filter: brightness(20%);
 	}
 	background-color: black;
+	/* .btns > button {
+		color: red;
+	} */
 }
 
 /* button 기본 스타일 제거 */
@@ -95,7 +102,7 @@ body {
 }
 .mas2 {
 	background-color: var(--color-about-btn);
-	color: white;
+	color: var(--mas-text);
 }
 .link-btn > * {
 	box-shadow: 0 2px 25px var(--color-about-btn);

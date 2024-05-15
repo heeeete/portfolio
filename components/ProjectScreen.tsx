@@ -5,6 +5,23 @@ import React, { memo } from "react";
 import Image from "next/image";
 import ImageSlider from "./ImageSlider";
 
+function onRenderCallback(
+	id: any, // 방금 커밋된 Profiler 트리의 "id"
+	phase: any, // "mount" (트리가 방금 마운트가 된 경우) 혹은 "update"(트리가 리렌더링된 경우)
+	actualDuration: any, // 커밋된 업데이트를 렌더링하는데 걸린 시간
+	baseDuration: any, // 메모이제이션 없이 하위 트리 전체를 렌더링하는데 걸리는 예상시간
+	startTime: any, // React가 언제 해당 업데이트를 렌더링하기 시작했는지
+	commitTime: any, // React가 해당 업데이트를 언제 커밋했는지
+	interactions: any // 이 업데이트에 해당하는 상호작용들의 집합
+) {
+	// 렌더링 타이밍을 집합하거나 로그...
+	console.log(id);
+	console.log(phase);
+	console.log(actualDuration);
+	console.log(baseDuration);
+	console.log(interactions);
+}
+
 const PurpleText = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<span>
@@ -319,6 +336,7 @@ const Mamory = () => {
 		{ url: "/mamory/mamory2.png" },
 		{ url: "/mamory/mamory3.png" },
 		{ url: "/mamory/mamory3-1.png" },
+		{ url: "/mamory/mamory3-2.png" },
 		{ url: "/mamory/mamory4.png" },
 		{ url: "/mamory/mamory5.png" },
 		{ url: "/mamory/mamory6.png" },
@@ -522,6 +540,14 @@ const Portfolio = () => {
 					<br />
 					&nbsp;●&nbsp;<PurpleText>IntersectionObserver API</PurpleText>를
 					사용하여 요소가 자연스럽게 나타나는 애니메이션 구현
+					<br />
+					<br />
+					&nbsp;●&nbsp;<PurpleText>Debounce</PurpleText>를 구현하여 리렌더링
+					최적화
+					<br />
+					<br />
+					&nbsp;●&nbsp;<PurpleText>CSS</PurpleText> 기반으로 다크 모드 구현하고
+					해당 모드 유지 기능 구현
 					<br />
 					<br />
 					&nbsp;●&nbsp;<PurpleText>Debounce</PurpleText>를 구현하여 리렌더링
@@ -766,6 +792,7 @@ const ProjectContainer = memo(() => {
 const ProjectScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
 	(props, ref) => {
 		const { visibleItems } = props;
+		console.log("HELLLELEEL");
 
 		return (
 			<section className="container" ref={ref}>
