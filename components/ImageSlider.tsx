@@ -14,6 +14,8 @@ interface ImageSlider {
 	dotBorderColor?: string;
 	arrowColor?: string;
 	borderRadius?: number;
+	autoSlider?: number;
+	duration?: number;
 }
 
 const ImageSlider = ({
@@ -25,7 +27,13 @@ const ImageSlider = ({
 	dotBorderColor = "white",
 	arrowColor = "white",
 	borderRadius = 0,
+	autoSlider = 0,
+	duration = 300,
 }: ImageSlider) => {
+	if (duration < 300) {
+		throw new Error("Duration should be at least 300ms");
+	}
+
 	const imgStyle: React.CSSProperties = {
 		width: width ? `${width}px` : "100%",
 		height: height ? `${height}px` : "100%",
@@ -44,6 +52,15 @@ const ImageSlider = ({
 	let travelRatio: number = 0;
 	let travel: number = 0;
 	let originOffset: number = 0;
+
+	useEffect(() => {
+		if (autoSlider) {
+			const intervalId = setInterval(() => {
+				navigate(1);
+			}, autoSlider);
+			return () => clearInterval(intervalId);
+		}
+	}, [imgWidth, idx]); //
 
 	useEffect(() => {
 		if (!transitionEnabled) {
@@ -78,17 +95,15 @@ const ImageSlider = ({
 		) as HTMLElement;
 
 		const startMouse = (e: MouseEvent) => {
-			if (Math.abs(travelRatio) < 0.8) {
-				setTransitionEnabled(false);
-				travel = e.clientX - initDragPos;
-				travelRatio = travel / imgWidth;
-				setOffset(originOffset + travel);
-			}
+			setTransitionEnabled(false);
+			travel = e.clientX - initDragPos;
+			travelRatio = travel / imgWidth;
+			setOffset(originOffset + travel);
 		};
 
 		const stopMouse = () => {
 			setTransitionEnabled(true);
-			if (Math.abs(travelRatio) > 0.3) {
+			if (Math.abs(travelRatio) > 0.2) {
 				const newIdx =
 					travelRatio > 0
 						? Math.max(idx - 1, 0)
@@ -116,7 +131,7 @@ const ImageSlider = ({
 
 				setTimeout(() => {
 					isMoving.current = false;
-				}, 400);
+				}, duration + 100);
 			}
 		};
 
@@ -159,7 +174,7 @@ const ImageSlider = ({
 			setOffset(-newIdx * imgWidth);
 			setTimeout(() => {
 				isMoving.current = false;
-			}, 400);
+			}, duration + 100);
 		}
 	};
 
@@ -289,7 +304,7 @@ const ImageSlider = ({
 				.img-inner-container {
 					display: flex;
 					transform: translateX(${offset}px);
-					transition: ${transitionEnabled ? "0.3s" : "none"};
+					transition: ${transitionEnabled ? `${duration}ms` : "none"};
 				}
 				.indicator-container {
 					transform: translateY(-20px);

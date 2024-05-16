@@ -94,7 +94,7 @@ const PongWorld = () => {
 				</div>
 			</div>
 			<br />
-			<ImageSlider images={images} />
+			<ImageSlider images={images} duration={1000} />
 			<br />
 			<p>
 				&nbsp;<PurpleText>PongWorld</PurpleText> 프로젝트는 외부 라이브러리 없이{" "}
@@ -520,7 +520,7 @@ const Portfolio = () => {
 				</div>
 			</div>
 			<br />
-			<ImageSlider images={images} />
+			<ImageSlider images={images} autoSlider={3000} />
 			<br />
 			<p>
 				&nbsp;저를 표현할 수 있는 웹 사이트가 필요하다고 생각하여, 포트폴리오
@@ -792,7 +792,6 @@ const ProjectContainer = memo(() => {
 const ProjectScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
 	(props, ref) => {
 		const { visibleItems } = props;
-		console.log("HELLLELEEL");
 
 		return (
 			<section className="container" ref={ref}>
