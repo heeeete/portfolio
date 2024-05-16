@@ -7,12 +7,18 @@ interface Image {
 
 interface ImageSlider {
 	images: Image[];
+	showArrows?: boolean;
+	showDots?: boolean;
+	enableDrag?: boolean;
+	enableLoop?: boolean;
 	width?: number | null;
 	height?: number | null;
 	objectFit?: "fill" | "contain" | "cover" | "none" | "scale-down";
 	dotColor?: string;
+	dotHoverColor?: string;
 	dotBorderColor?: string;
 	arrowColor?: string;
+	arrowSize?: number;
 	borderRadius?: number;
 	autoSlider?: number;
 	duration?: number;
@@ -20,12 +26,18 @@ interface ImageSlider {
 
 const ImageSlider = ({
 	images,
+	showArrows = true,
+	showDots = true,
+	enableDrag = true,
+	enableLoop = true,
 	width = null,
 	height = null,
 	objectFit = "fill",
 	dotColor = "white",
-	dotBorderColor = "white",
+	dotHoverColor = "grey",
+	dotBorderColor = "grey",
 	arrowColor = "white",
+	arrowSize = 50,
 	borderRadius = 0,
 	autoSlider = 0,
 	duration = 300,
@@ -41,10 +53,12 @@ const ImageSlider = ({
 		borderRadius: borderRadius,
 	};
 	const sliderContainerRef = useRef<HTMLDivElement>(null);
-	const loopedImages = [images[images.length - 1], ...images, images[0]];
+	const loopedImages = enableLoop
+		? [images[images.length - 1], ...images, images[0]]
+		: images;
 	const [imgWidth, setImgWidth] = useState<number>(0);
 	const [offset, setOffset] = useState<number>(0);
-	const [idx, setIdx] = useState<number>(1);
+	const [idx, setIdx] = useState<number>(enableLoop ? 1 : 0);
 	const [transitionEnabled, setTransitionEnabled] = useState(true);
 	const totalChildren: number = loopedImages.length;
 	const isMoving = useRef<boolean>(false);
@@ -76,7 +90,7 @@ const ImageSlider = ({
 				const { width } = e.contentRect;
 				setImgWidth(width);
 				setOffset(-idx * width);
-				setIdx(1);
+				setIdx(enableLoop ? 1 : 0);
 			}
 		});
 
@@ -90,6 +104,8 @@ const ImageSlider = ({
 	}, []);
 
 	useEffect(() => {
+		if (!enableDrag) return;
+
 		const $imgInnerContainer = document.querySelector(
 			".img-inner-container"
 		) as HTMLElement;
@@ -145,14 +161,16 @@ const ImageSlider = ({
 	}, [imgWidth, idx]);
 
 	const handleTransitionEnd = () => {
-		if (idx === 0) {
-			setTransitionEnabled(false);
-			setIdx(images.length);
-			setOffset(-images.length * imgWidth);
-		} else if (idx === totalChildren - 1) {
-			setTransitionEnabled(false);
-			setIdx(1);
-			setOffset(1 * -imgWidth);
+		if (enableLoop) {
+			if (idx === 0) {
+				setTransitionEnabled(false);
+				setIdx(images.length);
+				setOffset(-images.length * imgWidth);
+			} else if (idx === totalChildren - 1) {
+				setTransitionEnabled(false);
+				setIdx(1);
+				setOffset(1 * -imgWidth);
+			}
 		}
 	};
 
@@ -164,10 +182,14 @@ const ImageSlider = ({
 	const navigate = (direction: number) => {
 		if (!isMoving.current) {
 			let newIdx = idx + direction;
-			if (newIdx >= totalChildren) {
-				newIdx = 1;
-			} else if (newIdx <= -1) {
-				newIdx = totalChildren - 2;
+			if (enableLoop) {
+				if (newIdx >= totalChildren) {
+					newIdx = 1;
+				} else if (newIdx <= -1) {
+					newIdx = totalChildren - 2;
+				}
+			} else {
+				newIdx = Math.max(0, Math.min(totalChildren - 1, newIdx));
 			}
 			isMoving.current = true;
 			setIdx(newIdx);
@@ -179,59 +201,76 @@ const ImageSlider = ({
 	};
 
 	const RenderIndicators = () => {
-		return Array.from({ length: totalChildren - 2 }, (_, _idx) => {
-			let indicatorIdx = _idx + 1;
-			let backgroundColor;
+		return Array.from(
+			{ length: enableLoop ? totalChildren - 2 : totalChildren },
+			(_, _idx) => {
+				let indicatorIdx = enableLoop ? _idx + 1 : _idx;
+				let backgroundColor;
 
-			if (idx === totalChildren - 1 && indicatorIdx === 1) {
-				backgroundColor = dotColor;
-			} else if (idx === 0 && indicatorIdx === totalChildren - 2) {
-				backgroundColor = dotColor;
-			} else if (indicatorIdx === idx) {
-				backgroundColor = dotColor;
-			} else {
-				backgroundColor = "";
+				if (enableLoop) {
+					if (idx === totalChildren - 1 && indicatorIdx === 1) {
+						backgroundColor = dotColor;
+					} else if (idx === 0 && indicatorIdx === totalChildren - 2) {
+						backgroundColor = dotColor;
+					} else if (indicatorIdx === idx) {
+						backgroundColor = dotColor;
+					} else {
+						backgroundColor = "";
+					}
+				} else {
+					if (idx === _idx) backgroundColor = dotColor;
+					else backgroundColor = "";
+				}
+
+				return (
+					<div
+						className="indicator"
+						onClick={() => onClickIndicator(_idx + 1)}
+						key={_idx}
+					>
+						<style jsx>{`
+							.indicator {
+								width: 13px;
+								height: 13px;
+								border: 1px solid ${dotBorderColor};
+								background-color: ${backgroundColor};
+								border-radius: 50%;
+								margin-inline: 2px;
+								cursor: pointer;
+
+								&:hover {
+									background-color: ${dotHoverColor};
+								}
+							}
+						`}</style>
+					</div>
+				);
 			}
-
-			return (
-				<div
-					className="indicator"
-					onClick={() => onClickIndicator(_idx + 1)}
-					key={_idx}
-				>
-					<style jsx>{`
-						.indicator {
-							width: 13px;
-							height: 13px;
-							border: 0.75px solid ${dotBorderColor};
-							background-color: ${backgroundColor};
-							border-radius: 50%;
-							margin-inline: 2px;
-							transition: 1s;
-							cursor: pointer;
-						}
-					`}</style>
-				</div>
-			);
-		});
+		);
 	};
 
 	return (
 		<div className="container">
 			<div className="slider-container">
-				<button onClick={() => navigate(-1)} className="left">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="1em"
-						height="1em"
-						viewBox="0 0 20 20"
-					>
-						<path
-							fill="currentColor"
-							d="m4 10l9 9l1.4-1.5L7 10l7.4-7.5L13 1z"
-						/>
-					</svg>
-				</button>
+				{showArrows ? (
+					<button onClick={() => navigate(-1)} className="left">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="1em"
+							height="1em"
+							viewBox="0 0 20 20"
+						>
+							<g fill="currentColor">
+								<path d="m12.384 15.68l-5-6l-.768.64l5 6z" />
+								<path d="m11.616 16.32l-5-6c-.427-.512.341-1.152.768-.64l5 6c.427.512-.341 1.152-.768.64" />
+								<path d="m11.616 3.68l-5 6l.768.64l5-6z" />
+								<path d="m12.384 4.32l-5 6c-.427.512-1.195-.128-.768-.64l5-6c.427-.512 1.195.128.768.64" />
+							</g>
+						</svg>
+					</button>
+				) : (
+					""
+				)}
 				<div className="slider-img-container" ref={sliderContainerRef}>
 					<div
 						className="img-inner-container"
@@ -252,35 +291,42 @@ const ImageSlider = ({
 									</div>
 								);
 							return (
-								<Image
+								<img
 									src={e.url}
 									alt="img-slider"
 									key={idx}
-									width={1}
-									height={1}
+									loading="lazy"
 									style={imgStyle}
 								/>
 							);
 						})}
 					</div>
 				</div>
-				<button onClick={() => navigate(1)} className="right">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="1em"
-						height="1em"
-						viewBox="0 0 20 20"
-					>
-						<path
-							fill="currentColor"
-							d="M7 1L5.6 2.5L13 10l-7.4 7.5L7 19l9-9z"
-						/>
-					</svg>
-				</button>
+				{showArrows ? (
+					<button onClick={() => navigate(1)} className="right">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="1em"
+							height="1em"
+							viewBox="0 0 20 20"
+						>
+							<g fill="currentColor">
+								<path d="M7.116 4.32a.5.5 0 1 1 .768-.64l5 6a.5.5 0 0 1-.768.64z" />
+								<path d="M7.884 16.32a.5.5 0 0 1-.768-.64l5-6a.5.5 0 1 1 .768.64z" />
+							</g>
+						</svg>
+					</button>
+				) : (
+					""
+				)}
 			</div>
-			<div className="indicator-container">
-				<RenderIndicators />
-			</div>
+			{showDots ? (
+				<div className="indicator-container">
+					<RenderIndicators />
+				</div>
+			) : (
+				""
+			)}
 			<style jsx>{`
 				.container {
 					display: flex;
@@ -317,10 +363,10 @@ const ImageSlider = ({
 					height: ${height ? height + "px" : ""};
 				}
 				button {
+					display: flex;
 					position: absolute;
-					border: none;
 					color: ${arrowColor};
-					font-size: 40px;
+					font-size: ${arrowSize}px;
 					cursor: pointer;
 					z-index: 1;
 

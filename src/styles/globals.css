@@ -152,6 +152,9 @@ body {
 }
 .hash1 > *,
 .hash2 > * {
+	display: flex;
+	text-align: center;
+	align-items: center;
 	margin-right: 10px;
 	padding: 7px;
 	border-radius: 30px;
