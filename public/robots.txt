@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://heeeete.github.io/portfolio
+
+# Sitemaps
+Sitemap: https://heeeete.github.io/portfolio/sitemap.xml
