@@ -33,7 +33,7 @@ const SkillScreen = forwardRef<
 						<div className="img-container">
 							<Image
 								className="image"
-								src={"/HTML5.svg"}
+								src={"https://heeeete.github.io/portfolio/HTML5.svg"}
 								alt="HTML"
 								width={1}
 								height={1}
@@ -47,7 +47,7 @@ const SkillScreen = forwardRef<
 						<div className="img-container">
 							<Image
 								className="image"
-								src={"/CSS.svg"}
+								src={"https://heeeete.github.io/portfolio/CSS.svg"}
 								alt="CSS"
 								width={1}
 								height={1}
@@ -61,7 +61,7 @@ const SkillScreen = forwardRef<
 						<div className="img-container">
 							<Image
 								className="image"
-								src={"/JS.svg"}
+								src={"https://heeeete.github.io/portfolio/JS.svg"}
 								alt="JS"
 								width={1}
 								height={1}
@@ -76,7 +76,7 @@ const SkillScreen = forwardRef<
 						<div className="img-container">
 							<Image
 								className="image"
-								src={"/TS.png"}
+								src={"https://heeeete.github.io/portfolio/TS.png"}
 								alt="JS"
 								width={1}
 								height={1}
@@ -90,7 +90,7 @@ const SkillScreen = forwardRef<
 						<div className="img-container">
 							<Image
 								className="image"
-								src={"/REACT.png"}
+								src={"https://heeeete.github.io/portfolio/REACT.png"}
 								alt="JS"
 								width={1}
 								height={1}
@@ -104,7 +104,7 @@ const SkillScreen = forwardRef<
 						<div className="img-container">
 							<Image
 								className="image"
-								src={"/nextJS.png"}
+								src={"https://heeeete.github.io/portfolio/nextJS.png"}
 								alt="JS"
 								width={1}
 								height={1}
@@ -123,7 +123,7 @@ const SkillScreen = forwardRef<
 						<div className="img-container">
 							<Image
 								className="image"
-								src={"/nodeJS.png"}
+								src={"https://heeeete.github.io/portfolio/nodeJS.png"}
 								alt="JS"
 								width={1}
 								height={1}
@@ -145,7 +145,7 @@ const SkillScreen = forwardRef<
 						<div className="mobile-img-container">
 							<Image
 								className="image"
-								src={"/RN.webp"}
+								src={"https://heeeete.github.io/portfolio/RN.webp"}
 								alt="JS"
 								width={1}
 								height={1}
@@ -171,7 +171,7 @@ const SkillScreen = forwardRef<
 						<div className="version-img-container">
 							<Image
 								className="image"
-								src={"/GIT.svg"}
+								src={"https://heeeete.github.io/portfolio/GIT.svg"}
 								alt="GIT"
 								width={1}
 								height={1}
@@ -185,7 +185,7 @@ const SkillScreen = forwardRef<
 						<div className="version-img-container github">
 							<Image
 								className="image"
-								src={"/github.png"}
+								src={"https://heeeete.github.io/portfolio/github.png"}
 								alt="GIT"
 								width={1}
 								height={1}
@@ -204,7 +204,7 @@ const SkillScreen = forwardRef<
 						<div className="img-container">
 							<Image
 								className="image"
-								src={"/C.png"}
+								src={"https://heeeete.github.io/portfolio/C.png"}
 								alt="C"
 								width={1}
 								height={1}
@@ -219,7 +219,7 @@ const SkillScreen = forwardRef<
 						<div className="img-container">
 							<Image
 								className="image"
-								src={"/cpp.svg"}
+								src={"https://heeeete.github.io/portfolio/cpp.svg"}
 								width={1}
 								height={1}
 								alt="C"
@@ -239,117 +239,117 @@ const SkillScreen = forwardRef<
 			</div>
 			<style jsx>
 				{`
-                        .container {
-							display: flex;
-							flex-direction: column;
-                            position: relative;
-							align-items: center;
-                            width: 100dvw;
-                        }
-						.skillContainer {
-							display: flex;
-							flex-direction: column;
-							align-items: center;
+					.container {
+						display: flex;
+						flex-direction: column;
+						position: relative;
+						align-items: center;
+						width: 100dvw;
+					}
+					.skillContainer {
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+					}
+					.title-container {
+						display: flex;
+						justify-content: center;
+						padding-top: 100px;
+						padding-bottom: 100px;
+					}
+					.line {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						font-size: 1.5em;
+						width: 100%;
+					}
+					.line::before,
+					.line::after {
+						content: "";
+						flex-grow: 1;
+						background: rgba(255, 255, 255, 0.35);
+						height: 1px;
+						font-size: 0px;
+						line-height: 0px;
+						margin: 0px 10px;
+					}
+
+					.forntend-skill,
+					.version-control-skill,
+					.backend-skill,
+					.mobile-skill,
+					.other-skill {
+						width: 10sdvw;
+						display: grid;
+						box-sizing: border-box;
+						justify-items: center;
+						align-items: center;
+						background-color: rgba(128, 128, 128, 0.343);
+						margin: 1em;
+						padding: 1em;
+						border-radius: 10px;
+					}
+
+					.forntend-skill {
+						grid-template-columns: repeat(3, 6fr);
+					}
+
+					.version-control-skill {
+						grid-template-columns: repeat(2, 2fr);
+					}
+
+					.other-skill {
+						grid-template-columns: repeat(2, 2fr);
+					}
+
+					.img-container {
+						padding: 20px;
+						width: 110px;
+						height: 100%;
+						transition: 0.5s;
+						filter: drop-shadow(5px 5px 5px black);
+					}
+
+					.mobile-img-container,
+					.version-img-container {
+						width: 150px;
+
+						transition: 0.5s;
+						filter: drop-shadow(5px 5px 5px black);
+					}
+					.version-img-container.github {
+						background: white;
+						width: 200px;
+						display: flex;
+						padding: 10px;
+						border-radius: 10px;
+						object-fit: contain;
+					}
+
+					.img-container:hover,
+					.mobile-img-container:hover,
+					.version-img-container:hover {
+						transform: translateY(-20px);
+					}
+
+					@media all and (max-width: 768px) {
+						.title {
+							font-size: 2rem;
 						}
-                        .title-container {
-                            display: flex;
-                            justify-content: center;
-                            padding-top: 100px;
-                            padding-bottom: 100px;
-                        }
-                        .line {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            font-size: 1.5em;
-							width: 100%;
-
-
-                        }
-                        .line::before,
-                        .line::after {
-                            content: "";
-                            flex-grow: 1;
-                            background: rgba(255, 255, 255, 0.35);
-                            height: 1px;
-                            font-size: 0px;
-                            line-height: 0px;
-                            margin: 0px 10px;
-                        }
-
-                        .forntend-skill,
-                        .version-control-skill,
-                        .backend-skill,
-                        .mobile-skill,
-                        .other-skill {'
-                            width: 10sdvw;
-                            display: grid;
-                            box-sizing: border-box;
-                            justify-items: center;
-                            align-items: center;
-                            background-color: rgba(128, 128, 128, 0.343);
-                            margin: 1em;
-                            padding: 1em;
-                            border-radius: 10px;
-                        }
-
-                        .forntend-skill {
-                            grid-template-columns: repeat(3, 6fr);
-                        }
-
-                        .version-control-skill {
-                            grid-template-columns: repeat(2, 2fr);
-                        }
-
-                        .other-skill {
-                            grid-template-columns: repeat(2, 2fr);
-                        }
-
-                        .img-container {
-							padding: 20px;
-							width: 110px;
-                            height: 100%;
-                            transition: 0.5s;
-                            filter: drop-shadow(5px 5px 5px black);
-                        }
-
-                        .mobile-img-container,
-                        .version-img-container {
-                            width: 150px;
-
-                            transition: 0.5s;
-                            filter: drop-shadow(5px 5px 5px black);
-                        }
+						.img-container {
+							width: 70px;
+							margin: 0;
+							padding: 5px;
+						}
+						.mobile-img-container,
+						.version-img-container,
 						.version-img-container.github {
-							background: white;
-									width: 200px;
-									display: flex;
-									padding: 10px;
-									border-radius: 10px;
-									object-fit: contain;
+							width: 100px;
+							margin: 10px;
 						}
-
-                        .img-container:hover,
-                        .mobile-img-container:hover,
-                        .version-img-container:hover {
-                            transform: translateY(-20px);
-                        }
-
-                        @media all and (max-width: 768px) {
-                            .title {
-                                font-size: 2rem;
-                            }
-							.img-container{
-								width: 70px;
-								margin: 0;
-								padding: 5px;
-							}
-							.mobile-img-container,.version-img-container,.version-img-container.github{
-								width: 100px;
-								margin: 10px;
-							}
-                        }
-                    `}
+					}
+				`}
 			</style>
 		</section>
 	);

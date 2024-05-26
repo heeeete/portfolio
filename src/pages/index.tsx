@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import NavBar from "../../components/NavBar";
-import Seo from "../../components/Seo";
 import FirstScreen from "../../components/FirstScreen";
 import AboutScreen from "../../components/AboutScreen";
 import SkillScreen from "../../components/SkillScreen";
 import ProjectScreen from "../../components/ProjectScreen";
-import debounce from "../../components/utils/debounce";
+import debounce from "../../utils/debounce";
 
 const randomColor = () => {
 	return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(
@@ -124,7 +123,12 @@ export default function Home() {
 		<>
 			<div className="container">
 				<div className="background-stars" ref={starRef}></div>
-				<NavBar aboutRef={aboutRef} firstRef={firstRef} skillRef={skillRef} />
+				<NavBar
+					aboutRef={aboutRef}
+					firstRef={firstRef}
+					skillRef={skillRef}
+					projectRef={projectRef}
+				/>
 				<FirstScreen aboutRef={aboutRef} ref={firstRef} />
 				<AboutScreen
 					visibleItems={visibleItems}

@@ -14,7 +14,6 @@ const AboutScreen = forwardRef<
 	{ visibleItems: Set<string>; skillRef: React.RefObject<HTMLDivElement> }
 >((props, ref) => {
 	const { visibleItems, skillRef } = props;
-	const starRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
 		const firstFront = document.querySelector(".flip .front");

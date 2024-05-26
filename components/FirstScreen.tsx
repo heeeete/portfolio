@@ -1,4 +1,3 @@
-import back from "../public/back.jpg";
 import Image from "next/legacy/image";
 import DownArrow from "./DownArrow";
 import { useEffect, forwardRef, RefObject } from "react";
@@ -40,22 +39,29 @@ const FirstScreen = forwardRef<
 		<section className="container" ref={ref}>
 			<div className="image-container">
 				<div className="full-image-container">
-					<Image src={back} alt="background" layout="fill" quality={100} />
+					<Image
+						src={"https://heeeete.github.io/portfolio/back.jpg"}
+						alt="background"
+						layout="fill"
+					/>
 				</div>
 			</div>
 			<div className="image-container">
 				<div className="secoend-image-container">
 					<Image
-						src={back}
+						src={"https://heeeete.github.io/portfolio/back.jpg"}
 						alt="background"
 						layout="fill"
-						quality={100}
 					></Image>
 				</div>
 			</div>
 			<div className="image-container">
 				<div className="circle-image-container">
-					<Image src={back} alt="circular part" layout="fill" quality={100} />
+					<Image
+						src={"https://heeeete.github.io/portfolio/back.jpg"}
+						alt="circular part"
+						layout="fill"
+					/>
 				</div>
 			</div>
 			<div className="text">FRONT-END-PORTFOLIO</div>

@@ -8,10 +8,12 @@ export default function NavBar({
 	aboutRef,
 	firstRef,
 	skillRef,
+	projectRef,
 }: {
 	aboutRef: React.RefObject<HTMLDivElement>;
 	firstRef: React.RefObject<HTMLDivElement>;
 	skillRef: React.RefObject<HTMLDivElement>;
+	projectRef: React.RefObject<HTMLDivElement>;
 }) {
 	const [theme, setTheme] = useState<"light" | "dark">("dark"); // 초기값을 "dark"로 설정
 
@@ -22,19 +24,26 @@ export default function NavBar({
 
 	const scrollToFirst = () => {
 		if (firstRef.current)
-			firstRef.current.scrollIntoView({ behavior: "smooth" });
+			firstRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
 	};
 
 	const scrollToAbout = () => {
 		if (aboutRef.current) {
-			aboutRef.current.scrollIntoView({ behavior: "smooth" });
+			aboutRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
 			toggleMenu();
 		}
 	};
 
 	const scrollToSkill = () => {
 		if (skillRef.current) {
-			skillRef.current.scrollIntoView({ behavior: "smooth" });
+			skillRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+			toggleMenu();
+		}
+	};
+
+	const scrollToProject = () => {
+		if (projectRef.current) {
+			projectRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
 			toggleMenu();
 		}
 	};
@@ -121,8 +130,9 @@ export default function NavBar({
 					<button className={Nova_square.className} onClick={scrollToSkill}>
 						SKILL
 					</button>
-					<button className={Nova_square.className}>PROJECT</button>
-					<button className={Nova_square.className}>CONTACT</button>
+					<button className={Nova_square.className} onClick={scrollToProject}>
+						PROJECT
+					</button>
 				</div>
 			</div>
 			<style jsx>{`
@@ -139,6 +149,8 @@ export default function NavBar({
 					z-index: 3;
 				}
 				.theme {
+					display: flex;
+					align-items: center;
 					margin-left: 30px;
 					color: white;
 					font-size: 20px;
@@ -242,7 +254,10 @@ export default function NavBar({
 				button:hover::before {
 					transform: scale(1);
 				}
-				@media all and (max-width: 768px) {
+				@media (max-width: 768px) {
+					.nav {
+						min-height: 20px !important;
+					}
 					.nav-wrapper {
 						flex-direction: column;
 						overflow: hidden;
@@ -252,7 +267,10 @@ export default function NavBar({
 						justify-content: center;
 						overflow: hidden;
 						height: 0px;
-						transition: 1s;
+						transition: 0.4s;
+					}
+					.theme {
+						margin: 0;
 					}
 					.btns.active {
 						height: 200px;

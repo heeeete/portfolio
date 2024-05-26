@@ -9,7 +9,7 @@ type Arrow = {
 export default function DownArrow({ ArrowColor, targetRef }: Arrow) {
 	const scrollToTarget = () => {
 		if (targetRef.current) {
-			targetRef.current.scrollIntoView({ behavior: "smooth" });
+			targetRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
 		}
 	};
 
