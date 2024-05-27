@@ -49,7 +49,38 @@ export default function Seo() {
 
 	return (
 		<Head>
-			<meta name="description" content="frontEnd portfolio" />
+			<meta name="title" content="박희태 포트폴리오" />
+			<meta
+				name="description"
+				content="Frontend Developer 박희태의 포트폴리오입니다."
+			/>
+			<meta
+				name="keywords"
+				content="박희태, huipark, PARK HUITAE, 프론트엔드 개발자, Frontend Developer, JavaScript, React, Next.js, 웹 개발자, 포트폴리오"
+			/>
+			<meta name="author" content="박희태" />
+			<meta property="og:type" content="website" />
+			<meta property="og:title" content="박희태 포트폴리오" />
+			<meta
+				property="og:description"
+				content="Frontend Developer 박희태의 포트폴리오입니다."
+			/>
+			<meta property="og:url" content="https://heeeete.github.io/portfolio/" />
+			<meta
+				property="og:image"
+				content="https://heeeete.github.io/portfolio/me.png"
+			/>
+			<meta name="twitter:card" content="summary_large_image" />
+			<meta name="twitter:title" content="박희태 포트폴리오" />
+			<meta
+				name="twitter:description"
+				content="Frontend Developer 박희태의 포트폴리오입니다."
+			/>
+			<meta name="twitter:url" content="https://heeeete.github.io/portfolio/" />
+			<meta
+				name="twitter:image"
+				content="https://heeeete.github.io/portfolio/me.png"
+			/>
 			<script
 				type="application/ld+json"
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}

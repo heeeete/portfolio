@@ -238,17 +238,20 @@ const ProjectScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
 						</h1>
 					</ObserverItem>
 				</header>
-				<p style={{ color: "rgba(255, 0, 0, 0.362)", margin: "10px 0" }}>
+				<p className="responsive-opacity-text" style={{ margin: "10px 0" }}>
 					브라우저처럼 이용해 보세요
 				</p>
-				<button className="open-portfolio" onClick={openPortfolio}>
+				<button
+					className="open-portfolio responsive-text"
+					onClick={openPortfolio}
+				>
 					<img
 						src="https://heeeete.github.io/portfolio/me.png"
 						alt="me"
 						width={100}
 						height={100}
 					/>
-					포트폴리오 보기
+					<p style={{ marginTop: "10px" }}>포트폴리오 보기</p>
 				</button>
 				{showBrowser ? (
 					<article className="browser">

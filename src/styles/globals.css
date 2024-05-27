@@ -27,6 +27,7 @@ body.light-nav-active .menu-button > * {
 :root {
 	--color-about-btn: #004f00d6;
 	--color-text: black;
+	--opacity-color-text: rgba(0, 0, 0, 0.583);
 	--mas-text: white;
 
 	background-color: white;
@@ -43,6 +44,7 @@ body.light-nav-active .menu-button > * {
 [data-theme="dark"] {
 	--color-about-btn: rgb(255, 255, 255);
 	--color-text: white;
+	--opacity-color-text: rgba(255, 255, 255, 0.583);
 	--mas-text: black;
 	.image-container {
 		filter: brightness(20%);
@@ -110,6 +112,9 @@ body.full-screen {
 
 .responsive-text {
 	color: var(--color-text);
+}
+.responsive-opacity-text {
+	color: var(--opacity-color-text);
 }
 .mas {
 	color: var(--color-about-btn);
