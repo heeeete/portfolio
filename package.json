@@ -9,7 +9,7 @@
 		"start": "next start",
 		"lint": "next lint",
 		"export": "next export",
-		"deploy": "touch out/.nojekyll && gh-pages -d out --dotfiles",
+		"deploy": "touch out/.nojekyll && gh-pages -d out --dotfiles --add",
 		"postbuild": "next-sitemap"
 	},
 	"dependencies": {
