@@ -1,0 +1,684 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Mamory</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+</style></head><body><article id="fae6726a-638f-4445-a644-6db435688c5e" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="Mamory%20fae6726a638f4445a6446db435688c5e/mamory.png"/></div><h1 class="page-title">Mamory</h1><p class="page-description"></p></header><div class="page-body"><h3 id="74f82bc8-0cbb-4394-a9bf-62da853e9c70" class="">Github</h3><figure id="e76dcb77-949f-4175-b1e0-bd37e183be24"><div class="source">https://github.com/heeeete/Mamory</div></figure><figure id="19cb55b0-dbc1-43b3-8d78-dddcc408841e"><div class="source" style="width: 80%; height: 50%;"><video controls style="width: 100%; height: 100%;">
+	<source
+	  src="./Mamory%20fae6726a638f4445a6446db435688c5e/mamory.mp4"
+	  type="video/mp4"
+	/>
+  </video></div></figure><p id="079143c2-8a1c-4175-891c-c8e068eb486a" class=""><mark class="highlight-pink"> </mark><mark class="highlight-pink"><strong>일상을 기록하는 데 여러 앱을 사용해야 하는 불편함</strong></mark>을 해소하기 위해 마모리를 개발했습니다. 해당 프로젝트는 <mark class="highlight-pink"><strong>frontEnd</strong></mark> 두 명이서 진행을 했습니다. <mark class="highlight-pink"><strong>backEnd</strong></mark>가 없어서 직접 <strong><mark class="highlight-pink">데이터베이스를</mark></strong> 만들어보고 <mark class="highlight-pink"><strong>AWS S3</strong></mark><strong> 스토리지</strong>를 사용해 보면서 많은 경험을 할 수 있었습니다.</p><p id="e0226fd4-bf76-46c1-bc10-66d09a110363" class=""> 인생 첫 프로젝트를 시작하면서 <mark class="highlight-pink"><strong>Git</strong></mark>으로 협업을 해보고, <mark class="highlight-pink"><strong>React-Native, Mysql, RestAPI</strong></mark> 등 모든 것이 처음이라 힘든 부분이 정말 많았지만 <mark class="highlight-pink"><strong>CSS, JavaScript, React</strong></mark> 등 웹 개발의 기본 지식을 습득할 수 있었고, 개발의 매력을 알게 된 저의 첫 번째 프로젝트입니다.</p><div id="64baf22e-47a1-4a3e-a6f9-87276efcc30e" class="column-list"><div id="b4b3064a-f22f-4265-8967-2b2d89dd49bb" style="width:50%" class="column"><h3 id="11bded25-f870-4868-9369-856939edb2cd" class="">✅ <strong>역할</strong></h3><ul id="37b7f6b6-8fc4-41ba-9ad6-05029798f0dd" class="bulleted-list"><li style="list-style-type:disc">Todo 알람 기능</li></ul><ul id="32f1d019-a499-46a9-a756-7b31f37d8c05" class="bulleted-list"><li style="list-style-type:disc">영화, 책 리뷰 기능</li></ul><ul id="80c7fb1b-636c-4228-997d-077ed5fc167d" class="bulleted-list"><li style="list-style-type:disc">로그인 유지 기능</li></ul><ul id="93f0e846-0872-459d-a1d2-13974273303a" class="bulleted-list"><li style="list-style-type:disc">테마 기능</li></ul><p id="0f8ce978-a3d4-46e5-be13-c7b393cebc26" class="">
+</p></div><div id="43ac2564-4fc9-4eb7-bee9-fee6c96a1a5e" style="width:50%" class="column"><h3 id="d1be1ee9-e869-4e61-aa84-e8a7e550893f" class="">✅ 주요 기능</h3><ul id="e628675b-0d24-45d6-9721-7dfa4d45ce89" class="bulleted-list"><li style="list-style-type:disc">다이어리 <ul id="40de6136-f2cc-483a-9bad-52a8f8c68634" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-default">날씨, 기분, 사진을 함께 첨부</mark>하여 작성. 최신 날짜 순으로 조회. 수정, 삭제 가능. <mark class="highlight-default">키워드 또는 날짜 검색을 통한 특정 다이어리 조회 </mark>가능.</li></ul></li></ul><ul id="044a0e1e-3602-4fa0-abc8-88b1922cf897" class="bulleted-list"><li style="list-style-type:disc">할 일 목록<ul id="388acf04-5c3a-4a6c-a859-fb39ccca9ccc" class="bulleted-list"><li style="list-style-type:circle">알람 설정 및 유지 옵션 선택 가능. 등록된 할 일 들은 순서 편집 및 수정, 삭제 가능</li></ul><ul id="98c66a2e-1878-4803-8bd1-57343fa58f21" class="bulleted-list"><li style="list-style-type:circle">유지 옵션 미선택 시 익일 오전 6시에 자동 삭제</li></ul></li></ul><ul id="e60d7fa9-384e-4014-9fa8-a144d45ef137" class="bulleted-list"><li style="list-style-type:disc">영화/책 리뷰 기능<ul id="92f1fe98-3670-4a32-8fae-e16304ce43d0" class="bulleted-list"><li style="list-style-type:circle">검색을 통해 영화/책 정보를 가져와 나의 리뷰와 함께 ‘<mark class="highlight-red"><strong>별로예요</strong></mark>’, ‘<mark class="highlight-blue"><strong>재밌어요</strong></mark>’로 구분하여 등록. 수정, 삭제 가능. 키워드 검색을 통한 특정 리뷰 조회 가능.</li></ul></li></ul><ul id="21de760e-72c0-46bb-80be-fc3302f1ee06" class="bulleted-list"><li style="list-style-type:disc">마이페이지<ul id="53ef2b10-3fa3-40b9-b364-275ea2f06497" class="bulleted-list"><li style="list-style-type:circle">이번 달 다이어리 감정 비율에 따라 감정 이미지를 나열 및 감정 멘트를 출력. 테마 색상 선택 가능. 나의 정보를 조회 및 수정 가능.</li></ul></li></ul><ul id="bcc51a26-822b-4824-b8ba-7347239bedf9" class="bulleted-list"><li style="list-style-type:disc">한 달간의 감정 비율 확인<ul id="0cec68fd-6830-4684-86dd-c64d2d8f0b9b" class="bulleted-list"><li style="list-style-type:circle">한 달간의 감정 비율을 한눈으로 확인 가능</li></ul></li></ul></div></div><h3 id="acd31409-212e-4c08-b109-b36aca280888" class=""><strong>관련 링크</strong></h3><ul id="4c70a869-65e5-4cb4-83e6-c4bafc18c42f" class="bulleted-list"><li style="list-style-type:disc"><strong>🔗 </strong><mark class="highlight-default"><strong><a href="https://gaebarsaebal.tistory.com/33">[Android] android project 앱 이름 바꾸기</a></strong></mark></li></ul><ul id="20aea2b8-da3e-4e37-a257-995a2cb54a10" class="bulleted-list"><li style="list-style-type:disc"><strong>🔗 </strong><mark class="highlight-default"><strong><a href="https://gaebarsaebal.tistory.com/36">[Android] android studio 어플 아이콘 바꾸기</a></strong></mark></li></ul><ul id="4e001223-de76-4009-a020-d00db1b3b7f1" class="bulleted-list"><li style="list-style-type:disc"><strong>🔗 </strong><mark class="highlight-default"><strong><a href="https://gaebarsaebal.tistory.com/34">[IOS] ios project 앱 이름 바꾸기</a></strong></mark></li></ul><ul id="ea85af54-0b37-425f-8d1d-11ce2ebf4844" class="bulleted-list"><li style="list-style-type:disc"><strong>🔗 </strong><mark class="highlight-default"><strong><a href="https://gaebarsaebal.tistory.com/35">[IOS] ios 앱 아이콘 변경하기</a></strong></mark></li></ul><ul id="be1a2965-4065-4b2f-9c07-f15bfe8b97db" class="bulleted-list"><li style="list-style-type:disc"><strong>🔗 </strong><mark class="highlight-default"><strong><a href="https://gaebarsaebal.tistory.com/6">[react native / 리액트 네이티브] 에러 Error: Reanimated 2 failed to create a worklet, maybe you forgot to add Reanimated&#x27;s babel plugin?</a></strong></mark></li></ul><ul id="f0e17ad0-6126-4b60-a18d-ff65bbc2f854" class="bulleted-list"><li style="list-style-type:disc"><strong>🔗 </strong><mark class="highlight-default"><strong><a href="https://gaebarsaebal.tistory.com/7">[react native / 리액트 네이티브] 에러 Error: GestureDetector must be used as a descendant of GestureHandlerRootView. Otherwise the gestures will not be recognized. See https://docs.swmansion.com/react-native-gesture-handler/docs/installation fo..</a></strong></mark></li></ul><ul id="c55f1515-7fd3-4287-aac5-bdff6ea7a2e5" class="bulleted-list"><li style="list-style-type:disc"><strong>🔗 </strong><mark class="highlight-default"><strong><a href="https://gaebarsaebal.tistory.com/9">[react native / 리액트 네이티브][expo] 에러 Error: Constants.platform.ios.model has been deprecated in favor of expo-device&#x27;s Device.modelName property. This API will be removed in SDK 45.</a></strong></mark></li></ul><ul id="ce787b7b-33e4-44f0-bbcf-51654e52f6bb" class="bulleted-list"><li style="list-style-type:disc"><strong>🔗 </strong><mark class="highlight-default"><strong><a href="https://gaebarsaebal.tistory.com/18">[react-native / 리액트 네이티브]ERROR Error: [Reanimated] Mismatch between JavaScript code version and Reanimated Babel plugin version (3.5.3 vs. 3.4.2) 에러</a></strong></mark></li></ul><ul id="57a63aad-86a0-4a83-9c6d-2327d3478784" class="bulleted-list"><li style="list-style-type:disc"><strong>🔗 </strong><mark class="highlight-default"><strong><a href="https://gaebarsaebal.tistory.com/32">[android studio] APK 만들때 [A problem was found with the configuration of task &#x27;:app:lintVitalAnalyzeRelease&#x27; (type &#x27;AndroidLintAnalysisTask&#x27;).] ERROR</a></strong></mark></li></ul><h3 id="030f6f10-53d4-427d-bea5-31251713ff7b" class=""><strong>🛠️ Stack</strong></h3><ul id="7140d1d5-98ae-40b4-a912-740c83f738ec" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><strong>Frontend</strong></mark> : React Native</li></ul><ul id="e8e12b59-0d07-469e-ab86-efbad642841a" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red"><strong>Backend</strong></mark> : Node.js</li></ul><ul id="8655b595-66c8-4b67-98c8-6ce9f045d29e" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow"><strong>Database</strong></mark> : Mysql</li></ul><ul id="b2317940-04fd-45c0-86f1-39f8328e50d2" class="bulleted-list"><li style="list-style-type:disc"><strong><mark class="highlight-yellow">Cloud</mark></strong><mark class="highlight-yellow"> </mark><strong><mark class="highlight-yellow">Services</mark></strong>: AWS S3</li></ul><p id="11bbb612-4d4c-438a-9723-c4469a4da815" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
