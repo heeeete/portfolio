@@ -49,6 +49,12 @@ export default function Seo() {
 
 	return (
 		<Head>
+			<title>{"박희태 포트폴리오"}</title>
+			<link
+				rel="shortcut icon"
+				type="image/x-icon"
+				href="https://heeeete.github.io/portfolio/favicon.ico"
+			></link>
 			<meta name="title" content="박희태 포트폴리오" />
 			<meta
 				name="description"

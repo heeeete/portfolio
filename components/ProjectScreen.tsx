@@ -106,8 +106,8 @@ const ProjectContainer = memo(
 					.project-container {
 						display: flex;
 						flex-direction: column;
-						width: 80dvw;
-						height: 80dvh;
+						width: 70dvw;
+						height: 70vh;
 						border-radius: 10px;
 						background-color: #c2c2c2;
 						transition: 0.5s;
@@ -258,7 +258,7 @@ const ProjectScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
 						<ProjectContainer setShowBrowser={setShowBrowser} />
 					</article>
 				) : (
-					<div style={{ width: "80dvw", height: "80dvh" }}></div>
+					<div style={{ width: "70dvw", height: "70vh" }}></div>
 				)}
 				<style jsx>{`
 					.container {
@@ -267,7 +267,7 @@ const ProjectScreen = forwardRef<HTMLDivElement, { visibleItems: Set<string> }>(
 						flex-direction: column;
 						align-items: center;
 						justify-content: center;
-						height: 100dvh;
+						height: 100vh;
 					}
 					.title-container {
 						padding: 0;

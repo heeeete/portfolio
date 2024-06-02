@@ -1,6 +1,29 @@
 import PurpleText from "../ColorTextComponents/PurpleText";
+import { useState, useEffect } from "react";
 
 const TickTock = () => {
+	const [statusProject, setStatusProject] = useState<boolean>(false);
+
+	const toggleOverlay = () => {
+		setStatusProject(!statusProject);
+		if (!statusProject) window.history.pushState({}, "");
+		else window.history.back();
+		document.body.classList.toggle("full-screen");
+	};
+
+	useEffect(() => {
+		const handlePopState = () => {
+			setStatusProject(false);
+		};
+
+		window.addEventListener("popstate", handlePopState);
+
+		return () => {
+			window.removeEventListener("popstate", handlePopState);
+		};
+	}, []);
+
+
 	return (
 		<>
 			2024.02
@@ -63,16 +86,40 @@ const TickTock = () => {
 				</h3>
 			</div>
 			<br />
-			<div className="see-more-container">
-				<a
-					className="see-more-btn"
-					target="_blank"
-					href="https://stirring-viscount-3c3.notion.site/TickTock-4652ecef184d4332921031524a9b557e?pvs=4"
-				>
-					See More
-					<p style={{ fontSize: "10px", textAlign: "center" }}>click</p>
-				</a>
+			<div className="see-more-container" onClick={toggleOverlay}>
+				See More
+				<p style={{ fontSize: "10px", textAlign: "center" }}>click</p>
 			</div>
+			{statusProject ? (
+				<div className="more-project-container ">
+					<div className="cancel-btn" onClick={toggleOverlay}>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="2rem"
+							height="2rem"
+							viewBox="0 0 24 24"
+						>
+							<path
+								fill="none"
+								stroke="currentColor"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth="1.5"
+								d="M19 5L5 19M5 5l14 14"
+								color="currentColor"
+							/>
+						</svg>
+					</div>
+					<iframe
+						src="https://heeeete.github.io/portfolio/tickTock/tickTock.html"
+						width={"100%"}
+						height={"100%"}
+						style={{ border: "none" }}
+					></iframe>
+				</div>
+			) : (
+				""
+			)}
 			<style jsx>{`
 				h1 {
 					font-size: 2rem;
@@ -104,6 +151,25 @@ const TickTock = () => {
 					min-height: 300px;
 					border-radius: 50%;
 				}
+				.see-more-container {
+					color: #b23eff;
+					cursor: pointer;
+				}
+				.more-project-container {
+					position: fixed;
+					width: 100dvw;
+					height: 100dvh;
+					background-color: white;
+					top: 0;
+					left: 0;
+					z-index: 3000;
+					overflow: hidden;
+				}
+				.cancel-btn {
+					position: absolute;
+					right: 15px;
+				}
+
 			`}</style>
 		</>
 	);

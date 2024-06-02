@@ -1,25 +1,47 @@
 import Image from "next/image";
 import PurpleText from "../ColorTextComponents/PurpleText";
 import dynamic from "next/dynamic";
+import { useState, useEffect } from "react";
 
 const ImageSlider = dynamic(() => import("simple-image-carousel"), {
 	ssr: false,
 });
 
+const images = [
+	{ url: "https://heeeete.github.io/portfolio/mamory/mamory1.png" },
+	{ url: "https://heeeete.github.io/portfolio/mamory/mamory2.png" },
+	{ url: "https://heeeete.github.io/portfolio/mamory/mamory3.png" },
+	{ url: "https://heeeete.github.io/portfolio/mamory/mamory3-1.png" },
+	{ url: "https://heeeete.github.io/portfolio/mamory/mamory3-2.png" },
+	{ url: "https://heeeete.github.io/portfolio/mamory/mamory4.png" },
+	{ url: "https://heeeete.github.io/portfolio/mamory/mamory5.png" },
+	{ url: "https://heeeete.github.io/portfolio/mamory/mamory6.png" },
+	{ url: "https://heeeete.github.io/portfolio/mamory/mamory7.png" },
+	{ url: "https://heeeete.github.io/portfolio/mamory/mamory8.png" },
+	{ url: "https://heeeete.github.io/portfolio/mamory/mamory9.png" },
+];
+
 const Mamory = () => {
-	const images = [
-		{ url: "https://heeeete.github.io/portfolio/mamory/mamory1.png" },
-		{ url: "https://heeeete.github.io/portfolio/mamory/mamory2.png" },
-		{ url: "https://heeeete.github.io/portfolio/mamory/mamory3.png" },
-		{ url: "https://heeeete.github.io/portfolio/mamory/mamory3-1.png" },
-		{ url: "https://heeeete.github.io/portfolio/mamory/mamory3-2.png" },
-		{ url: "https://heeeete.github.io/portfolio/mamory/mamory4.png" },
-		{ url: "https://heeeete.github.io/portfolio/mamory/mamory5.png" },
-		{ url: "https://heeeete.github.io/portfolio/mamory/mamory6.png" },
-		{ url: "https://heeeete.github.io/portfolio/mamory/mamory7.png" },
-		{ url: "https://heeeete.github.io/portfolio/mamory/mamory8.png" },
-		{ url: "https://heeeete.github.io/portfolio/mamory/mamory9.png" },
-	];
+	const [statusProject, setStatusProject] = useState<boolean>(false);
+
+	const toggleOverlay = () => {
+		setStatusProject(!statusProject);
+		if (!statusProject) window.history.pushState({}, "");
+		else window.history.back();
+		document.body.classList.toggle("full-screen");
+	};
+
+	useEffect(() => {
+		const handlePopState = () => {
+			setStatusProject(false);
+		};
+
+		window.addEventListener("popstate", handlePopState);
+
+		return () => {
+			window.removeEventListener("popstate", handlePopState);
+		};
+	}, []);
 
 	return (
 		<>
@@ -137,16 +159,40 @@ const Mamory = () => {
 				</div>
 			</div>
 			<br />
-			<div className="see-more-container">
-				<a
-					className="see-more-btn"
-					target="_blank"
-					href="https://stirring-viscount-3c3.notion.site/Mamory-fae6726a638f4445a6446db435688c5e?pvs=4"
-				>
-					See More
-					<p style={{ fontSize: "10px", textAlign: "center" }}>click</p>
-				</a>
+			<div className="see-more-container" onClick={toggleOverlay}>
+				See More
+				<p style={{ fontSize: "10px", textAlign: "center" }}>click</p>
 			</div>
+			{statusProject ? (
+				<div className="more-project-container ">
+					<div className="cancel-btn" onClick={toggleOverlay}>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="2rem"
+							height="2rem"
+							viewBox="0 0 24 24"
+						>
+							<path
+								fill="none"
+								stroke="currentColor"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth="1.5"
+								d="M19 5L5 19M5 5l14 14"
+								color="currentColor"
+							/>
+						</svg>
+					</div>
+					<iframe
+						src="https://heeeete.github.io/portfolio/mamory/mamory.html"
+						width={"100%"}
+						height={"100%"}
+						style={{ border: "none" }}
+					></iframe>
+				</div>
+			) : (
+				""
+			)}
 			<style jsx>{`
 				h1 {
 					font-size: 2rem;
@@ -170,6 +216,24 @@ const Mamory = () => {
 					display: flex;
 					justify-content: center;
 					align-items: center;
+				}
+				.see-more-container {
+					color: #b23eff;
+					cursor: pointer;
+				}
+				.more-project-container {
+					position: fixed;
+					width: 100dvw;
+					height: 100dvh;
+					background-color: white;
+					top: 0;
+					left: 0;
+					z-index: 3000;
+					overflow: hidden;
+				}
+				.cancel-btn {
+					position: absolute;
+					right: 15px;
 				}
 			`}</style>
 		</>

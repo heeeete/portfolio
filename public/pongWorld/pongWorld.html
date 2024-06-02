@@ -1,0 +1,683 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>PongWorld</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+</style></head><body><article id="861eba77-0442-4857-b092-618f34701fe2" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🏓</span></div><h1 class="page-title">PongWorld</h1><p class="page-description"></p></header><div class="page-body"><p id="ffd9a533-5d69-426c-b675-a18ee2d3d0a3" class=""> <mark class="highlight-pink">PongWorld</mark> 프로젝트는 외부 라이브러리 없이 <mark class="highlight-pink">Vanilla.js</mark>를 이용해 SPA 방식으로 개발한 실시간 <mark class="highlight-pink">PingPong</mark> 게임 플랫폼입니다.</p><p id="ff2b0847-a870-4ca5-bea3-0c39181c5f4a" class=""> 게임의 성능 최적화를 위해 <mark class="highlight-pink"><strong>CSS</strong></mark>의 <mark class="highlight-pink"><strong>position</strong></mark> 속성과 <mark class="highlight-pink"><strong>translate</strong></mark> 속성을 비교 분석하였고, 이를 통해 쾌적한 게임을 만들 수 있었습니다.</p><p id="89d981c8-b593-455b-926e-a31ff6ce32f5" class=""> 서버와 양방향 통신을 하기위해 처음으로 <mark class="highlight-pink"><strong>WebSocket</strong></mark>을 사용해 보았습니다. 비동기적 특성과 복잡한 이벤트 처리에 어려움을 겪었지만, 성공적으로 실시간 웹 사이트를 만들 수 있었습니다. <mark class="highlight-pink"><strong>WebSocket</strong></mark>을 사용해 본 것만으로도 의미가 있었지만 성공적으로 프로젝트를 마무리했다는 점에서 더욱 의미가 있습니다.</p><div id="a840d476-a2bd-439f-8446-1be1b06560cc" class="column-list"><div id="cdc91443-2adb-4306-91dc-acb4b4a72786" style="width:50%" class="column"><h3 id="763c5ea0-c11f-4125-b37e-421a832b8f45" class="">✅ <strong>역할</strong></h3><ul id="29467e3c-8d87-488a-9feb-27a2335fb3ce" class="bulleted-list"><li style="list-style-type:disc">SPA 구현<ul id="92c856b9-77ff-4d21-a879-ffccb078709d" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">HTML history API</mark>를 사용하여 동적으로 컨텐츠 로드하고 URL 업데이트</li></ul><ul id="326da9d8-0812-4fe2-86a1-ca7b8e035e18" class="bulleted-list"><li style="list-style-type:circle">정규식을 이용해 URL을 매칭시키고 해당 <mark class="highlight-yellow_background">URL에 맞는 DOM을 동적으로 렌더링</mark></li></ul></li></ul><ul id="8fc84392-c99c-4dcb-9f2d-82ede6e739ff" class="bulleted-list"><li style="list-style-type:disc">실시간 게임 기능<ul id="8a2b30bb-2813-48b4-94a3-61c8e315e042" class="bulleted-list"><li style="list-style-type:circle">탁구채 조작을 <mark class="highlight-yellow_background">마우스</mark>, <mark class="highlight-yellow_background">키보드</mark> 두가지로 할 수 있게 구현</li></ul><ul id="403d2dde-db01-42c5-a3f4-091f35b881a0" class="bulleted-list"><li style="list-style-type:circle">부드러운 애니메이션을 위해 <mark class="highlight-yellow_background">requestAnimationFrame()</mark>을 사용</li></ul></li></ul><ul id="7b59fddc-4dd3-4e30-94ce-ffda1dadc895" class="bulleted-list"><li style="list-style-type:disc">실시간 채팅 기능<ul id="449ea500-ac49-4ca1-a61f-49584b3d0668" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">WebSocket</mark>을 사용하여 실시간 채팅 기능 구현</li></ul><ul id="bac75baf-ba58-499d-aa87-ea7378d6c6b7" class="bulleted-list"><li style="list-style-type:circle">서버와 협업으로<mark class="highlight-yellow_background"> 무한 스크롤 기능 구현</mark></li></ul></li></ul><ul id="b32c5b37-fd29-439a-8577-a19b12f1e504" class="bulleted-list"><li style="list-style-type:disc">로그인 기능<ul id="83603768-c1ac-461d-b2a5-fb2533001bb0" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">accessToken</mark>은 XSS 공격으로부터 보호하기 위해 <mark class="highlight-yellow_background">메모리에 저장</mark></li></ul><ul id="5b133245-b28a-4c95-928b-f731ef6d054b" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">refreshToken</mark>은 CSRF 공격 및 토큰 탈취 방지를 위해 <mark class="highlight-yellow_background">Secure, HttpOnly, SameSite</mark> 옵션이 설정된 <mark class="highlight-yellow_background">쿠키에 저장</mark></li></ul></li></ul><ul id="a3b5da5f-1ce4-4598-b640-240d847c0353" class="bulleted-list"><li style="list-style-type:disc">마이페이지<ul id="54542a6b-9f26-42fc-b0ac-e9ab78eabcbc" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">REST API</mark>를 사용하여 사용자 정보 업데이트</li></ul></li></ul></div><div id="c13d248e-9418-400c-a071-65d70cb7729a" style="width:50%" class="column"><h3 id="81afa0da-703d-482e-a9b7-48442e822081" class="">✅ 주요 기능</h3><ul id="2fc7fe49-ffaf-4435-809e-8b0063dfb596" class="bulleted-list"><li style="list-style-type:disc">실시간 핑퐁 게임</li></ul><ul id="7f2a5265-7e6e-40ea-ba10-df46bdeed1d7" class="bulleted-list"><li style="list-style-type:disc">토너먼트 게임</li></ul><ul id="21df1d7b-482b-4448-b691-233538809ee4" class="bulleted-list"><li style="list-style-type:disc">실시간 채팅</li></ul><ul id="90d10f44-f45e-41a2-904a-6c6b826ee586" class="bulleted-list"><li style="list-style-type:disc">친구 관리(차단, 친구 추가, 삭제)</li></ul><ul id="73624bb3-c080-4f05-8471-79d866fcf9b3" class="bulleted-list"><li style="list-style-type:disc">마이페이지</li></ul><p id="76fa0796-6aaa-439c-becc-7cd3f4ea5d63" class="">
+</p></div></div><h3 id="6e927d1b-8ff6-4c06-ad1f-384a4cfc3b57" class="">⭐ 성과</h3><div id="e828372b-9b1f-4f5d-a9c1-c0cd9a2037a3" class="column-list"><div id="bc2037ed-b747-44b3-ac9a-c66c41178bbd" style="width:50%" class="column"><ul id="83968f45-fe6b-458d-aaa0-f2246385eab6" class="bulleted-list"><li style="list-style-type:disc">애니메이션 최적화 : <mark class="highlight-pink">프레임 드랍 발생 빈도가 크게 감소</mark>하여, <mark class="highlight-pink">게임의 FPS가 평균 59fps</mark>로 유지되며, <mark class="highlight-pink">최저 FPS가 58fps로 이전 15fps에서 크게 개선</mark></li></ul><h3 id="c06e7262-c87e-40dd-9c8c-cf5c9eb08a5c" class="">관련링크 </h3><p id="2d3e711e-f1fc-405a-8250-f79e906ab67e" class=""><strong>🔗 </strong><strong><a href="https://gaebarsaebal.tistory.com/62">탁구채 애니메이션 최적화: setInterval vs requestAnimationFrame, position vs transform</a></strong></p></div><div id="9ad24092-3a8f-47c9-b4b9-cc66d2608d59" style="width:50%" class="column"><figure id="864c0160-2f08-4bf7-8e33-00b9d5c8c6c1" class="image"><a href="./a.png"><img style="width:384px" src="./a.png"/></a></figure></div></div><h3 id="2d930c37-e38b-4caa-8325-8d58ff7acf4e" class=""><strong>관련링크</strong></h3><ul id="5e1d0f05-f5ac-4465-89d6-59a1bfebc722" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-default"><strong>🔗 </strong></mark><mark class="highlight-default"><strong><a href="https://gaebarsaebal.tistory.com/63">requestAnimationFrame 프레임 레이트 조정하기</a></strong></mark><mark class="highlight-default"><strong> </strong></mark></li></ul><ul id="ffd48a66-8088-435a-be95-d71a11528265" class="bulleted-list"><li style="list-style-type:disc"><strong>🔗 </strong><mark class="highlight-default"><strong><a href="https://gaebarsaebal.tistory.com/61">인증되지 않은 유저 접근 막기</a></strong></mark></li></ul><ul id="bec1bd4c-4a8c-42bd-bb40-5134f211ea39" class="bulleted-list"><li style="list-style-type:disc"><strong>🔗 </strong><mark class="highlight-default"><strong><a href="https://gaebarsaebal.tistory.com/58">탁구채 속도가 환경에 따라 다르게 움직임(requestAnimationFrame)</a></strong></mark></li></ul><ul id="a30d8cc2-c058-42e4-9766-37d9431e4620" class="bulleted-list"><li style="list-style-type:disc"><strong>🔗  </strong><mark class="highlight-default"><strong><a href="https://gaebarsaebal.tistory.com/57">같은 경로의 이동을 막자</a></strong></mark></li></ul><ul id="5cdc2df2-f333-472a-8232-dd043f366489" class="bulleted-list"><li style="list-style-type:disc"><strong>🔗 </strong><mark class="highlight-default"><strong><a href="https://gaebarsaebal.tistory.com/55">WebSocket 이 닫히면 재연결을 해보자</a></strong></mark></li></ul><ul id="6b790e86-f5fe-42a4-92a0-4aadf59f0e2c" class="bulleted-list"><li style="list-style-type:disc"><strong>🔗 </strong><mark class="highlight-default"><strong><a href="https://gaebarsaebal.tistory.com/54">싱글톤 패턴을 활용한 중앙 집중식 WebSocket 관리 방식</a></strong></mark></li></ul><ul id="5d16f26f-9d36-4e24-8c11-37d872419e13" class="bulleted-list"><li style="list-style-type:disc"><strong>🔗 </strong><mark class="highlight-default"><strong><a href="https://gaebarsaebal.tistory.com/49">[ JavaScript / JS ] WebSocket 연결하고 실시간 채팅 구현하기</a></strong></mark></li></ul><h3 id="5f15beb5-8364-4bfa-8199-bf09c7cf81c4" class="">🐞 트러블슈팅</h3><ul id="9419eb7e-89df-4203-a5bd-2475330257aa" class="bulleted-list"><li style="list-style-type:disc">🔗 <a href="https://gaebarsaebal.tistory.com/53"><strong>웹소켓 연결 비동기 문제</strong></a></li></ul><ul id="c1f4d473-eaf8-48d8-9e8c-279d6a61afbf" class="bulleted-list"><li style="list-style-type:disc">🔗 <a href="https://gaebarsaebal.tistory.com/56"><strong>메세지를 읽지 않았는데 안 읽은 메세지가 안뜬다...</strong></a></li></ul><ul id="efa69659-f4c8-4322-8aba-f56de23d8f67" class="bulleted-list"><li style="list-style-type:disc">🔗 <a href="https://gaebarsaebal.tistory.com/59"><strong>SPA 게임 개발에서 웹소켓 연결 끊김과 서버 다운 문제 해결: 이벤트 리스너 관리</strong></a></li></ul><p id="aef732f4-410a-4b8f-9dda-1050a3eb72d8" class="">
+</p><h3 id="dc07cd54-c1d9-403b-beea-95aa50505c53" class=""><strong>🛠️ Stack</strong></h3><ul id="434b125a-6e83-4ef3-b812-4eb6a102eea7" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><strong>Frontend</strong></mark> : Vanilla.js</li></ul><ul id="e8c07aaa-b960-4894-bb72-04648804d193" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red"><strong>Backend</strong></mark> : Django, python</li></ul><ul id="ecee4959-ff72-4a49-b30f-6b4b7501c478" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow"><strong>Database</strong></mark> : postgreSQL</li></ul><ul id="baa0aa69-07c0-4b2a-9e3c-ed8006c995e6" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow"><strong>Build-Tool</strong></mark> : Docker, NginX</li></ul><ul id="af691f63-cacb-4f71-bddd-1fbcf90a9cc9" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow"><strong>Collaboration-Tool</strong></mark> : Figma, Notion, Github</li></ul><p id="2dcd8cab-a29f-4bee-8851-fb9838069ec6" class="">
+</p><p id="1969fcf7-701d-49c7-98d0-bef8e5ee418f" class="">
+</p><p id="9d3e0331-b765-4472-a129-0be12febf290" class="">
+</p><p id="aed22d19-05d8-4654-96e1-0827c1121306" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

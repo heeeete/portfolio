@@ -121,21 +121,20 @@ const AboutScreen = forwardRef<
 									<p className="info">
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
-											width="1em"
-											height="1em"
+											width="10rem"
+											height="10rem"
 											viewBox="0 0 24 24"
 										>
 											<path
 												fill="currentColor"
-												d="M17 3h-3v3h-4V3H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m-5 5a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m4 8H8v-1c0-1.33 2.67-2 4-2s4 .67 4 2zM13 5h-2V1h2zm3 14H8v-1h8zm-4 2H8v-1h4z"
+												fillRule="evenodd"
+												d="M10 4h4c3.771 0 5.657 0 6.828 1.172C22 6.343 22 8.229 22 12c0 3.771 0 5.657-1.172 6.828C19.657 20 17.771 20 14 20h-4c-3.771 0-5.657 0-6.828-1.172C2 17.657 2 15.771 2 12c0-3.771 0-5.657 1.172-6.828C4.343 4 6.229 4 10 4m3.25 5a.75.75 0 0 1 .75-.75h5a.75.75 0 0 1 0 1.5h-5a.75.75 0 0 1-.75-.75m1 3a.75.75 0 0 1 .75-.75h4a.75.75 0 0 1 0 1.5h-4a.75.75 0 0 1-.75-.75m1 3a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1-.75-.75M11 9a2 2 0 1 1-4 0a2 2 0 0 1 4 0m-2 8c4 0 4-.895 4-2s-1.79-2-4-2s-4 .895-4 2s0 2 4 2"
+												clipRule="evenodd"
 											/>
 										</svg>
 									</p>
 								</div>
 								<div className="back back1">
-									<div className="info-back-img">
-										<FontAwesomeIcon icon={faUser} />
-									</div>
 									<p className="responsive-text">
 										name:{" "}
 										<span
@@ -171,10 +170,17 @@ const AboutScreen = forwardRef<
 						<div className="item" data-id={`ID-2`}>
 							<div className="flip">
 								<div className="front second github">
-									<FontAwesomeIcon
-										icon={faGithub}
-										style={{ width: "55%", height: "auto" }}
-									/>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="10rem"
+										height="10rem"
+										viewBox="0 0 24 24"
+									>
+										<path
+											fill="currentColor"
+											d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"
+										/>
+									</svg>
 								</div>
 								<div className={`back back2`}>
 									<MaskButton
@@ -210,13 +216,12 @@ const AboutScreen = forwardRef<
 				{`
 					.about-container {
 						display: flex;
+						position: relative;
 						flex-direction: column;
 						justify-content: center;
 						align-items: center;
 						width: 100dvw;
-						height: 100dvh;
-						padding-top: 80px;
-						position: relative;
+						height: 100vh;
 					}
 
 					.about-content {
@@ -225,6 +230,10 @@ const AboutScreen = forwardRef<
 						align-items: center;
 						width: 100dvw;
 						z-index: 2;
+					}
+					.title-container {
+						padding-block: 100px;
+						display: flex;
 					}
 
 					.about-text {
@@ -237,6 +246,10 @@ const AboutScreen = forwardRef<
 						width: 70%;
 						white-space: nowrap;
 						z-index: 2;
+					}
+					.name-text {
+						font-family: Koreail-Bold;
+						font-size: 1.7dvw;
 					}
 
 					.text-1,
@@ -302,11 +315,6 @@ const AboutScreen = forwardRef<
 						}
 					}
 
-					.name-text {
-						font-family: Koreail-Bold;
-						font-size: 2dvw;
-					}
-
 					.about-card {
 						display: flex;
 						flex-direction: column;
@@ -329,6 +337,7 @@ const AboutScreen = forwardRef<
 						height: 100%;
 						transform-style: preserve-3d;
 						border-radius: 10px;
+						display: flex;
 					}
 					.front,
 					.back {
@@ -395,10 +404,6 @@ const AboutScreen = forwardRef<
 						}
 					}
 
-					h1 {
-						margin-bottom: 5vh;
-					}
-
 					@keyframes blink-cursos {
 						50% {
 							border-color: transparent;
@@ -406,22 +411,19 @@ const AboutScreen = forwardRef<
 					}
 
 					@media all and (max-width: 768px) {
-						.title {
-							font-size: 2em;
-						}
 						.Arrow {
 						}
 						.about-content {
 							flex-direction: column;
 						}
 						.about-text {
-							font-size: 0.7rem;
+							font-size: 2.5dvw;
 						}
 						.name-text {
-							font-size: 0.9rem;
+							font-size: 2.7dvw;
 						}
 						.item {
-							width: 10rem;
+							margin: 0;
 						}
 						.tistory,
 						.info {

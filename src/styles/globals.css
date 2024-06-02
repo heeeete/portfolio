@@ -4,12 +4,6 @@
 	src: url("../../public/font/Korail_Round_Gothic_Light.ttf") format("truetype");
 }
 @font-face {
-	font-family: Koreail-Medium;
-	font-weight: normal;
-	src: url("../../public/font/Korail_Round_Gothic_Medium.ttf")
-		format("truetype");
-}
-@font-face {
 	font-family: Koreail-Bold;
 	font-weight: normal;
 	src: url("../../public/font/Korail_Round_Gothic_Bold.ttf") format("truetype");
@@ -99,9 +93,6 @@ body.full-screen {
 	overflow: hidden;
 }
 
-.title-container {
-	padding-bottom: 20px;
-}
 .title {
 	font-size: 3rem;
 }
@@ -228,11 +219,17 @@ body.full-screen {
 
 @media (width < 768px) {
 	html {
-		font-size: 15px;
+		font-size: 10px;
 	}
-	h1 {
-		font-size: 20px !important;
+
+	.about-container {
+		padding: 0;
 	}
+
+	.title-container {
+		display: flex;
+	}
+
 	.image-slider-container {
 		width: 100%;
 	}

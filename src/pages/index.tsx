@@ -12,6 +12,12 @@ const randomColor = () => {
 	)}, ${Math.floor(Math.random() * 256)})`;
 };
 
+const isMobileDevice = () => {
+	return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+		navigator.userAgent
+	);
+};
+
 export default function Home() {
 	const [visibleItems, setVisibleItems] = useState(new Set<string>());
 	const firstRef = useRef<HTMLDivElement | null>(null);
@@ -113,9 +119,10 @@ export default function Home() {
 		const debounceMakeStarts = debounce(makeStars, 500);
 		makeStars();
 
-		window.addEventListener("resize", debounceMakeStarts);
+		if (!isMobileDevice())
+			window.addEventListener("resize", debounceMakeStarts);
 		return () => {
-			removeEventListener("resize", debounceMakeStarts);
+			if (!isMobileDevice()) removeEventListener("resize", debounceMakeStarts);
 		};
 	}, []);
 

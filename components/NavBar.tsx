@@ -43,7 +43,10 @@ export default function NavBar({
 
 	const scrollToProject = () => {
 		if (projectRef.current) {
-			projectRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+			projectRef.current.scrollIntoView({
+				behavior: "smooth",
+				block: "center",
+			});
 			toggleMenu();
 		}
 	};

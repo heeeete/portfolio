@@ -1,6 +1,6 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import DownArrow from "./DownArrow";
-import { useEffect, forwardRef, RefObject } from "react";
+import { useState, useEffect, forwardRef, RefObject } from "react";
 
 const FirstScreen = forwardRef<
 	HTMLDivElement,
@@ -41,8 +41,13 @@ const FirstScreen = forwardRef<
 				<div className="full-image-container">
 					<Image
 						src={"https://heeeete.github.io/portfolio/back.jpg"}
+						blurDataURL="https://heeeete.github.io/portfolio/back.jpg"
 						alt="background"
-						layout="fill"
+						priority={true}
+						style={{ width: "100%", height: "100%", objectFit: "cover" }}
+						width={1}
+						height={1}
+						placeholder="blur"
 					/>
 				</div>
 			</div>
@@ -50,8 +55,13 @@ const FirstScreen = forwardRef<
 				<div className="secoend-image-container">
 					<Image
 						src={"https://heeeete.github.io/portfolio/back.jpg"}
+						blurDataURL="https://heeeete.github.io/portfolio/back.jpg"
 						alt="background"
-						layout="fill"
+						priority={true}
+						style={{ width: "100%", height: "100%", objectFit: "cover" }}
+						width={1}
+						height={1}
+						placeholder="blur"
 					></Image>
 				</div>
 			</div>
@@ -59,8 +69,13 @@ const FirstScreen = forwardRef<
 				<div className="circle-image-container">
 					<Image
 						src={"https://heeeete.github.io/portfolio/back.jpg"}
+						blurDataURL="https://heeeete.github.io/portfolio/back.jpg"
 						alt="circular part"
-						layout="fill"
+						priority={true}
+						style={{ width: "100%", height: "100%", objectFit: "cover" }}
+						width={1}
+						height={1}
+						placeholder="blur"
 					/>
 				</div>
 			</div>
@@ -75,7 +90,7 @@ const FirstScreen = forwardRef<
 					justify-content: center;
 					align-items: center;
 					width: 100dvw;
-					height: 100dvh;
+					height: 100vh;
 					position: relative;
 					overflow: hidden;
 					padding-top: 70px;
@@ -98,7 +113,6 @@ const FirstScreen = forwardRef<
 				.image-container.half-size {
 					width: 2200px;
 				}
-
 				.full-image-container,
 				.circle-image-container,
 				.secoend-image-container {
