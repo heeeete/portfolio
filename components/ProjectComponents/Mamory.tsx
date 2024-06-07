@@ -34,6 +34,7 @@ const Mamory = () => {
 	useEffect(() => {
 		const handlePopState = () => {
 			setStatusProject(false);
+			document.body.classList.remove("full-screen");
 		};
 
 		window.addEventListener("popstate", handlePopState);
@@ -83,13 +84,12 @@ const Mamory = () => {
 				<ImageSlider
 					images={images}
 					width={200}
-					enableLoop={false}
 					arrowColor="rgb(255, 234, 0)"
 					dotColor="rgb(255, 234, 0)"
 				/>
 			</div>
 			<br />
-			<p>
+			<p style={{ fontSize: "16px" }}>
 				&nbsp;
 				<PurpleText>
 					일상을 기록하는 데 여러 앱을 사용해야 하는 불편함
@@ -109,7 +109,7 @@ const Mamory = () => {
 			</p>
 			<br />
 			<div className="project-minimal-content">
-				<h3>
+				<h3 style={{ fontSize: "20px" }}>
 					<br />
 					&nbsp;●&nbsp;<PurpleText>useContext, AsyncStorage</PurpleText>을
 					사용하여 테마 기능 구현
@@ -132,8 +132,8 @@ const Mamory = () => {
 			<br />
 			<div className="project-summary-content">
 				<div className="project-summary-inner-content">
-					<h2>✔&nbsp;역할</h2>
-					<p>
+					<h2 style={{ fontSize: "18px" }}>✔&nbsp;역할</h2>
+					<p style={{ fontSize: "16px" }}>
 						<strong>&nbsp;Todo 알람 기능</strong>
 						<br />
 						<strong>&nbsp;영화, 책 리뷰 기능</strong>
@@ -144,8 +144,8 @@ const Mamory = () => {
 					</p>
 				</div>
 				<div>
-					<h2>✔&nbsp;주요 기능</h2>
-					<p>
+					<h2 style={{ fontSize: "18px" }}>✔&nbsp;주요 기능</h2>
+					<p style={{ fontSize: "16px" }}>
 						<strong>&nbsp;다이어리</strong>
 						<br />
 						<strong>&nbsp;할 일 목록</strong>
@@ -228,7 +228,7 @@ const Mamory = () => {
 					background-color: white;
 					top: 0;
 					left: 0;
-					z-index: 3000;
+					z-index: 1100;
 					overflow: hidden;
 				}
 				.cancel-btn {

@@ -83,10 +83,10 @@ const PongWorld = () => {
 			</div>
 			<br />
 			<div className="image-slider-container">
-				<ImageSlider images={images} enableLoop={false} />
+				<ImageSlider images={images} />
 			</div>
 			<br />
-			<p>
+			<p style={{ fontSize: "16px" }}>
 				&nbsp;<PurpleText>PongWorld</PurpleText> 프로젝트는 외부 라이브러리 없이{" "}
 				<PurpleText> VanillaJS</PurpleText>를 이용해{" "}
 				<PurpleText>SPA</PurpleText> 방식으로 개발한{" "}
@@ -111,7 +111,7 @@ const PongWorld = () => {
 			</p>
 			<br />
 			<div className="project-minimal-content">
-				<h3>
+				<h3 style={{ fontSize: "20px" }}>
 					<br />
 					&nbsp;●&nbsp;<PurpleText>Websocket</PurpleText>을 이용한 실시간 웹
 					페이지 구현
@@ -142,41 +142,32 @@ const PongWorld = () => {
 			<br />
 			<div className="project-summary-content">
 				<div className="project-summary-inner-content">
-					<h2>✔&nbsp;역할</h2>
-					<p>
+					<h2 style={{ fontSize: "18px" }}>✔&nbsp;역할</h2>
+					<p style={{ fontSize: "16px" }}>
 						<strong>&nbsp;SPA 구현</strong>
-					</p>
-					<p>
+						<br />
 						<strong>&nbsp;실시간 게임 기능</strong>
-					</p>
-					<p>
+						<br />
 						<strong>&nbsp;실시간 채팅 기능</strong>
-					</p>
-					<p>
+						<br />
 						<strong>&nbsp;로그인 기능</strong>
-					</p>
-					<p>
+						<br />
 						<strong>&nbsp;마이페이지 기능</strong>
-					</p>
-					<p>
+						<br />
 						<strong>&nbsp;모달 기능</strong>
 					</p>
 				</div>
 				<div>
-					<h2>✔&nbsp;주요 기능</h2>
-					<p>
+					<h2 style={{ fontSize: "18px" }}>✔&nbsp;주요 기능</h2>
+					<p style={{ fontSize: "16px" }}>
 						<strong>&nbsp;실시간 핑퐁 게임</strong>
-					</p>
-					<p>
+						<br />
 						<strong>&nbsp;토너먼트 게임</strong>
-					</p>
-					<p>
+						<br />
 						<strong>&nbsp;실시간 채팅</strong>
-					</p>
-					<p>
+						<br />
 						<strong>&nbsp;친구 관리(차단, 친구 추가, 삭제)</strong>
-					</p>
-					<p>
+						<br />
 						<strong>&nbsp;마이페이지 </strong>
 					</p>
 				</div>

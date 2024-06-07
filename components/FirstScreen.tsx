@@ -44,9 +44,9 @@ const FirstScreen = forwardRef<
 						blurDataURL="https://heeeete.github.io/portfolio/back.jpg"
 						alt="background"
 						priority={true}
-						style={{ width: "100%", height: "100%", objectFit: "cover" }}
-						width={1}
-						height={1}
+						style={{ objectFit: "cover" }}
+						fill
+						sizes="100vw"
 						placeholder="blur"
 					/>
 				</div>
@@ -58,9 +58,9 @@ const FirstScreen = forwardRef<
 						blurDataURL="https://heeeete.github.io/portfolio/back.jpg"
 						alt="background"
 						priority={true}
-						style={{ width: "100%", height: "100%", objectFit: "cover" }}
-						width={1}
-						height={1}
+						style={{ objectFit: "cover" }}
+						fill
+						sizes="100vw"
 						placeholder="blur"
 					></Image>
 				</div>
@@ -72,9 +72,9 @@ const FirstScreen = forwardRef<
 						blurDataURL="https://heeeete.github.io/portfolio/back.jpg"
 						alt="circular part"
 						priority={true}
-						style={{ width: "100%", height: "100%", objectFit: "cover" }}
-						width={1}
-						height={1}
+						style={{ objectFit: "cover" }}
+						fill
+						sizes="100vw"
 						placeholder="blur"
 					/>
 				</div>

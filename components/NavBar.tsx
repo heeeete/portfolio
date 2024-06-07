@@ -45,7 +45,7 @@ export default function NavBar({
 		if (projectRef.current) {
 			projectRef.current.scrollIntoView({
 				behavior: "smooth",
-				block: "center",
+				block: "start",
 			});
 			toggleMenu();
 		}

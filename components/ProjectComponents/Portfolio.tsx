@@ -71,10 +71,10 @@ const Portfolio = () => {
 			</div>
 			<br />
 			<div className="image-slider-container">
-				<ImageSlider images={images} enableLoop={false} />
+				<ImageSlider images={images} />
 			</div>
 			<br />
-			<p>
+			<p style={{ fontSize: "16px" }}>
 				&nbsp;저 자신을 표현할 수 있는 웹 사이트가 필요하다고 생각하여,
 				포트폴리오 용도로 만든 웹 사이트입니다. 동시에{" "}
 				<PurpleText>Next.js</PurpleText>와 <PurpleText>TypeScript</PurpleText>{" "}
@@ -95,7 +95,7 @@ const Portfolio = () => {
 			</p>
 			<br />
 			<div className="project-minimal-content">
-				<h3>
+				<h3 style={{ fontSize: "20px" }}>
 					<br />
 					&nbsp;●&nbsp;<PurpleText>Image Slider</PurpleText> 구현
 					<br />

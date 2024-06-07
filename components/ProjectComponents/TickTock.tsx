@@ -23,7 +23,6 @@ const TickTock = () => {
 		};
 	}, []);
 
-
 	return (
 		<>
 			2024.02
@@ -58,7 +57,7 @@ const TickTock = () => {
 					src="https://heeeete.github.io/tick-tock/"
 				></iframe>
 			</div>
-			<p>
+			<p style={{ fontSize: "16px" }}>
 				&nbsp;기존 시계의 형태를 유지하면서도 창의적이고 재미있는 방식으로
 				시간을 표현하는 웹을 개발하였습니다.
 				<br />
@@ -73,7 +72,7 @@ const TickTock = () => {
 			</p>
 			<br />
 			<div className="project-minimal-content">
-				<h3>
+				<h3 style={{ fontSize: "20px" }}>
 					<br />
 					&nbsp;●&nbsp;<PurpleText>moment-timezone</PurpleText> 라이브러리를
 					통해 다양한 시간대를 지원하도록 구현하였습니다.
@@ -169,7 +168,6 @@ const TickTock = () => {
 					position: absolute;
 					right: 15px;
 				}
-
 			`}</style>
 		</>
 	);
